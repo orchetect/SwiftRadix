@@ -4,7 +4,7 @@
 <a href="https://raw.githubusercontent.com/uraimo/Bitter/master/LICENSE"><img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="License: MIT" /></a>
 </p>
 
-A lightweight value type of `Hex<T>` for storing hexadecimal string-representable values of any `BinaryInteger` type, with a focus on being extremely versatile and convenient. It has constructors from all BinaryInteger types (`T`) or from a hex String, and methods to examine and manipulate data in base-16.
+A new lightweight value type of `Hex<T>` capable of containing any integer type (`T`) capable of being represented as hexadecimal, providing constructors and methods to translate integers to/from hex strings and vice-versa using simple, clean syntax.
 
 ## Summary
 
@@ -246,7 +246,7 @@ let d = Data([0x1, 0x2, 0x3, 0xFF])
 
 ## Limitations
 
-The max integer size storable and representable as a hex String is:
+The max integer size storable and representable as a hex String is `UInt64` which is the natural limitation of Swift.
 
 ```swift
 Hex<UInt64>(0xFFFF_FFFF_FFFF_FFFF)
