@@ -163,16 +163,16 @@ h.nibbleString(3, padTo: 2)   // "01"
 
 
 
-## Equatability and Advanced Operators
+## Equatability
 
-`Hex<T>` can be tested for equatability directly using typical operators (==, !=, >, <) without needing to access the `.value` property. This makes for cleaner code and is more convenient.
+`Hex<T>` can be tested for equatability directly using typical operators (`==`, `!=`, `>`, `<`) without needing to access the `.value` property. This makes for cleaner, more convenient code.
 
 ```swift
 let h1 = 10.hex        // Hex<Int>
 let h2 = 20.hex        // Hex<Int>
 
 h1.value == h2.value   // this works but it's easier to just do this...
-h1 == h2                        // false
+h1 == h2               // false
 ```
 
 They can be compared with great flexibility -- even between different integer types directly without requiring casting or conversions.
@@ -189,8 +189,27 @@ h1 != UInt8(20)        // true   (comparing Hex<Int> with UInt8)
 255.hex == "ZZ".hex    // false - optional is nil
 ```
 
-Additional operators similarly supported:
-- `+=, -=, *=, /=, >>, <<, &`
+
+
+## Additional Operators
+
+Additional operators similarly supported, allowing mixing of types as with equatability:
+
+- `+=, -=, *=, /=, &`
+
+
+
+## Bitwise Shifting
+
+```swift
+var h = 0x1F.hex
+
+0x2F.hex << 1          // 0x2F0    (bitwise nibble shift left)
+0x2F.hex >> 1          // 0x2      (bitwise nibble shift right)
+
+0x10.hex >> 1          // 0x1      (bitwise nibble shift right)
+0x10.hex << 4          // 0x100000 (bitwise nibble shift left)
+```
 
 
 
