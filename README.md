@@ -4,7 +4,7 @@
 <a href="https://raw.githubusercontent.com/uraimo/Bitter/master/LICENSE"><img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="License: MIT" /></a>
 </p>
 
-A new lightweight value type of `Hex<T>` capable of containing any integer type (`T`) capable of being represented as hexadecimal, providing constructors and methods to translate integers to/from hex strings and vice-versa using simple, clean syntax.
+A new lightweight value type of `Hex<T>` containing any integer type (`T`) capable of being represented as hexadecimal, providing constructors and methods to translate integers to/from hex strings and vice-versa using simple, clean syntax.
 
 ## Summary
 
