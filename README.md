@@ -23,7 +23,7 @@ A new lightweight value type of `Hex<T>` containing any integer type (`T`) capab
 ["00", "FF", "ZZ"].hex.values         // [Optional(0), Optional(255), nil]
 
 [0, 65535, 4000].hex.stringValue                 // "00 FFFF FA0"
-[0, 65535, 4000].hex.stringValue(padToEvery: 4)  // "0000 FFFF 4268"
+[0, 65535, 4000].hex.stringValue(padToEvery: 4)  // "0000 FFFF 0FA0"
 
 // nibbles: get, set, and bitwise shift
 
