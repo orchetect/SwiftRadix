@@ -158,26 +158,56 @@ public func /=<T>(lhs: inout T, rhs: Hex<T>) {
 
 // MARK: Bitwise operators
 
+infix operator >>>>: BitwiseShiftPrecedence
+infix operator <<<<: BitwiseShiftPrecedence
+
 extension Hex {
+
+	// nibble bit shift (4 binary places)
+	
+	static public func >>>>(lhs: Hex, rhs: Hex) -> Hex {
+		return Hex(lhs.value >> (rhs.value * 4))							// nibble shift - multiples of 4 bits
+	}
+	static public func >>>><U: BinaryInteger>(lhs: Hex, rhs: U) -> Hex {
+		return Hex(lhs.value >> (rhs * 4))									// nibble shift - multiples of 4 bits
+	}
+	static public func >>>><U: BinaryInteger>(lhs: U, rhs: Hex) -> Hex<U> {
+		return Hex<U>(lhs >> (rhs.value * 4))								// nibble shift - multiples of 4 bits
+	}
+	
+	static public func <<<<(lhs: Hex, rhs: Hex) -> Hex {
+		return Hex(lhs.value << (rhs.value * 4))							// nibble shift - multiples of 4 bits
+	}
+	static public func <<<<<U: BinaryInteger>(lhs: Hex, rhs: U) -> Hex {
+		return Hex(lhs.value << (rhs * 4))									// nibble shift - multiples of 4 bits
+	}
+	static public func <<<<<U: BinaryInteger>(lhs: U, rhs: Hex) -> Hex<U> {
+		return Hex<U>(lhs << (rhs.value * 4))								// nibble shift - multiples of 4 bits
+	}
+	
+	// bitshift left / right
+	
 	static public func >>(lhs: Hex, rhs: Hex) -> Hex {
-		return Hex(lhs.value >> (rhs.value * 4))							// shift base-16 places
+		return Hex(lhs.value >> rhs.value)									// traditional bit shift
 	}
 	static public func >><U: BinaryInteger>(lhs: Hex, rhs: U) -> Hex {
-		return Hex(lhs.value >> (rhs * 4))									// shift base-16 places
+		return Hex(lhs.value >> rhs)										// traditional bit shift
 	}
 	static public func >><U: BinaryInteger>(lhs: U, rhs: Hex) -> U {
-		return lhs >> rhs.value												// shift default bitwise
+		return lhs >> rhs.value												// traditional bit shift
 	}
 	
 	static public func <<(lhs: Hex, rhs: Hex) -> Hex {
-		return Hex(lhs.value << (rhs.value * 4))							// shift base-16 places
+		return Hex(lhs.value << rhs.value)									// traditional bit shift
 	}
 	static public func <<<U: BinaryInteger>(lhs: Hex, rhs: U) -> Hex {
-		return Hex(lhs.value << (rhs * 4))									// shift base-16 places
+		return Hex(lhs.value << rhs)										// traditional bit shift
 	}
 	static public func <<<U: BinaryInteger>(lhs: U, rhs: Hex) -> U {
-		return lhs << rhs.value												// shift default bitwise
+		return lhs << rhs.value												// traditional bit shift
 	}
+	
+	// bitshift &
 	
 	static public func &(lhs: Hex, rhs: Hex) -> Hex {
 		return Hex(lhs.value & rhs.value)									// filter mask: 0x0F, 0xF0, 0xFF, etc.

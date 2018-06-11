@@ -202,20 +202,25 @@ h1 != UInt8(20)        // true   (comparing Hex<Int> with UInt8)
 
 Additional operators similarly supported, allowing mixing of types as with equatability:
 
-- `+=, -=, *=, /=, &`
+- `+=, -=, *=, /=, <<, >>, &`
 
 
 
 ## Bitwise Shifting
 
 ```swift
-var h = 0x1F.hex
+// traditional bit shift left/right still work as usual
 
-0x2F.hex << 1          // 0x2F0    (bitwise nibble shift left)
-0x2F.hex >> 1          // 0x2      (bitwise nibble shift right)
+0b0100.hex << 1        // 0b1000
+0b0100.hex >> 1        // 0b0010
 
-0x10.hex >> 1          // 0x1      (bitwise nibble shift right)
-0x10.hex << 4          // 0x100000 (bitwise nibble shift left)
+// nibble shift (multiples of 4 bits)
+
+0x2F.hex <<<< 1        // 0x2F0    (bitwise nibble shift left)
+0x2F.hex >>>> 1        // 0x2      (bitwise nibble shift right)
+
+0xF0.hex >>>> 1        // 0xF      (bitwise nibble shift right)
+0xF0.hex <<<< 4        // 0xF00000 (bitwise nibble shift left)
 ```
 
 
