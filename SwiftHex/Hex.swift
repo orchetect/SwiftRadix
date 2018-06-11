@@ -148,7 +148,7 @@ public struct Hex<T: BinaryInteger>: HexStringRepresentable {
 	public func stringValue(padToEvery: Int, withPrefix: Bool = false) -> String {
 		guard let number = Int(exactly: value) else { return "" }
 		let hexString = String(format: "%ll0X", number) // %ll can represent 64-bit, otherwise % truncates at 32-bit
-		return (withPrefix ? "0x" : "") + String(repeatElement("0", count: hexString.count.roundedUp(divisibleBy: padToEvery) - hexString.count)) + hexString
+		return (withPrefix ? "0x" : "") + String(repeatElement("0", count: hexString.count.roundingUp(divisibleBy: padToEvery) - hexString.count)) + hexString
 	}
 	
 	/// Computed property: returns decimal value of hex digit at zero-based `position` from right-to-left. Nibbles can also be get or set via the [nibble: Int] subscript.
@@ -168,7 +168,7 @@ public struct Hex<T: BinaryInteger>: HexStringRepresentable {
 	public func nibbleString(_ position: Int, padToEvery: Int, withPrefix: Bool = false) -> String {
 		guard let number = Int(exactly: nibble(position)) else { return "" }
 		let hexString = String(format: "%ll0X", number) // %ll can represent 64-bit, otherwise % truncates at 32-bit
-		return (withPrefix ? "0x" : "") + String(repeatElement("0", count: hexString.count.roundedUp(divisibleBy: padToEvery) - hexString.count)) + hexString
+		return (withPrefix ? "0x" : "") + String(repeatElement("0", count: hexString.count.roundingUp(divisibleBy: padToEvery) - hexString.count)) + hexString
 	}
 	
 	public subscript(nibble nib: Int) -> NumberType {
@@ -199,5 +199,17 @@ public struct Hex<T: BinaryInteger>: HexStringRepresentable {
 	public var bytes: [UInt8] {
 		var value = self
 		return withUnsafeBytes(of: &value) { Array($0) }
+	}
+}
+
+fileprivate extension BinaryInteger {
+	/// Rounds an integer up to nearest evenly-divisible number. Works on negative integers too.
+	fileprivate func roundingUp(divisibleBy: Self) -> Self {
+		let source: Self = self >= 0 ? self : 0 - self
+		let isNegative: Bool = self < 0
+		
+		let rem = source % divisibleBy
+		let divisions = rem == 0 ? source : source + divisibleBy - rem
+		return isNegative ? 0 - divisions : divisions
 	}
 }

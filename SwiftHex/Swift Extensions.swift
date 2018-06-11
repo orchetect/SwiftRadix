@@ -14,16 +14,6 @@ extension BinaryInteger {
 	public var hex: Hex<Self> {
 		return Hex(self)
 	}
-	
-	/// Rounds an integer up to nearest evenly-divisible number. Works on negative integers too.
-	public func roundedUp(divisibleBy: Self) -> Self {
-		let source: Self = self >= 0 ? self : 0 - self
-		let isNegative: Bool = self < 0
-		
-		let rem = source % divisibleBy
-		let divisions = rem == 0 ? source : source + divisibleBy - rem
-		return isNegative ? 0 - divisions : divisions
-	}
 }
 
 extension String {
