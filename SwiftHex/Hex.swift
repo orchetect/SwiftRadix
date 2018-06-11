@@ -97,7 +97,7 @@ public struct Hex<T: BinaryInteger>: HexStringRepresentable {
 	public typealias NumberType = T
 	
 	/// Actual integer value. Can set and get directly.
-	public var value: NumberType
+	public var value: NumberType = 0
 	
 	/// Construct from a number, preserving the number's type in `value` variable.
 	public init (_ number: NumberType) {
@@ -105,12 +105,11 @@ public struct Hex<T: BinaryInteger>: HexStringRepresentable {
 	}
 	
 	/// Construct from a hex string.
-	/// `Hex("FF")` - Stores `value` as Int type by default.
+	/// `Hex("FF")` or `Hex("0xFF")` - Stores `value` as Int type by default.
 	/// To specify number type, construct as `Hex<Int8>("FF")` for example.
 	public init? (_ hexString: String) {
-		guard let convertedValue = Int(hexString, radix: 16) else { return nil }
-		guard let castedValue = T(exactly: convertedValue) else { return nil }
-		value = castedValue
+		guard let convertedValue = hexStringToValue(parsing: hexString) else { return nil }
+		value = convertedValue
 	}
 	
 	/// Computed property: Getter returns hex String representation of `value`. Setter assigns `value` to numeric equivalent of hex String.
@@ -120,41 +119,56 @@ public struct Hex<T: BinaryInteger>: HexStringRepresentable {
 			return String(format:"%llX", number) // %ll can represent 64-bit, otherwise % truncates at 32-bit
 		}
 		set {
-			guard let convertedValue = Int(newValue, radix: 16) else { return }
-			value = T(convertedValue)
+			guard let convertedValue = hexStringToValue(parsing: newValue) else { return }
+			value = convertedValue
 		}
 	}
 	
+	/// Internal function to convert a hex String to a value. Fails with nil if not successful or if the hex String is malformed.
+	private func hexStringToValue(parsing hexString: String) -> NumberType? {
+		var parseString: Substring
+		
+		if hexString.starts(with: "0x") {			// case-sensitive; only 0x is valid - 0X is not allowed
+			parseString = hexString.dropFirst(2)	// produces a view on hexString, not a copy
+		} else {
+			parseString = hexString.dropFirst(0)	// produces a view on hexString, not a copy
+		}
+		
+		guard let convertedValue = Int(parseString, radix: 16) else { return nil }			// fails if non-conformant to the radix (a malformed hex String)
+		guard let castedValue = NumberType(exactly: convertedValue) else { return nil }		// fails if the number overflows the integer type
+		return castedValue
+	}
+	
 	/// Computed property: returns hex String representation of `value`, padding zeros to number of places passed.
-	public func stringValue(padTo: Int) -> String {
+	public func stringValue(padTo: Int = 2, withPrefix: Bool = false) -> String {
 		guard let number = Int(exactly: value) else { return "" }
-		return String(format:"%ll0\(padTo)X", number) // %ll can represent 64-bit, otherwise % truncates at 32-bit
+		return (withPrefix ? "0x" : "") + String(format:"%ll0\(padTo)X", number) // %ll can represent 64-bit, otherwise % truncates at 32-bit
 	}
 	/// Computed property: returns hex String representation of `value`, padded to multiples of specified number of characters.
-	public func stringValue(padToEvery: Int) -> String {
+	public func stringValue(padToEvery: Int, withPrefix: Bool = false) -> String {
 		guard let number = Int(exactly: value) else { return "" }
 		let hexString = String(format: "%ll0X", number) // %ll can represent 64-bit, otherwise % truncates at 32-bit
-		return String(repeatElement("0", count: hexString.count.roundedUp(divisibleBy: padToEvery) - hexString.count)) + hexString
+		return (withPrefix ? "0x" : "") + String(repeatElement("0", count: hexString.count.roundedUp(divisibleBy: padToEvery) - hexString.count)) + hexString
 	}
 	
 	/// Computed property: returns decimal value of hex digit at zero-based `position` from right-to-left. Nibbles can also be get or set via the [nibble: Int] subscript.
 	public func nibble(_ position: Int) -> NumberType {
-		return (value & (0xF << (4 * T(position)))) >> (4 * T(position))
+		return (value & (0xF << (4 * NumberType(position)))) >> (4 * NumberType(position))
 	}
 	/// Computed property: returns string form of hex digit at zero-based `position` from right-to-left, with no padding zeros.
-	public func nibbleString(_ position: Int) -> String {
-		return self.nibbleString(position, padTo: 1)
+	public func nibbleString(_ position: Int, withPrefix: Bool = false) -> String {
+		return (withPrefix ? "0x" : "") + self.nibbleString(position, padTo: 1)
 	}
 	/// Computed property: returns string form of hex digit at zero-based `position` from right-to-left, padding zeros to number of places passed.
-	public func nibbleString(_ position: Int, padTo: Int) -> String {
+	public func nibbleString(_ position: Int, padTo: Int, withPrefix: Bool = false) -> String {
 		guard let number = Int(exactly: nibble(position)) else { return "" }
-		return String(format:"%ll0\(padTo)X", number) // %ll can represent 64-bit, otherwise % truncates at 32-bit
+		return (withPrefix ? "0x" : "") + String(format:"%ll0\(padTo)X", number) // %ll can represent 64-bit, otherwise % truncates at 32-bit
 	}
 	/// Computed property: returns string form of hex digit at zero-based `position` from right-to-left, padded to multiples of specified number of characters passed in `padToEvery`.
-	public func nibbleString(_ position: Int, padToEvery: Int = 1) -> String {
+	public func nibbleString(_ position: Int, padToEvery: Int, withPrefix: Bool = false) -> String {
 		guard let number = Int(exactly: nibble(position)) else { return "" }
 		let hexString = String(format: "%ll0X", number) // %ll can represent 64-bit, otherwise % truncates at 32-bit
-		return String(repeatElement("0", count: hexString.count.roundedUp(divisibleBy: padToEvery) - hexString.count)) + hexString
+		return (withPrefix ? "0x" : "") + String(repeatElement("0", count: hexString.count.roundedUp(divisibleBy: padToEvery) - hexString.count)) + hexString
 	}
 	
 	public subscript(nibble nib: Int) -> NumberType {
@@ -164,7 +178,7 @@ public struct Hex<T: BinaryInteger>: HexStringRepresentable {
 		set {
 			if newValue < 0x0 || newValue > 0xF { return } // ensure nibble is valid
 			
-			let mask = value & (0b1111 << (4 * T(nib))) // obtain old nibble value
+			let mask = value & (0b1111 << (4 * NumberType(nib))) // obtain old nibble value
 			let setValue = (value - mask) + (newValue << (4 * nib)) // subtract old value and add new nibble value
 			
 			value = setValue

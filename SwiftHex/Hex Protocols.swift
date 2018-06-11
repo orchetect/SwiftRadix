@@ -18,8 +18,8 @@ public protocol HexStringRepresentable: CustomStringConvertible, CustomDebugStri
 	var value: NumberType { get set }
 	
 	var stringValue: String { get set }
-	func stringValue(padTo: Int) -> String
-	func stringValue(padToEvery: Int) -> String
+	func stringValue(padTo: Int, withPrefix: Bool) -> String
+	func stringValue(padToEvery: Int, withPrefix: Bool) -> String
 }
 
 // MARK: String Convertible
