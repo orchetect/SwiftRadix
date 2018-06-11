@@ -184,7 +184,8 @@ h1 == h2               // false  (comparing Hex<Int> with Hex<Int>)
 h1 == 20               // false  (comparing Hex<Int> with Int)
 h1 != UInt8(20)        // true   (comparing Hex<Int> with UInt8)
 
-// even though "FF".hex is an optional, the comparison still works safely without requiring the optional to be unwrapped first
+// even though "FF".hex produces an Optional,
+// the comparison still works safely without requiring the optional to be unwrapped first
 255.hex == "FF".hex    // true
 255.hex == "ZZ".hex    // false - optional is nil
 ```
