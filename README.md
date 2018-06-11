@@ -12,13 +12,17 @@ A new lightweight value type of `Hex<T>` containing any integer type (`T`) capab
 // convert to or from hex strings
 
 255.hex.stringValue                   // "FF"
+255.hex.stringValue(withPrefix: true) // "0xFF"
 "FF".hex?.value                       // Optional(255)
+"0xFF".hex?.value                     // Optional(255)
 "ZZ".hex?.value                       // nil (not valid hex string, so init fails)
 
 // work with arrays of any integer type, or hex strings and convert between them
 
-[0, 255, 0, 255].hex.stringValue      // "00 FF 00 FF"
-[0, 255, 0, 255].hex.stringValues     // ["00", "FF", "00", "FF"]
+[0, 255, 0, 255].hex.stringValue                      // "00 FF 00 FF"
+[0, 255, 0, 255].hex.stringValues                     // ["00", "FF", "00", "FF"]
+[0, 255, 0, 255].hex.stringValue(withPrefix: true)    // "0x00 0xFF 0x00 0xFF"
+[0, 255, 0, 255].hex.stringValues(withPrefix: true)   // ["0x00", "0xFF", "0x00", "0xFF"]
 
 ["00", "FF", "ZZ"].hex.values         // [Optional(0), Optional(255), nil]
 
@@ -47,7 +51,7 @@ UInt8(123).hex == Int16(123)  // true (can equate to any integer type, whether H
 
 ## Constructors
 
-The `Hex<T>` struct acts as a shell around a type-preserved BinaryInteger:
+The `Hex<T>` struct acts as a shell around a type-preserved `BinaryInteger`:
 
 `Hex(n)` == `Hex<T of n>(n)`
 
@@ -77,6 +81,7 @@ A valid hexadecimal string can be used to construct the `Hex<T>` struct. This co
 ```swift
 Hex("FF")                 // Hex<Int>(255)?
 "FF".hex                  // Hex<Int>(255)?
+"0xFF".hex                // Hex<Int>(255)?
 
 "ZZZZ".hex                // nil - not a valid hex string
 ```
@@ -95,12 +100,13 @@ Hex<UInt8>("FFFFFF")      // nil -- 0xFFFFFF does not fit in UInt8, so init fail
 Once the `Hex<T>` object is constructed, various methods become available.
 
 ```swift
-let h = 255.hex           // Hex<Int>(255)
-h.value                   // 255, type Int
-h.stringValue             // "FF"
+let h = 255.hex                           // Hex<Int>(255)
+h.value                                   // 255, type Int
+h.stringValue                             // "FF"
+h.stringValue(withPrefix: true)           // "0xFF"
 
-h.stringValue = "7F"      // can also set the hex string, then get the value...
-h.value                   // 127, type Int
+h.stringValue = "7F"                      // can also set the hex String and get value...
+h.value                                   // 127, type Int
 ```
 
 Padding to *n* number of leading zeros can be specified if you need uniform string formatting:
@@ -110,7 +116,7 @@ Padding to *n* number of leading zeros can be specified if you need uniform stri
 0xF.hex.stringValue(padTo: 2)             // "0F"
 0xF.hex.stringValue(padTo: 3)             // "00F"
 
-0xFFFF.hex.stringValue(padTo: 3)          // "FFFF" - has no effect because it's > 3 places
+0xFFFF.hex.stringValue(padTo: 3)          // "FFFF" - has no effect; it's > 3 places
 ```
 
 It is also possible to pad leading zeros to every *n* multiple of digit places.
@@ -181,7 +187,7 @@ They can be compared with great flexibility -- even between different integer ty
 let h1 = 10.hex        // Hex<Int>
 let h2 = 20.hex        // Hex<Int>
 h1 == h2               // false  (comparing Hex<Int> with Hex<Int>)
-h1 == 20               // false  (comparing Hex<Int> with Int)
+h1 > 20                // true   (comparing Hex<Int> with Int)
 h1 != UInt8(20)        // true   (comparing Hex<Int> with UInt8)
 
 // even though "FF".hex produces an Optional,
@@ -223,6 +229,8 @@ let a = [1, 2].hex                    // [Hex<Int>(1), Hex<Int>(2)]
 let uint8array: [UInt8] = [3, 4]
 let b = uint8array.hex                // [Hex<UInt8>(3), Hex<UInt8>(4)]
 
+[UInt8](arrayLiteral: 5, 6).hex       // [Hex<UInt8>(5), Hex<UInt8>(6)]
+
 // and back again:
 
 a.values                              // [1, 2] of type [Int]
@@ -231,8 +239,11 @@ b.values                              // [3, 4] of type [UInt8]
 
 It can also be flattened into a concatenated `String` or an array of hex `String`:
 ```swift
-[0, 255, 0, 255].hex.stringValue      // "00 FF 00 FF"
-[0, 255, 0, 255].hex.stringValues     // ["00", "FF", "00", "FF"]
+[0, 255, 0, 255].hex.stringValue                     // "00 FF 00 FF"
+[0, 255, 0, 255].hex.stringValues                    // ["00", "FF", "00", "FF"]
+
+[0, 255, 0, 255].hex.stringValue(withPrefix: true)   // "0x00 0xFF 0x00 0xFF"
+[0, 255, 0, 255].hex.stringValues(withPrefix: true)  // ["0x00", "0xFF", "0x00", "0xFF"]
 ```
 
 Which can be useful when debugging binary data to the console, or presenting binary data in a human-readable format easily:
@@ -243,12 +254,34 @@ let d = Data([0x1, 0x2, 0x3, 0xFF])
 [UInt8](d).hex.stringValue            // "01 02 03 FF"
 ```
 
+`String` arrays can also be translated into an array of `Hex<T>?` . There is no `.values` property but you can easily render the array down, or iterate over it.
+
+```swift
+["00", "0xFF", "ZZ"].hex.map({ $0?.value }))         // [Optional(0), Optional(255), nil]
+["00", "0xFF", "ZZ"].hex.map({ $0?.value ?? -1 }))   // [0, 255, -1]
+
+// or use the convenience property .hexValues
+
+["00", "0xFF", "ZZ"].valuesFromHexStrings            // [Optional(0), Optional(255), nil]
+```
+
 
 
 ## Limitations
 
-The max integer size storable and representable as a hex String is `UInt64` which is the natural limitation of Swift.
+The max integer size storable and representable as a hex `String` is `UInt64` which is the natural limitation of Swift.
 
 ```swift
 Hex<UInt64>(0xFFFF_FFFF_FFFF_FFFF)
 ```
+
+Negative numbers will be stored in `.value` normally but may produce unexpected hex `String`s. You do not have to exclusively use unsigned integers, but it's best to avoid using negative numbers which will have an ambigious hex representation.
+
+> Use of, and formatting, negative numbers may be expanded in future updates to SwiftHex, or if you feel generous, feel free to tackle this and submit your code.
+
+```swift
+(-1).hex.value         // -1
+(-1).hex == -1         // true
+(-1).hex               // 0xFFFFFFFFFFFFFFFF
+```
+
