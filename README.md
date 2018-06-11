@@ -24,10 +24,10 @@ A new lightweight value type of `Hex<T>` containing any integer type (`T`) capab
 [0, 255, 0, 255].hex.stringValue(withPrefix: true)    // "0x00 0xFF 0x00 0xFF"
 [0, 255, 0, 255].hex.stringValues(withPrefix: true)   // ["0x00", "0xFF", "0x00", "0xFF"]
 
-["00", "FF", "ZZ"].hex.values         // [Optional(0), Optional(255), nil]
+[0, 65535, 4000].hex.stringValue                      // "00 FFFF FA0"
+[0, 65535, 4000].hex.stringValue(padToEvery: 4)       // "0000 FFFF 0FA0"
 
-[0, 65535, 4000].hex.stringValue                 // "00 FFFF FA0"
-[0, 65535, 4000].hex.stringValue(padToEvery: 4)  // "0000 FFFF 0FA0"
+["00", "FF", "ZZ"].valuesFromHexStrings               // [Optional(0), Optional(255), nil]
 
 // nibbles: get, set, and bitwise shift
 
