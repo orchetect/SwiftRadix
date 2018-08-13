@@ -37,8 +37,8 @@ h[nibble: 1]                          // 0x1
 h[nibble: 1] = 0x7
 h.value                               // 0x7F
 
-0x1F.hex << 1                         // 0x1F0 (bitwise nibble shift left)
-0x10.hex >> 1                         // 0x1   (bitwise nibble shift right)
+0x1F.hex <<<< 1                       // 0x1F0 (bitwise nibble shift left)
+0x10.hex >>>> 1                       // 0x1   (bitwise nibble shift right)
 
 // test for equatability with ultimate flexibility,
 // without needing to extract the .value first, casting or converting
