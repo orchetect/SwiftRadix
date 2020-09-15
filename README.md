@@ -1,109 +1,164 @@
-# SwiftHex
+# SwiftRadix
+
+#### (the library formerly known as SwiftHex)
+
 <p>
-<a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/Swift4-compatible-orange.svg?style=flat" alt="Swift 4 compatible" /></a>
+<a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/Swift%205.2-compatible-orange.svg?style=flat" alt="Swift 5.2 compatible" /></a>
+<a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/SPM-compatible-orange.svg?style=flat" alt="Swift Package Manager (SPM) compatible" /></a>
+<a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/platform-macOS%20|%20iOS%20|%20tvOS%20|%20watchOS-green.svg?style=flat" alt="Platform - macOS | iOS | tvOS | watchOS" /></a>
+<a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/Linux-not%20tested-black.svg?style=flat" alt="Linux - not tested" /></a>
+<a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/Code%20Coverage-100%20percent-green.svg?style=flat" alt="Platform - macOS | iOS | tvOS | watchOS" /></a>
 <a href="https://raw.githubusercontent.com/uraimo/Bitter/master/LICENSE"><img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="License: MIT" /></a>
 </p>
+A lightweight library useful for translating integers to and from radix strings (binary, hex, octal or any base) using simple, clean functional syntax.
 
-A new lightweight value type of `Hex<T>` containing any integer type (`T`) capable of being represented as hexadecimal, providing constructors and methods to translate integers to/from hex strings and vice-versa using simple, clean syntax.
+
 
 ## Summary
+
+### Common Usage
+
+> All methods in the library apply uniformly to:
+>
+> - The generalized `Radix(base:)` / `.radix(base:)`
+> - `Binary()` / `.binary`
+> - `Octal()` / `.octal`
+> - `Hex()` / `.hex`
+>
+> For the sake of simplifying this documentation, `Hex()` / `.hex` will be used for most examples below.
 
 ```swift
 // convert to or from hex strings
 
-255.hex.stringValue                   // "FF"
-255.hex.stringValue(withPrefix: true) // "0xFF"
-"FF".hex?.value                       // Optional(255)
-"0xFF".hex?.value                     // Optional(255)
-"ZZ".hex?.value                       // nil (not valid hex string, so init fails)
+255.hex.stringValue               // "FF"
+255.hex.stringValue(prefix: true) // "0xFF"
+"FF".hex?.value                   // Optional(255)
+"0xFF".hex?.value                 // Optional(255)
+"ZZ".hex?.value                   // nil (not valid hex string, so init fails)
 
 // work with arrays of any integer type, or hex strings and convert between them
 
-[0, 255, 0, 255].hex.stringValue                      // "00 FF 00 FF"
-[0, 255, 0, 255].hex.stringValues                     // ["00", "FF", "00", "FF"]
-[0, 255, 0, 255].hex.stringValue(withPrefix: true)    // "0x00 0xFF 0x00 0xFF"
-[0, 255, 0, 255].hex.stringValues(withPrefix: true)   // ["0x00", "0xFF", "0x00", "0xFF"]
+[0, 255, 0, 255].hex.stringValue                  // "00 FF 00 FF"
+[0, 255, 0, 255].hex.stringValues                 // ["00", "FF", "00", "FF"]
+[0, 255, 0, 255].hex.stringValue(prefix: true)    // "0x00 0xFF 0x00 0xFF"
+[0, 255, 0, 255].hex.stringValues(prefix: true)   // ["0x00", "0xFF", "0x00", "0xFF"]
 
-[0, 65535, 4000].hex.stringValue                      // "00 FFFF FA0"
-[0, 65535, 4000].hex.stringValue(padToEvery: 4)       // "0000 FFFF 0FA0"
+[0, 65535, 4000].hex.stringValue                  // "00 FFFF FA0"
+[0, 65535, 4000].hex.stringValue(padToEvery: 4)   // "0000 FFFF 0FA0"
 
-["00", "FF", "ZZ"].valuesFromHexStrings               // [Optional(0), Optional(255), nil]
+["00", "FF", "ZZ"].hex.values                     // [Optional(0), Optional(255), nil]
 
-// nibbles: get, set, and bitwise shift
-
-var h = 0x1F.hex
-h[nibble: 0]                          // 0xF
-h[nibble: 1]                          // 0x1
-h[nibble: 1] = 0x7
-h.value                               // 0x7F
-
-0x1F.hex <<<< 1                       // 0x1F0 (bitwise nibble shift left)
-0x10.hex >>>> 1                       // 0x1   (bitwise nibble shift right)
-
-// test for equatability with ultimate flexibility,
+// test for equatability or perform math operations with great flexibility,
 // without needing to extract the .value first, casting or converting
 
-UInt8(123).hex == Int16(123)  // true (can equate to any integer type, whether Hex<T> or not)
+UInt8(123).hex == Int16(123)      // true
+"FF".hex == 255                   // true
 
+123.hex + 10.binary - 10          // == 123
 ```
 
+### Premise
 
-
-## Constructors
-
-The `Hex<T>` struct acts as a shell around a type-preserved `BinaryInteger`:
-
-`Hex(n)` == `Hex<T of n>(n)`
-
-The `Hex` type can be constructed using initializers, or convenience extensions. Both are identical.
+At its core, a new generic type called `Radix` stores any `BinaryInteger` value, as well as its associated base (radix).
 
 ```swift
-Hex(123)                  // Hex<Int>(123)
-123.hex                   // Hex<Int>(123)
+Radix<T: BinaryInteger>
+
+// constructors
+
+Radix(0xFF, base: 16)                // Radix<Int>(255)
+Radix(UInt8(0xFF), base: 16)         // Radix<UInt8>(255)
+Radix<UInt8>(0xFF, base: 16)         // Radix<UInt8>(255)
+
+Radix(0b1111, base: 2)               // Radix<Int>(15)
+
+// category method to construct
+
+0xFF.radix(base: 16)                 // Radix<Int>(255)
+0xFF.radix(base: 16, as: UInt8.self) // Radix<UInt8>(255)
 ```
 
-Any `BinaryInteger` type that is expressable as hexadecimal can be used.
+However, for common bases (binary base-2, octal base-8, hex base-16) you may never need to construct `Radix` directly. Instead, there are convenient functional category methods on common types and collections to shortcut these.
 
 ```swift
-Int(123).hex              // Hex<Int>(123)
-Int8(123).hex             // Hex<Int8>(123)
-UInt8(123).hex            // Hex<UInt8>(123)
-Int16(123).hex            // Hex<Int16>(123)
-UInt16(123).hex           // Hex<UInt16>(123)
-Int32(123).hex            // Hex<Int32>(123)
-UInt32(123).hex           // Hex<UInt32>(123)
-Int64(123).hex            // Hex<Int64>(123)
-UInt64(123).hex           // Hex<UInt64>(123)
+255.binary            // == Radix<Int>(0b11111111, base: 2)
+"0b11111111".binary   // == Radix<Int>(255, base: 2)?
+
+255.octal             // == Radix<Int>(0o377, base: 8)
+"0o377".octal         // == Radix<Int>(255, base: 8)?
+
+255.hex               // == Radix<Int>(0xFF, base: 16)
+"0xFF".hex            // == Radix<Int>(255, base: 16)?
+
+255.radix(base: 5)    // == Radix<Int>(255, base: 5)
+"2010".radix(base: 5) // == Radix<Int>(255, base: 5)?
 ```
 
-A valid hexadecimal string can be used to construct the `Hex<T>` struct. This constructor returns an optional, since if the string is not valid hexadecimal, the constructor will fail and `nil` will be returned. If no integer type is specified, the type will defult to `Hex<Int>`.
+You will see how powerful and elegant these can be when combined, further down the README.
+
+
+
+## Proxy Constructors
+
+Two invocation styles, producing the same result.
 
 ```swift
-Hex("FF")                 // Hex<Int>(255)?
-"FF".hex                  // Hex<Int>(255)?
-"0xFF".hex                // Hex<Int>(255)?
+// proxy constructor function
+Hex(123)                  // Radix<Int>(123, base: 16)
 
-"ZZZZ".hex                // nil - not a valid hex string
+// functional category property
+123.hex                   // Radix<Int>(123, base: 16)
 ```
 
-To construct from a hex string to a specific desired internal integer value type, specify it in the constructor.
+Any `BinaryInteger` type can be used.
 
 ```swift
-Hex<UInt8>("FF")          // Hex<UInt8>(255)?
-Hex<UInt8>("FFFFFF")      // nil -- 0xFFFFFF does not fit in UInt8, so init fails
+Int(123).hex              // Radix<Int>(123)
+Int8(123).hex             // Radix<Int8>(123)
+UInt8(123).hex            // Radix<UInt8>(123)
+Int16(123).hex            // Radix<Int16>(123)
+UInt16(123).hex           // Radix<UInt16>(123)
+Int32(123).hex            // Radix<Int32>(123)
+UInt32(123).hex           // Radix<UInt32>(123)
+Int64(123).hex            // Radix<Int64>(123)
+UInt64(123).hex           // Radix<UInt64>(123)
+```
+
+A valid hexadecimal string can be used, either containing the prefix `0x` or without it.
+
+This constructor returns an `Optional`, since if the string is not valid hexadecimal, the constructor will fail and `nil` will be returned.
+
+If no integer type is specified, the type will defult to `Int`.
+
+```swift
+Hex("FF")                 // Radix<Int>(255)?
+"FF".hex                  // Radix<Int>(255)?
+"0xFF".hex                // Radix<Int>(255)?
+
+"ZZZZ".hex                // nil ; not a valid hex string
+```
+
+To specify an integer type other than `Int`, specify it using `as:`.
+
+```swift
+Hex("FF", as: UInt8.self)      // Radix<UInt8>(255)?
+"FF".hex(as: UInt8.self)       // Radix<UInt8>(255)?
+
+Hex("FFFFFF", as: UInt8.self)  // nil -- 0xFFFFFF does not fit in UInt8, so init fails
+"FFFFFF".hex(as: UInt8.self)   // nil -- 0xFFFFFF does not fit in UInt8, so init fails
 ```
 
 
 
 ## Getting and Setting Values
 
-Once the `Hex<T>` object is constructed, various methods become available.
+Various methods become available:
 
 ```swift
-let h = 255.hex                           // Hex<Int>(255)
-h.value                                   // 255, type Int
+let h = 255.hex                           // Radix<Int>(255)
+h.value                                   // Int(255)
 h.stringValue                             // "FF"
-h.stringValue(withPrefix: true)           // "0xFF"
+h.stringValue(prefix: true)               // "0xFF"
 
 h.stringValue = "7F"                      // can also set the hex String and get value...
 h.value                                   // 127, type Int
@@ -112,11 +167,11 @@ h.value                                   // 127, type Int
 Padding to *n* number of leading zeros can be specified if you need uniform string formatting:
 
 ```swift
-0xF.hex.stringValue                       // "F"
-0xF.hex.stringValue(padTo: 2)             // "0F"
-0xF.hex.stringValue(padTo: 3)             // "00F"
+    0xF.hex.stringValue                   // "F"
+    0xF.hex.stringValue(padTo: 2)         // "0F"
+    0xF.hex.stringValue(padTo: 3)         // "00F"
 
-0xFFFF.hex.stringValue(padTo: 3)          // "FFFF" - has no effect; it's > 3 places
+ 0xFFFF.hex.stringValue(padTo: 3)         // "FFFF" - has no effect; it's > 3 places
 ```
 
 It is also possible to pad leading zeros to every *n* multiple of digit places.
@@ -131,51 +186,22 @@ It is also possible to pad leading zeros to every *n* multiple of digit places.
 0x12345.hex.stringValue(padToEvery: 4)    // "00012345"
 ```
 
-
-
-## Related Methods
-
-`.nibble(Int)`
-`[nibble: Int] { get set }`
-
-- gets nibble (4-byte) value at specified position right-to-left
-- subscript can also be used to get or set nibble values
+In addition to padding, strings can be split every *n* digit places, and also in combination with padding.
 
 ```swift
-var h = 0x1234.hex
-
-h.nibble(0)               // 0x4 (type T, which is Int in this case)
-h.nibble(3)               // 0x1 (type T, which is Int in this case)
-
-h[nibble: 0]              // 0x4 (type T, which is Int in this case)
-h[nibble: 3]              // 0x1 (type T, which is Int in this case)
-h[nibble: 3] = 0xF
-h.value                   // == 0xF234
-```
-
-
-
-`.nibbleString(Int)`
-`.nibbleString(Int, padTo: Int)`
-
-- same as `nibble(Int)` but returns a hex String instead, optionally padded to specified number of places
-
-```swift
-let h = 0x1234.hex
-
-h.nibbleString(0)             // "4"
-h.nibbleString(3, padTo: 2)   // "01"
+    0xF.hex.stringValue(padTo: 8, splitEvery: 4)         // "0000 000F"
+0x123AB.hex.stringValue(padToEvery: 2, splitEvery: 2)    // "01 23 AB"
 ```
 
 
 
 ## Equatability
 
-`Hex<T>` can be tested for equatability directly using typical operators (`==`, `!=`, `>`, `<`) without needing to access the `.value` property. This makes for cleaner, more convenient code.
+`Hex<T>` can be tested for equatability directly using typical operators (`==`, `!=`, `>`, `<`) without needing to access the `.value` property. This makes for cleaner, more convenient syntax.
 
 ```swift
-let h1 = 10.hex        // Hex<Int>
-let h2 = 20.hex        // Hex<Int>
+let h1 = 10.hex        // Radix<Int>
+let h2 = 20.hex        // Radix<Int>
 
 h1.value == h2.value   // this works but it's easier to just do this...
 h1 == h2               // false
@@ -184,16 +210,17 @@ h1 == h2               // false
 They can be compared with great flexibility -- even between different integer types directly without requiring casting or conversions.
 
 ```swift
-let h1 = 10.hex        // Hex<Int>
-let h2 = 20.hex        // Hex<Int>
-h1 == h2               // false  (comparing Hex<Int> with Hex<Int>)
-h1 > 20                // true   (comparing Hex<Int> with Int)
-h1 != UInt8(20)        // true   (comparing Hex<Int> with UInt8)
+let h1 = 10.hex        // Radix<Int>
+let h2 = 20.hex        // Radix<Int>
+h1 == h2               // false  (comparing Radix<Int> with Radix<Int>)
+h1 > 20                // true   (comparing Radix<Int> with Int)
+h1 != UInt8(20)        // true   (comparing Radix<Int> with UInt8)
 
 // even though "FF".hex produces an Optional,
 // the comparison still works safely without requiring the optional to be unwrapped first
-255.hex == "FF".hex    // true
-255.hex == "ZZ".hex    // false - optional is nil
+"FF".hex == 255        // true
+"FF".hex == 255.hex    // true
+"ZZ".hex == 255.hex    // false - optional is nil
 ```
 
 
@@ -208,14 +235,20 @@ Additional operators similarly supported, allowing mixing of types as with equat
 
 ## Bitwise Shifting
 
-```swift
-// traditional bit shift left/right still work as usual
+### Traditional Bit Shift
 
+Traditional binary bit shift left/right still work as usual.
+
+```swift
 0b0100.hex << 1        // 0b1000
 0b0100.hex >> 1        // 0b0010
+```
 
-// nibble shift (multiples of 4 bits)
+### Nibble Shift
 
+Shift in multiples of 4 bits with new `<<<<` / `>>>>` operators.
+
+```swift
 0x2F.hex <<<< 1        // 0x2F0    (bitwise nibble shift left)
 0x2F.hex >>>> 1        // 0x2      (bitwise nibble shift right)
 
@@ -225,68 +258,122 @@ Additional operators similarly supported, allowing mixing of types as with equat
 
 
 
-## Extensions on Arrays
+## Extensions on Array and Data
 
-Any `[BinaryInteger]` Array can be converted to an equivalent `[Hex<T>]` Array:
+### [BinaryInteger]
+
+Any integer array can be converted to an equivalent `[Radix<T>]` Array:
+
 ```swift
-let a = [1, 2].hex                    // [Hex<Int>(1), Hex<Int>(2)]
+let a = [1, 2].hex           // [Radix<Int>(1), Radix<Int>(2)]
 
-let uint8array: [UInt8] = [3, 4]
-let b = uint8array.hex                // [Hex<UInt8>(3), Hex<UInt8>(4)]
-
-[UInt8](arrayLiteral: 5, 6).hex       // [Hex<UInt8>(5), Hex<UInt8>(6)]
+let arr: [UInt8] = [3, 4]
+let b = arr.hex              // [Radix<UInt8>(3), Radix<UInt8>(4)]
 
 // and back again:
 
-a.values                              // [1, 2] of type [Int]
-b.values                              // [3, 4] of type [UInt8]
+a.values                     // [1, 2] of type [Int]
+b.values                     // [3, 4] of type [UInt8]
 ```
 
-It can also be flattened into a concatenated `String` or an array of hex `String`:
+It can also be flattened into a concatenated `String` or an array of `String`s:
 ```swift
-[0, 255, 0, 255].hex.stringValue                     // "00 FF 00 FF"
-[0, 255, 0, 255].hex.stringValues                    // ["00", "FF", "00", "FF"]
+[0, 255, 0, 255].hex.stringValue                 // "00 FF 00 FF"
+[0, 255, 0, 255].hex.stringValue(prefix: true)   // "0x00 0xFF 0x00 0xFF"
 
-[0, 255, 0, 255].hex.stringValue(withPrefix: true)   // "0x00 0xFF 0x00 0xFF"
-[0, 255, 0, 255].hex.stringValues(withPrefix: true)  // ["0x00", "0xFF", "0x00", "0xFF"]
+[0, 255, 0, 255].hex.stringValues                // ["00", "FF", "00", "FF"]
+[0, 255, 0, 255].hex.stringValues(prefix: true)  // ["0x00", "0xFF", "0x00", "0xFF"]
 ```
 
-Which can be useful when debugging binary data to the console, or presenting binary data in a human-readable format easily:
+### [String]
+
+`String` arrays can also be translated into an array of `Radix<T>?` . The `.values` property produces an unwrapped array of `[Optional<T>]`.
+
+```swift
+["00", "0xFF", "ZZ"].hex.values   // [Optional(0), Optional(255), nil]
+```
+
+It is also possible to easily generate a Swift source-compatible array literal.
+
+```swift
+let arr = [0, 1, 255]
+
+arr.hex.stringValueArrayLiteral    // "[0x0, 0x1, 0xFF]"
+arr.binary.stringValueArrayLiteral // "[0b0, 0b1, 0b11111111]"
+```
+
+### Data
+
+Useful when debugging binary data to the console, or presenting it in a human-readable format easily.
 
 ```swift
 let d = Data([0x1, 0x2, 0x3, 0xFF])
 
-[UInt8](d).hex.stringValue            // "01 02 03 FF"
+d.hex.stringValue(padTo: 2)                          // "01 02 03 FF"
 ```
 
-`String` arrays can also be translated into an array of `Hex<T>?` . There is no `.values` property but you can easily render the array down, or iterate over it.
+### 
+
+## Value Memory Access Methods
+
+A numer of additional methods for reading and manipulating the underlying integer value.
+
+### Bit
+
+`.bit(Int)`
+`[bit: Int]`
+
+- gets single bit value at specified position right-to-left
+- subscript can also be used to get or set bit values
+- radix-agnostic
 
 ```swift
-["00", "0xFF", "ZZ"].hex.map({ $0?.value }))         // [Optional(0), Optional(255), nil]
-["00", "0xFF", "ZZ"].hex.map({ $0?.value ?? -1 }))   // [0, 255, -1]
+var h = 0b1100.binary
 
-// or use the convenience property .hexValues
+h.bit(0)                  // 0b0.binary
+h.bit(2)                  // 0b1.binary
 
-["00", "0xFF", "ZZ"].valuesFromHexStrings            // [Optional(0), Optional(255), nil]
+h[bit: 0]                 // 0b0 (type T, which is Int in this case)
+h[bit: 2]                 // 0b1 (type T, which is Int in this case)
+h[bit: 2] = 0b0
+h.value                   // == 0b1000
 ```
 
 
 
-## Limitations
+### Nibble
 
-The max integer size storable and representable as a hex `String` is `UInt64` which is the natural limitation of Swift.
+`.nibble(Int)`
+`[nibble: Int] { get set }`
+
+- gets nibble (4-bit) value at specified position right-to-left
+- subscript can also be used to get or set nibble values
+- radix-agnostic
 
 ```swift
-Hex<UInt64>(0xFFFF_FFFF_FFFF_FFFF)
+var h = 0x1234.hex
+
+h.nibble(0)               // 0x4.hex
+h.nibble(3)               // 0x1.hex
+
+h[nibble: 0]              // 0x4 (type T, which is Int in this case)
+h[nibble: 3]              // 0x1 (type T, which is Int in this case)
+h[nibble: 3] = 0xF
+h.value                   // == 0xF234
 ```
 
-Negative numbers will be stored in `.value` normally but may produce unexpected hex `String`s. You do not have to exclusively use unsigned integers, but it's best to avoid using negative numbers which will have an ambigious hex representation.
 
-> Use of, and formatting, negative numbers may be expanded in future updates to SwiftHex, or if you feel generous, feel free to tackle this and submit your code.
+
+### Bytes
+
+`.bytes`
+
+- A convenience property to return the raw bytes of the value as `[Uint8]`  right-to-left
+- radix-agnostic
 
 ```swift
-(-1).hex.value         // -1
-(-1).hex == -1         // true
-(-1).hex               // 0xFFFFFFFFFFFFFFFF
+let bytes = 0xFF00.hex.bytes
+
+bytes // [0x00, 0xFF]
 ```
 
