@@ -7,7 +7,7 @@
 <a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/SPM-compatible-orange.svg?style=flat" alt="Swift Package Manager (SPM) compatible" /></a>
 <a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/platform-macOS%20|%20iOS%20|%20tvOS%20|%20watchOS-green.svg?style=flat" alt="Platform - macOS | iOS | tvOS | watchOS" /></a>
 <a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/Linux-not%20tested-black.svg?style=flat" alt="Linux - not tested" /></a>
-<a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/Code%20Coverage-100%20percent-green.svg?style=flat" alt="Platform - macOS | iOS | tvOS | watchOS" /></a>
+<a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/Code%20Coverage-100%20percent-green.svg?style=flat" alt="Code Coverage - 100 Percent" /></a>
 <a href="https://raw.githubusercontent.com/uraimo/Bitter/master/LICENSE"><img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="License: MIT" /></a>
 </p>
 A lightweight library useful for translating integers to and from radix strings (binary, hex, octal or any base) using simple, clean functional syntax.
