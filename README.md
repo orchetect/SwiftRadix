@@ -1,15 +1,29 @@
 # SwiftRadix
 
-#### (the library formerly known as SwiftHex)
+##### (the library formerly known as SwiftHex)
 
 <p>
-<a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/Swift%205.2-compatible-orange.svg?style=flat" alt="Swift 5.2 compatible" /></a>
-<a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/SPM-compatible-orange.svg?style=flat" alt="Swift Package Manager (SPM) compatible" /></a>
-<a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/platform-macOS%20|%20iOS%20|%20tvOS%20|%20watchOS-green.svg?style=flat" alt="Platform - macOS | iOS | tvOS | watchOS" /></a>
-<a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/Linux-not%20tested-black.svg?style=flat" alt="Linux - not tested" /></a>
-<a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/Code%20Coverage-100%20percent-green.svg?style=flat" alt="Code Coverage - 100 Percent" /></a>
-<a href="https://raw.githubusercontent.com/uraimo/Bitter/master/LICENSE"><img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="License: MIT" /></a>
+<a href="https://developer.apple.com/swift">
+<img src="https://img.shields.io/badge/Swift%205.2-compatible-orange.svg?style=flat"
+     alt="Swift 5.2 compatible" /></a>
+<a href="#installation">
+<img src="https://img.shields.io/badge/SPM-compatible-orange.svg?style=flat"
+     alt="Swift Package Manager (SPM) compatible" /></a>
+<a href="https://developer.apple.com/swift">
+<img src="https://img.shields.io/badge/platform-macOS%20|%20iOS%20|%20tvOS%20|%20watchOS-green.svg?style=flat"
+     alt="Platform - macOS | iOS | tvOS | watchOS" /></a>
+<a href="#contributions">
+<img src="https://img.shields.io/badge/Linux-not%20tested-black.svg?style=flat"
+     alt="Linux - not tested" /></a>
+<a href="#documentation">
+<img src="https://img.shields.io/badge/Code%20Coverage-100%20percent-green.svg?style=flat"
+     alt="Code Coverage - 100 Percent" /></a>
+<a href="https://github.com/orchetect/SwiftRadix/blob/master/LICENSE">
+<img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" 
+     alt="License: MIT" /></a>
 </p>
+
+
 A lightweight library useful for translating integers to and from radix strings (binary, hex, octal or any base) using simple, clean functional syntax.
 
 
@@ -57,6 +71,20 @@ UInt8(123).hex == Int16(123)      // true
 123.hex + 10.binary - 10          // == 123
 ```
 
+## Installation
+
+### Swift Package Manager (SPM)
+
+To add PListKit to your Xcode project, select File → Swift Packages → Add Package Depedancy using `https://github.com/orchetect/SwiftRadix` as the URL.
+
+### Cocoapods
+
+```bash
+pod 'SwiftRadix'
+```
+
+## Documentation
+
 ### Premise
 
 At its core, a new generic type called `Radix` stores any `BinaryInteger` value, as well as its associated base (radix).
@@ -98,7 +126,7 @@ You will see how powerful and elegant these can be when combined, further down t
 
 
 
-## Proxy Constructors
+### Proxy Constructors
 
 Two invocation styles, producing the same result.
 
@@ -150,7 +178,7 @@ Hex("FFFFFF", as: UInt8.self)  // nil -- 0xFFFFFF does not fit in UInt8, so init
 
 
 
-## Getting and Setting Values
+### Getting and Setting Values
 
 Various methods become available:
 
@@ -195,7 +223,7 @@ In addition to padding, strings can be split every *n* digit places, and also in
 
 
 
-## Equatability
+### Equatability
 
 `Hex<T>` can be tested for equatability directly using typical operators (`==`, `!=`, `>`, `<`) without needing to access the `.value` property. This makes for cleaner, more convenient syntax.
 
@@ -225,7 +253,7 @@ h1 != UInt8(20)        // true   (comparing Radix<Int> with UInt8)
 
 
 
-## Additional Operators
+### Additional Operators
 
 Additional operators similarly supported, allowing mixing of types as with equatability:
 
@@ -233,9 +261,9 @@ Additional operators similarly supported, allowing mixing of types as with equat
 
 
 
-## Bitwise Shifting
+### Bitwise Shifting
 
-### Traditional Bit Shift
+#### Traditional Bit Shift
 
 Traditional binary bit shift left/right still work as usual.
 
@@ -244,7 +272,7 @@ Traditional binary bit shift left/right still work as usual.
 0b0100.hex >> 1        // 0b0010
 ```
 
-### Nibble Shift
+#### Nibble Shift
 
 Shift in multiples of 4 bits with new `<<<<` / `>>>>` operators.
 
@@ -258,9 +286,9 @@ Shift in multiples of 4 bits with new `<<<<` / `>>>>` operators.
 
 
 
-## Extensions on Array and Data
+### Extensions on Array and Data
 
-### [BinaryInteger]
+#### [BinaryInteger]
 
 Any integer array can be converted to an equivalent `[Radix<T>]` Array:
 
@@ -285,7 +313,7 @@ It can also be flattened into a concatenated `String` or an array of `String`s:
 [0, 255, 0, 255].hex.stringValues(prefix: true)  // ["0x00", "0xFF", "0x00", "0xFF"]
 ```
 
-### [String]
+#### [String]
 
 `String` arrays can also be translated into an array of `Radix<T>?` . The `.values` property produces an unwrapped array of `[Optional<T>]`.
 
@@ -302,7 +330,7 @@ arr.hex.stringValueArrayLiteral    // "[0x0, 0x1, 0xFF]"
 arr.binary.stringValueArrayLiteral // "[0b0, 0b1, 0b11111111]"
 ```
 
-### Data
+#### Data
 
 Useful when debugging binary data to the console, or presenting it in a human-readable format easily.
 
@@ -314,11 +342,11 @@ d.hex.stringValue(padTo: 2)                          // "01 02 03 FF"
 
 ### 
 
-## Value Memory Access Methods
+### Value Memory Access Methods
 
 A numer of additional methods for reading and manipulating the underlying integer value.
 
-### Bit
+#### Bit
 
 `.bit(Int)`
 `[bit: Int]`
@@ -341,7 +369,7 @@ h.value                   // == 0b1000
 
 
 
-### Nibble
+#### Nibble
 
 `.nibble(Int)`
 `[nibble: Int] { get set }`
@@ -364,7 +392,7 @@ h.value                   // == 0xF234
 
 
 
-### Bytes
+#### Bytes
 
 `.bytes`
 
@@ -377,3 +405,20 @@ let bytes = 0xFF00.hex.bytes
 bytes // [0x00, 0xFF]
 ```
 
+
+
+## Author
+
+Coded by a bunch of 🐹 hamsters in a trenchcoat that calls itself [@orchetect](https://github.com/orchetect).
+
+
+
+## License
+
+Licensed under the MIT license. See [LICENSE](https://github.com/orchetect/SwiftRadix/blob/master/LICENSE) for details.
+
+
+
+## Contributions
+
+Contributions are welcome. Feel free to post an Issue to discuss.
