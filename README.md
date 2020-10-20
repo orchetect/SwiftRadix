@@ -218,7 +218,7 @@ In addition to padding, strings can be split every *n* digit places, and also in
 
 ### Equatability
 
-`Hex<T>` can be tested for equatability directly using typical operators (`==`, `!=`, `>`, `<`) without needing to access the `.value` property. This makes for cleaner, more convenient syntax.
+`Radix<T>` can be tested for equatability directly using typical operators (`==`, `!=`, `>`, `<`) without needing to access the `.value` property. This makes for cleaner, more convenient syntax.
 
 ```swift
 let h1 = 10.hex        // Radix<Int>
@@ -248,7 +248,7 @@ h1 != UInt8(20)        // true   (comparing Radix<Int> with UInt8)
 
 Additional operators similarly supported, allowing mixing of types as with equatability:
 
-- `+=, -=, *=, /=, <<, >>, &`
+- `+=`, `-=`, `*=`, `/=`, `<<`, `>>`, `&`
 
 ### Bitwise Shifting
 
@@ -377,7 +377,7 @@ h.value                   // == 0xF234
 
 `.bytes`
 
-- A convenience property to return the raw bytes of the value as `[Uint8]`  right-to-left
+- A convenience property to return the raw bytes of the value as `[Uint8]` right-to-left
 - radix-agnostic
 
 ```swift
