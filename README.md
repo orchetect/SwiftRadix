@@ -10,8 +10,8 @@
 <img src="https://img.shields.io/badge/SPM-compatible-orange.svg?style=flat"
      alt="Swift Package Manager (SPM) compatible" /></a>
 <a href="https://developer.apple.com/swift">
-<img src="https://img.shields.io/badge/platform-macOS%20|%20iOS%20|%20tvOS%20|%20watchOS-green.svg?style=flat"
-     alt="Platform - macOS | iOS | tvOS | watchOS" /></a>
+<img src="https://img.shields.io/badge/platform-macOS%2010.10%20|%20iOS%208.0%20|%20tvOS%209.0%20|%20watchOS%202.0-green.svg?style=flat"
+     alt="Platform - macOS 10.10 | iOS 8.0 | tvOS 9.0 | watchOS 2.0" /></a>
 <a href="#contributions">
 <img src="https://img.shields.io/badge/Linux-not%20tested-black.svg?style=flat"
      alt="Linux - not tested" /></a>
@@ -23,23 +23,20 @@
      alt="License: MIT" /></a>
 </p>
 
-
 A lightweight library useful for translating integers to and from radix strings (binary, hex, octal or any base) using simple, clean functional syntax.
-
-
 
 ## Summary
 
 ### Common Usage
 
-> All methods in the library apply uniformly to:
->
-> - The generalized `Radix(base:)` / `.radix(base:)`
-> - `Binary()` / `.binary`
-> - `Octal()` / `.octal`
-> - `Hex()` / `.hex`
->
-> For the sake of simplifying this documentation, `Hex()` / `.hex` will be used for most examples below.
+All methods in the library apply uniformly to:
+
+- `Radix(base:)` / `.radix(base:)`
+- `Binary()` / `.binary`
+- `Octal()` / `.octal`
+- `Hex()` / `.hex`
+
+For the sake of simplifying this documentation, `Hex()` / `.hex` will be used for most examples below.
 
 ```swift
 // convert to or from hex strings
@@ -68,14 +65,16 @@ A lightweight library useful for translating integers to and from radix strings 
 UInt8(123).hex == Int16(123)      // true
 "FF".hex == 255                   // true
 
-123.hex + 10.binary - 10          // == 123
+123.hex + 10.binary - 10          // 123
 ```
 
 ## Installation
 
 ### Swift Package Manager (SPM)
 
-To add PListKit to your Xcode project, select File → Swift Packages → Add Package Depedancy using `https://github.com/orchetect/SwiftRadix` as the URL.
+To add SwiftRadix to your Xcode project:
+1. Select File → Swift Packages → Add Package Depedancy
+2. Add package using  `https://github.com/orchetect/SwiftRadix` as the URL.
 
 ### Cocoapods
 
@@ -123,8 +122,6 @@ However, for common bases (binary base-2, octal base-8, hex base-16) you may nev
 ```
 
 You will see how powerful and elegant these can be when combined, further down the README.
-
-
 
 ### Proxy Constructors
 
@@ -176,8 +173,6 @@ Hex("FFFFFF", as: UInt8.self)  // nil -- 0xFFFFFF does not fit in UInt8, so init
 "FFFFFF".hex(as: UInt8.self)   // nil -- 0xFFFFFF does not fit in UInt8, so init fails
 ```
 
-
-
 ### Getting and Setting Values
 
 Various methods become available:
@@ -221,8 +216,6 @@ In addition to padding, strings can be split every *n* digit places, and also in
 0x123AB.hex.stringValue(padToEvery: 2, splitEvery: 2)    // "01 23 AB"
 ```
 
-
-
 ### Equatability
 
 `Hex<T>` can be tested for equatability directly using typical operators (`==`, `!=`, `>`, `<`) without needing to access the `.value` property. This makes for cleaner, more convenient syntax.
@@ -251,15 +244,11 @@ h1 != UInt8(20)        // true   (comparing Radix<Int> with UInt8)
 "ZZ".hex == 255.hex    // false - optional is nil
 ```
 
-
-
 ### Additional Operators
 
 Additional operators similarly supported, allowing mixing of types as with equatability:
 
 - `+=, -=, *=, /=, <<, >>, &`
-
-
 
 ### Bitwise Shifting
 
@@ -283,8 +272,6 @@ Shift in multiples of 4 bits with new `<<<<` / `>>>>` operators.
 0xF0.hex >>>> 1        // 0xF      (bitwise nibble shift right)
 0xF0.hex <<<< 4        // 0xF00000 (bitwise nibble shift left)
 ```
-
-
 
 ### Extensions on Array and Data
 
@@ -340,8 +327,6 @@ let d = Data([0x1, 0x2, 0x3, 0xFF])
 d.hex.stringValue(padTo: 2)                          // "01 02 03 FF"
 ```
 
-### 
-
 ### Value Memory Access Methods
 
 A numer of additional methods for reading and manipulating the underlying integer value.
@@ -367,8 +352,6 @@ h[bit: 2] = 0b0
 h.value                   // == 0b1000
 ```
 
-
-
 #### Nibble
 
 `.nibble(Int)`
@@ -390,8 +373,6 @@ h[nibble: 3] = 0xF
 h.value                   // == 0xF234
 ```
 
-
-
 #### Bytes
 
 `.bytes`
@@ -405,19 +386,13 @@ let bytes = 0xFF00.hex.bytes
 bytes // [0x00, 0xFF]
 ```
 
-
-
 ## Author
 
 Coded by a bunch of 🐹 hamsters in a trenchcoat that calls itself [@orchetect](https://github.com/orchetect).
 
-
-
 ## License
 
 Licensed under the MIT license. See [LICENSE](https://github.com/orchetect/SwiftRadix/blob/master/LICENSE) for details.
-
-
 
 ## Contributions
 
