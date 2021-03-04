@@ -165,6 +165,56 @@ extension SwiftRadixTests {
 		
 	}
 	
+	func testRadix_CollectionExtension_stringValueArrayLiteral_PadTo() {
+		
+		// binary
+		
+		let source1 = [0x00.binary, 0xFF.binary]
+		
+		XCTAssertEqual(source1.stringValueArrayLiteral(padTo: 4),
+					   "[0b0000, 0b11111111]")
+		
+		// hex
+		
+		let source2 = [0x00.hex, 0xFF.hex]
+		
+		XCTAssertEqual(source2.stringValueArrayLiteral(padTo: 4),
+					   "[0x0000, 0x00FF]")
+		
+		// octal
+		
+		let source3 = [0o000.octal, 0o123.octal]
+		
+		XCTAssertEqual(source3.stringValueArrayLiteral(padTo: 4),
+					   "[0o0000, 0o0123]")
+		
+	}
+	
+	func testRadix_CollectionExtension_stringValueArrayLiteral_PadToEvery() {
+		
+		// binary
+		
+		let source1 = [0x00.binary, 0xFF.binary]
+		
+		XCTAssertEqual(source1.stringValueArrayLiteral(padToEvery: 2),
+					   "[0b00, 0b11111111]")
+		
+		// hex
+		
+		let source2 = [0x00.hex, 0xFF.hex]
+		
+		XCTAssertEqual(source2.stringValueArrayLiteral(padToEvery: 2),
+					   "[0x00, 0xFF]")
+		
+		// octal
+		
+		let source3 = [0o000.octal, 0o123.octal]
+		
+		XCTAssertEqual(source3.stringValueArrayLiteral(padToEvery: 2),
+					   "[0o00, 0o0123]")
+		
+	}
+	
 	func testRadix_CollectionExtension_stringValues() {
 		
 		// binary

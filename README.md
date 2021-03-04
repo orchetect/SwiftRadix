@@ -47,15 +47,20 @@ For the sake of simplifying this documentation, `Hex()` / `.hex` will be used fo
 
 // work with arrays of any integer type, or hex strings and convert between them
 
-[0, 255, 0, 255].hex.stringValue                  // "00 FF 00 FF"
-[0, 255, 0, 255].hex.stringValues                 // ["00", "FF", "00", "FF"]
-[0, 255, 0, 255].hex.stringValue(prefix: true)    // "0x00 0xFF 0x00 0xFF"
-[0, 255, 0, 255].hex.stringValues(prefix: true)   // ["0x00", "0xFF", "0x00", "0xFF"]
+[0, 255, 0, 255].hex.stringValue                       // "00 FF 00 FF"
+[0, 255, 0, 255].hex.stringValues                      // ["00", "FF", "00", "FF"]
+[0, 255, 0, 255].hex.stringValue(prefixes: true)       // "0x00 0xFF 0x00 0xFF"
+[0, 255, 0, 255].hex.stringValues(prefixes: true)      // ["0x00", "0xFF", "0x00", "0xFF"]
 
-[0, 65535, 4000].hex.stringValue                  // "00 FFFF FA0"
-[0, 65535, 4000].hex.stringValue(padToEvery: 4)   // "0000 FFFF 0FA0"
+[0, 255, 0, 255].hex.stringValueArrayLiteral           // "[0x0, 0xFF, 0x0, 0xFF]"
+[0, 255, 0, 255].hex.stringValueArrayLiteral(padTo: 2) // "[0x00, 0xFF, 0x00, 0xFF]"
 
-["00", "FF", "ZZ"].hex.values                     // [Optional(0), Optional(255), nil]
+[0, 65535, 4000].hex.stringValue                       // "0 FFFF FA0"
+[0, 65535, 4000].hex.stringValue(padTo: 2)             // "00 FFFF FA0"
+[0, 65535, 4000].hex.stringValue(padToEvery: 2)        // "00 FFFF 0FA0"
+[0, 65535, 4000].hex.stringValue(padToEvery: 4)        // "0000 FFFF 0FA0"
+
+["00", "FF", "ZZ"].hex.values                          // [Optional(0), Optional(255), nil]
 
 // test for equatability or perform math operations with great flexibility,
 // without needing to extract the .value first, casting or converting

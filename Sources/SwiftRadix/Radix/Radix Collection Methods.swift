@@ -55,8 +55,25 @@ extension Collection where Element : RadixProtocol {
 	/// Convert an array of `Radix` to a Swift array literal, useful for generating Swift array declarations.
 	public var stringValueArrayLiteral: String {
 
+		stringValueArrayLiteral(padToEvery: 0)
+
+	}
+	
+	/// Convert an array of `Radix` to a Swift array literal, useful for generating Swift array declarations.
+	public func stringValueArrayLiteral(padTo: Int) -> String {
+
 		"["
-			+ self.stringValues(padToEvery: 0, prefixes: true)
+			+ self.stringValues(padTo: padTo, prefixes: true)
+			.joined(separator: ", " )
+			+ "]"
+
+	}
+	
+	/// Convert an array of `Radix` to a Swift array literal, useful for generating Swift array declarations.
+	public func stringValueArrayLiteral(padToEvery: Int) -> String {
+
+		"["
+			+ self.stringValues(padToEvery: padToEvery, prefixes: true)
 			.joined(separator: ", " )
 			+ "]"
 
