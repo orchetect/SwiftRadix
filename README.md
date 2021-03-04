@@ -4,24 +4,22 @@
 
 <p>
 <a href="https://developer.apple.com/swift">
-<img src="https://img.shields.io/badge/Swift%205.2-compatible-orange.svg?style=flat"
+<img src="https://img.shields.io/badge/Swift-5.2-blue.svg?style=flat"
      alt="Swift 5.2 compatible" /></a>
 <a href="#installation">
-<img src="https://img.shields.io/badge/SPM-compatible-orange.svg?style=flat"
+<img src="https://img.shields.io/badge/SPM-5.3-blue.svg?style=flat"
      alt="Swift Package Manager (SPM) compatible" /></a>
 <a href="https://developer.apple.com/swift">
-<img src="https://img.shields.io/badge/platform-macOS%2010.10%20|%20iOS%208.0%20|%20tvOS%209.0%20|%20watchOS%202.0-green.svg?style=flat"
-     alt="Platform - macOS 10.10 | iOS 8.0 | tvOS 9.0 | watchOS 2.0" /></a>
-<a href="#contributions">
-<img src="https://img.shields.io/badge/Linux-not%20tested-black.svg?style=flat"
-     alt="Linux - not tested" /></a>
+<img src="https://img.shields.io/badge/platform-macOS_10.10_|_iOS_8_|_tvOS_9_|_watchOS_2-%23989898.svg?style=flat"
+     alt="Platform - macOS 10.10 | iOS 8 | tvOS 9 | watchOS 2" /></a>
 <a href="#documentation">
-<img src="https://img.shields.io/badge/Code%20Coverage-100%20percent-green.svg?style=flat"
+<img src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg?style=flat"
      alt="Code Coverage - 100 Percent" /></a>
 <a href="https://github.com/orchetect/SwiftRadix/blob/master/LICENSE">
-<img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" 
+<img src="http://img.shields.io/badge/license-MIT-green.svg?style=flat" 
      alt="License: MIT" /></a>
 </p>
+
 
 A lightweight library useful for translating integers to and from radix strings (binary, hex, octal or any base) using simple, clean functional syntax.
 
@@ -29,12 +27,14 @@ A lightweight library useful for translating integers to and from radix strings 
 
 ### Common Usage
 
-All methods in the library apply uniformly to:
+Unified library with several constructor methods, all of which in turn provide all of the functionality of the library inline.
 
-- `Radix(base:)` / `.radix(base:)`
-- `Binary()` / `.binary`
-- `Octal()` / `.octal`
-- `Hex()` / `.hex`
+| Option 1: Function   | Option 2: Category method | Returns                                 |
+| -------------------- | ------------------------- | --------------------------------------- |
+| `Radix(_: T, base:)` | `.radix(base:)`           | `Radix<T>(base: n)` where n is `2...36` |
+| `Binary(_: T)`       | `.binary`                 | `Radix<T>(base: 2)`                     |
+| `Octal(_: T)`        | `.octal`                  | `Radix<T>(base: 8)`                     |
+| `Hex(_: T)`          | `.hex`                    | `Radix<T>(base: 16)`                    |
 
 For the sake of simplifying this documentation, `Hex()` / `.hex` will be used for most examples below.
 
@@ -86,7 +86,7 @@ pod 'SwiftRadix'
 
 ### Premise
 
-At its core, a new generic type called `Radix` stores any `BinaryInteger` value, as well as its associated base (radix).
+At its core, a new generic type called `Radix` wraps any `BinaryInteger` value, as well as its associated base (radix).
 
 ```swift
 Radix<T: BinaryInteger>
