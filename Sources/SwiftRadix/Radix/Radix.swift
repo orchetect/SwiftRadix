@@ -27,13 +27,15 @@ public struct Radix<T: BinaryInteger>: RadixProtocol {
 	public var base: Int
 	
 	/// String prefix specific to the radix
-	public var stringPrefix: String {
+	@inline(__always) public var stringPrefix: String {
+		
 		switch base {
 		case 2:  return "0b"
 		case 8:  return "0o"
 		case 16: return "0x"
 		default: return ""
 		}
+		
 	}
 	
 	
