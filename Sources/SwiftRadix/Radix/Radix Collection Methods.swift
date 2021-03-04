@@ -33,7 +33,7 @@ extension Collection where Element : RadixProtocol {
 
 	}
 
-	/// Convert an array of `Radix` to a concatenated String of radix string values, each value padded to two characters or multiples of the number of characters specified.
+	/// Convert an array of `Radix` to a concatenated String of radix string values, each value padded to multiples of the number of characters specified.
 	public func stringValue(padToEvery: Int,
 							prefix: Bool = false) -> String {
 		
@@ -59,7 +59,7 @@ extension Collection where Element : RadixProtocol {
 
 	}
 	
-	/// Convert an array of `Radix` to a Swift array literal, useful for generating Swift array declarations.
+	/// Convert an array of `Radix` to a Swift array literal, useful for generating Swift array declarations, each value padded to the number of characters specified.
 	public func stringValueArrayLiteral(padTo: Int) -> String {
 
 		"["
@@ -69,7 +69,7 @@ extension Collection where Element : RadixProtocol {
 
 	}
 	
-	/// Convert an array of `Radix` to a Swift array literal, useful for generating Swift array declarations.
+	/// Convert an array of `Radix` to a Swift array literal, useful for generating Swift array declarations, each value padded to multiples of the number of characters specified.
 	public func stringValueArrayLiteral(padToEvery: Int) -> String {
 
 		"["
@@ -86,14 +86,14 @@ extension Collection where Element : RadixProtocol {
 
 extension Collection where Element : RadixProtocol {
 
-	/// Convert an array of `Radix` to an Array of radix string values, each padded to two characters by default.
+	/// Convert an array of `Radix` to an Array of radix string values.
 	public var stringValues: [String] {
 
 		self.stringValues(padTo: 0)
 
 	}
 
-	/// Convert an array of `Radix` to an Array of radix string values, each padded to two characters the number of characters specified.
+	/// Convert an array of `Radix` to an Array of radix string values, each value padded to the number of characters specified.
 	public func stringValues(padTo: Int,
 							 prefixes: Bool = false) -> [String] {
 
@@ -103,7 +103,7 @@ extension Collection where Element : RadixProtocol {
 
 	}
 
-	/// Convert an array of `Radix` to an Array of radix string values, each value padded to two characters or multiples of the number of characters specified.
+	/// Convert an array of `Radix` to an Array of radix string values, each value padded to multiples of the number of characters specified.
 	public func stringValues(padToEvery: Int,
 							 prefixes: Bool = false) -> [String] {
 
