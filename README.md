@@ -1,7 +1,5 @@
 # SwiftRadix
 
-##### (the library formerly known as SwiftHex)
-
 <p>
 <a href="https://developer.apple.com/swift">
 <img src="https://img.shields.io/badge/Swift-5.2-blue.svg?style=flat"
@@ -388,11 +386,13 @@ bytes // [0x00, 0xFF]
 
 ## Author
 
-Coded by a bunch of 🐹 hamsters in a trenchcoat that calls itself [@orchetect](https://github.com/orchetect).
+Coded by a bunch of 🐹 hamsters in a trench coat that calls itself [@orchetect](https://github.com/orchetect).
 
 ## License
 
 Licensed under the MIT license. See [LICENSE](https://github.com/orchetect/SwiftRadix/blob/master/LICENSE) for details.
+
+This library was formerly known as SwiftHex.
 
 ## Contributions
 
