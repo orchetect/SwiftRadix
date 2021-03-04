@@ -140,6 +140,25 @@ extension SwiftRadixTests {
 		
 	}
 	
+	func testRadix_stringValue_Prefix() {
+		
+		// binary
+		
+		XCTAssertEqual(0b0.binary.stringValue(prefix: true), "0b0")
+		XCTAssertEqual(0b0.binary.stringValue(prefix: false), "0")
+		
+		// hex
+		
+		XCTAssertEqual(0b0.hex.stringValue(prefix: true), "0x0")
+		XCTAssertEqual(0b0.hex.stringValue(prefix: false), "0")
+		
+		// octal
+		
+		XCTAssertEqual(0b0.octal.stringValue(prefix: true), "0o0")
+		XCTAssertEqual(0b0.octal.stringValue(prefix: false), "0")
+		
+	}
+	
 	func testRadix_stringValue_PadTo() {
 		
 		// binary

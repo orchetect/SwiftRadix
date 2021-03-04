@@ -12,7 +12,7 @@ import XCTest
 
 extension SwiftRadixTests {
 	
-	func testRadix_CollectionExtension_stringValue_Get() {
+	func testRadix_CollectionExtension_stringValue() {
 		
 		// binary
 		
@@ -33,6 +33,40 @@ extension SwiftRadixTests {
 		let source3 = [0x000.octal, 0o123.octal]
 		
 		XCTAssertEqual(source3.stringValue,
+					   "0 123")
+		
+	}
+	
+	func testRadix_CollectionExtension_stringValue_Prefix() {
+		
+		// binary
+		
+		let source1 = [0x00.binary, 0xFF.binary]
+		
+		XCTAssertEqual(source1.stringValue(prefix: true),
+					   "0b0 0b11111111")
+		
+		XCTAssertEqual(source1.stringValue(prefix: false),
+					   "0 11111111")
+		
+		// hex
+		
+		let source2 = [0x00.hex, 0xFF.hex]
+		
+		XCTAssertEqual(source2.stringValue(prefix: true),
+					   "0x0 0xFF")
+		
+		XCTAssertEqual(source2.stringValue(prefix: false),
+					   "0 FF")
+		
+		// octal
+		
+		let source3 = [0x000.octal, 0o123.octal]
+		
+		XCTAssertEqual(source3.stringValue(prefix: true),
+					   "0o0 0o123")
+		
+		XCTAssertEqual(source3.stringValue(prefix: false),
 					   "0 123")
 		
 	}

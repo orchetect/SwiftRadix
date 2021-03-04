@@ -17,10 +17,21 @@ extension Collection where Element : RadixProtocol {
 	/// Convert an array of `Radix` to a concatenated String of radix string values.
 	public var stringValue: String {
 		
-		self.stringValue(padTo: 0)
+		self
+			.map { $0.stringValue }
+			.joined(separator: " ")
 
 	}
+	
+	/// Convert an array of `Radix` to a concatenated String of radix string values, each value padded to the number of characters specified.
+	public func stringValue(prefix: Bool) -> String {
+		
+		self
+			.map { $0.stringValue(prefix: prefix) }
+			.joined(separator: " ")
 
+	}
+	
 	/// Convert an array of `Radix` to a concatenated String of radix string values, each value padded to the number of characters specified.
 	public func stringValue(padTo: Int,
 							prefix: Bool = false) -> String {

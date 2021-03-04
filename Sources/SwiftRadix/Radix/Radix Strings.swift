@@ -34,6 +34,16 @@ extension Radix {
 	}
 	
 	/// Computed property:
+	/// Returns radix String representation of `value`, optionally including `prefix`.
+	public func stringValue(prefix: Bool) -> String {
+		
+		prefix
+			? stringPrefix + stringValue
+			: stringValue
+		
+	}
+	
+	/// Computed property:
 	/// Returns radix String representation of `value`, padding zeros to number of places passed.
 	///
 	/// If `splitEvery` > 0, a spacer is inserted every nth characters in the resulting string; the spacer will be a space if `prefix` is false and an underscore if `prefix` is true.
@@ -56,7 +66,9 @@ extension Radix {
 				.joined(separator: splitter)
 		}
 		
-		return (prefix ? stringPrefix : "") + radixString
+		return prefix
+			? stringPrefix + radixString
+			: radixString
 		
 	}
 	
@@ -84,7 +96,9 @@ extension Radix {
 				.joined(separator: splitter)
 		}
 		
-		return (prefix ? stringPrefix : "") + radixString
+		return prefix
+			? stringPrefix + radixString
+			: radixString
 		
 	}
 	
