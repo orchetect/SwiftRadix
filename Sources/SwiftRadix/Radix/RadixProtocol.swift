@@ -9,8 +9,8 @@
 
 import Foundation
 
-// Protocol is necessary in order to create asociatedtype-erased extensions
-// such as:
+// Protocol is necessary in order to create associatedtype-erased extensions
+// ie:
 // extension Collection where Element : RadixProtocol { }
 
 public protocol RadixProtocol {

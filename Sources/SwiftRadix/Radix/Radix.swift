@@ -56,7 +56,7 @@ public struct Radix<T: BinaryInteger>: RadixProtocol {
 	/// 0xFF.hex
 	///
 	/// ```
-	public init(_ number: NumberType, base: Int) {
+	@inline(__always) public init(_ number: NumberType, base: Int) {
 		
 		self.base = base
 		
@@ -108,7 +108,7 @@ public struct Radix<T: BinaryInteger>: RadixProtocol {
 	/// "FF".hex
 	///
 	/// ```
-	public init?(_ string: String, base: Int) {
+	@inlinable public init?(_ string: String, base: Int) {
 		
 		self.base = base
 		

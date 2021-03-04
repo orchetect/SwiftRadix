@@ -105,9 +105,9 @@ extension Collection where Element : RadixProtocol {
 extension Collection where Element : RadixProtocol {
 	
 	/// Returns an array of extracted values.
-	public var values: [Element.NumberType] {
+	@inlinable public var values: [Element.NumberType] {
 		
-		self.map( { $0.value })
+		self.map { $0.value }
 		
 	}
 	
@@ -117,7 +117,7 @@ extension Collection where Element : RadixProtocol {
 extension Collection where Element: OptionalType, Element.Wrapped : RadixProtocol {
 	
 	/// Returns an array of extracted values.
-	public var values: [Element.Wrapped.NumberType?] {
+	@inlinable public var values: [Element.Wrapped.NumberType?] {
 		
 		self.map { $0.optional?.value }
 		

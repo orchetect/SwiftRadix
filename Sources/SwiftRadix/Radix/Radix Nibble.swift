@@ -17,14 +17,14 @@ extension Radix {
 	/// Returns the value of the 4-bit nibble from right-to-left. `position` is zero-based.
 	///
 	/// Nibbles can also be get or set directly via the `[nibble: Int]` mutating subscript.
-	public func nibble(_ position: Int) -> Radix<NumberType> {
+	@inline(__always) public func nibble(_ position: Int) -> Radix<NumberType> {
 		
 		Radix(self[nibble: position], base: base)
 		
 	}
 	
 	/// Access binary nibbles from right-to-left. `position` is zero-based.
-	public subscript(nibble position: Int) -> NumberType {
+	@inline(__always) public subscript(nibble position: Int) -> NumberType {
 		
 		get {
 			

@@ -21,7 +21,7 @@ extension Radix {
 	/// UInt16(0xFF).hex.bytes // [0xFF,0x00]
 	///    Int(0xFF).hex.bytes // [0xFF,0x00,0x00,0x00,0x00,0x00,0x00,0x00]
 	/// ```
-	public var bytes: [UInt8] {
+	@inlinable public var bytes: [UInt8] {
 		
 		var mutableValueCopy = value
 		

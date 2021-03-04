@@ -35,7 +35,7 @@ public protocol OptionalType {
 
 extension Optional: OptionalType {
 	
-	public var optional: Wrapped? {
+	@inline(__always) public var optional: Wrapped? {
 		
 		self
 		

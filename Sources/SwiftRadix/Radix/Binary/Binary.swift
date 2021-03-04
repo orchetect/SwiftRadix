@@ -10,14 +10,14 @@
 import Foundation
 
 /// Convenience constructor for `Radix<T>` with a radix of 2 (binary).
-public func Binary<T: BinaryInteger>(_ number: T) -> Radix<T> {
+@inlinable public func Binary<T: BinaryInteger>(_ number: T) -> Radix<T> {
 	
 	Radix<T>(number, base: 2)
 	
 }
 
 /// Convenience constructor for `Radix<Int>` with a radix of 2 (binary).
-public func Binary(_ string: String) -> Radix<Int>? {
+@inlinable public func Binary(_ string: String) -> Radix<Int>? {
 
 	Radix<Int>(string, base: 2)
 
@@ -30,7 +30,7 @@ public func Binary(_ string: String) -> Radix<Int>? {
 /// ```
 /// Binary("1010", as: Int16.self)
 /// ```
-public func Binary<T: BinaryInteger>(_ string: String, as type: T.Type) -> Radix<T>? {
+@inlinable public func Binary<T: BinaryInteger>(_ string: String, as type: T.Type) -> Radix<T>? {
 	
 	Radix<T>(string, base: 2)
 	

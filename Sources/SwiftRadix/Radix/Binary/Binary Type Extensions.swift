@@ -9,16 +9,14 @@
 
 import Foundation
 
-fileprivate let localRadix = 2
-
 // MARK: - Constructors
 
 extension BinaryInteger {
 	
 	/// Returns a new `Radix<T>` base-2 struct from an integer, preserving the integer type.
-	public var binary: Radix<Self> {
+	@inline(__always) public var binary: Radix<Self> {
 		
-		Radix(self, base: localRadix)
+		Radix(self, base: 2)
 		
 	}
 	
@@ -27,9 +25,9 @@ extension BinaryInteger {
 extension String {
 	
 	/// Returns a new `Radix<Int>?` base-2 struct from a binary string.
-	public var binary: Radix<Int>? {
+	@inlinable public var binary: Radix<Int>? {
 		
-		Radix(self, base: localRadix)
+		Radix(self, base: 2)
 		
 	}
 	
@@ -40,9 +38,9 @@ extension String {
 	/// ```
 	/// "1010".binary(as: Int16.self)
 	/// ```
-	public func binary<T: BinaryInteger>(as type: T.Type) -> Radix<T>? {
+	@inlinable public func binary<T: BinaryInteger>(as type: T.Type) -> Radix<T>? {
 		
-		Radix<T>(self, base: localRadix)
+		Radix<T>(self, base: 2)
 		
 	}
 	
@@ -53,7 +51,7 @@ extension Array where Element == String {
 	/// Returns an array of `Radix<Int>?` base-2 structs constructed from an array of binary strings.
 	public var binary: [Radix<Int>?] {
 		
-		self.map( { Radix<Int>($0, base: localRadix) })
+		self.map { Radix<Int>($0, base: 2) }
 		
 	}
 	
@@ -66,7 +64,7 @@ extension Array where Element == String {
 	/// ```
 	public func binary<T: BinaryInteger>(as type: T.Type) -> [Radix<T>?] {
 		
-		self.map( { Radix<T>($0, base: localRadix) })
+		self.map { Radix<T>($0, base: 2) }
 		
 	}
 	
@@ -75,9 +73,9 @@ extension Array where Element == String {
 extension Collection where Element: BinaryInteger {
 	
 	/// Returns an array of `Radix<T>` base-2 structs built from an integer array, preserving the integer type.
-	public var binary: [Radix<Element>] {
+	@inlinable public var binary: [Radix<Element>] {
 		
-		self.map( { Radix($0, base: localRadix) })
+		self.map { Radix($0, base: 2) }
 		
 	}
 	
@@ -88,7 +86,7 @@ extension Data {
 	/// Returns an array of `Radix<UInt8>` base-2 structs built from Data bytes.
 	public var binary: [Radix<UInt8>] {
 		
-		self.map( { Radix($0, base: localRadix) })
+		self.map { Radix($0, base: 2) }
 		
 	}
 	

@@ -9,16 +9,14 @@
 
 import Foundation
 
-fileprivate let localRadix = 16
-
 // MARK: - Constructors
 
 extension BinaryInteger {
 	
 	/// Returns a new `Radix<T>` base-16 struct from an integer, preserving the integer type.
-	public var hex: Radix<Self> {
+	@inline(__always) public var hex: Radix<Self> {
 		
-		Radix(self, base: localRadix)
+		Radix(self, base: 16)
 		
 	}
 	
@@ -27,9 +25,9 @@ extension BinaryInteger {
 extension String {
 	
 	/// Returns a new `Radix<Int>?` base-16 struct from a hex string.
-	public var hex: Radix<Int>? {
+	@inlinable public var hex: Radix<Int>? {
 		
-		Radix(self, base: localRadix)
+		Radix(self, base: 16)
 		
 	}
 	
@@ -40,9 +38,9 @@ extension String {
 	/// ```
 	/// "FF".hex(as: Int16.self)
 	/// ```
-	public func hex<T: BinaryInteger>(as type: T.Type) -> Radix<T>? {
+	@inlinable public func hex<T: BinaryInteger>(as type: T.Type) -> Radix<T>? {
 		
-		Radix<T>(self, base: localRadix)
+		Radix<T>(self, base: 16)
 		
 	}
 	
@@ -53,7 +51,7 @@ extension Array where Element == String {
 	/// Returns an array of `Radix<Int>?` base-16 structs constructed from an array of hex strings.
 	public var hex: [Radix<Int>?] {
 		
-		self.map( { Radix<Int>($0, base: localRadix) })
+		self.map { Radix<Int>($0, base: 16) }
 		
 	}
 	
@@ -66,7 +64,7 @@ extension Array where Element == String {
 	/// ```
 	public func hex<T: BinaryInteger>(as type: T.Type) -> [Radix<T>?] {
 		
-		self.map( { Radix<T>($0, base: localRadix) })
+		self.map { Radix<T>($0, base: 16) }
 		
 	}
 	
@@ -75,9 +73,9 @@ extension Array where Element == String {
 extension Collection where Element: BinaryInteger {
 	
 	/// Returns an array of `Radix<T>` base-16 structs built from an integer array, preserving the integer type.
-	public var hex: [Radix<Element>] {
+	@inlinable public var hex: [Radix<Element>] {
 		
-		self.map( { Radix($0, base: localRadix) })
+		self.map { Radix($0, base: 16) }
 		
 	}
 	
@@ -88,7 +86,7 @@ extension Data {
 	/// Returns an array of `Radix<UInt8>` base-16 structs built from Data bytes.
 	public var hex: [Radix<UInt8>] {
 		
-		self.map( { Radix($0, base: localRadix) })
+		self.map { Radix($0, base: 16) }
 		
 	}
 	

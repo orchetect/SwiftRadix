@@ -14,14 +14,14 @@ extension Radix {
 	/// Access binary bits from right-to-left. `position` is zero-based.
 	///
 	/// Bits can also be get or set directly via the `[bit: Int]` mutating subscript.
-	public func bit(_ position: Int) -> Radix<NumberType> {
+	@inline(__always) public func bit(_ position: Int) -> Radix<NumberType> {
 		
 		Radix(self[bit: position], base: base)
 		
 	}
 	
 	/// Access binary bits from right-to-left. `position` is zero-based.
-	public subscript(bit position: Int) -> NumberType {
+	@inline(__always) public subscript(bit position: Int) -> NumberType {
 		
 		get {
 			
