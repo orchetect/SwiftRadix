@@ -11,10 +11,10 @@ import XCTest
 @testable import SwiftRadix
 
 final class SwiftRadixTests: XCTestCase {
-	
-	// allTests is no longer required as of Swift 5.1.
-	// see https://oleb.net/2020/swift-test-discovery/
-	
-	// static var allTests = [ ]
-	
+    
+    // allTests is no longer required as of Swift 5.1.
+    // see https://oleb.net/2020/swift-test-discovery/
+    
+    // static var allTests = [ ]
+    
 }
