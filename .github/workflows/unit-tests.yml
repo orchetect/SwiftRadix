@@ -1,0 +1,68 @@
+name: unit tests
+
+on:
+  workflow_run:
+    workflows: ["build"]
+    branches: [main]
+    types: [completed]
+    
+  workflow_dispatch:
+    branches: [main]
+    inputs:
+      manualRun:
+        description: 'Manual Run Trigger'
+        required: false
+        default: 'YES'
+    
+jobs: 
+  macOS:
+    # only run if build.yml succeeded or if invoked from a manual dispatch
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event.inputs.manualRun == 'YES' }}
+    name: macOS
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@main
+    - name: Build
+      run: xcodebuild build -workspace ".swiftpm/xcode/package.xcworkspace" -scheme "SwiftRadix-CI" -destination "platform=macOS,arch=x86_64"
+    - name: Run Tests
+      run: xcodebuild test -workspace ".swiftpm/xcode/package.xcworkspace" -scheme "SwiftRadix-CI" -destination "platform=macOS,arch=x86_64"
+      
+  macCatalyst:
+    # only run if build.yml succeeded or if invoked from a manual dispatch
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event.inputs.manualRun == 'YES' }}
+    name: macCatalyst
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@main
+    - name: Build
+      run: xcodebuild build -workspace ".swiftpm/xcode/package.xcworkspace" -scheme "SwiftRadix-CI" -destination "platform=macOS,variant=Mac Catalyst,arch=x86_64"
+    - name: Run Tests
+      run: xcodebuild test -workspace ".swiftpm/xcode/package.xcworkspace" -scheme "SwiftRadix-CI" -destination "platform=macOS,variant=Mac Catalyst,arch=x86_64"
+
+  iOS:
+    # only run if build.yml succeeded or if invoked from a manual dispatch
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event.inputs.manualRun == 'YES' }}
+    name: iOS
+    runs-on: macos-latest # this must be macos, GitHub does not offer iOS directly but we can use xcodebuild
+    steps:
+    - uses: actions/checkout@main
+    - name: Build (iPhone 12)
+      run: xcodebuild build -workspace ".swiftpm/xcode/package.xcworkspace" -scheme "SwiftRadix-CI" -destination "platform=iOS Simulator,name=iPhone 12"
+    - name: Run Tests (iPhone 12)
+      run: xcodebuild test -workspace ".swiftpm/xcode/package.xcworkspace" -scheme "SwiftRadix-CI" -destination "platform=iOS Simulator,name=iPhone 12"
+
+  tvOS:
+    # only run if build.yml succeeded or if invoked from a manual dispatch
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event.inputs.manualRun == 'YES' }}
+    name: tvOS
+    runs-on: macos-latest # this must be macos, GitHub does not offer tvOS directly but we can use xcodebuild
+    steps:
+    - uses: actions/checkout@main
+    - name: Build (Apple TV)
+      run: xcodebuild build -workspace ".swiftpm/xcode/package.xcworkspace" -scheme "SwiftRadix-CI" -destination "platform=tvOS Simulator,name=Apple TV"
+    - name: Run Tests (Apple TV)
+      run: xcodebuild test -workspace ".swiftpm/xcode/package.xcworkspace" -scheme "SwiftRadix-CI" -destination "platform=tvOS Simulator,name=Apple TV"
+
+
+# xcodebuild test reference:
+# https://developer.apple.com/library/archive/documentation/DeveloperTools/Conceptual/testing_with_xcode/chapters/08-automation.html
