@@ -1,23 +1,6 @@
 # SwiftRadix
 
-<p>
-<a href="https://developer.apple.com/swift">
-<img src="https://img.shields.io/badge/Swift-5.2-blue.svg?style=flat"
-     alt="Swift 5.2 compatible" /></a>
-<a href="#installation">
-<img src="https://img.shields.io/badge/SPM-5.3-blue.svg?style=flat"
-     alt="Swift Package Manager (SPM) compatible" /></a>
-<a href="https://developer.apple.com/swift">
-<img src="https://img.shields.io/badge/platform-macOS_10.10_|_iOS_8_|_tvOS_9_|_watchOS_2-%23989898.svg?style=flat"
-     alt="Platform - macOS 10.10 | iOS 8 | tvOS 9 | watchOS 2" /></a>
-<a href="#documentation">
-<img src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg?style=flat"
-     alt="Code Coverage - 100 Percent" /></a>
-<a href="https://github.com/orchetect/SwiftRadix/blob/master/LICENSE">
-<img src="http://img.shields.io/badge/license-MIT-green.svg?style=flat" 
-     alt="License: MIT" /></a>
-</p>
-
+[![CI Build Status](https://github.com/orchetect/SwiftRadix/actions/workflows/build.yml/badge.svg)](https://github.com/orchetect/SwiftRadix/actions/workflows/build.yml) [![CI Unit Tests Status](https://github.com/orchetect/SwiftRadix/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/orchetect/SwiftRadix/actions/workflows/unit-tests.yml) [![Platforms - macOS | iOS | tvOS | watchOS](https://img.shields.io/badge/platforms-macOS%20|%20iOS%20|%20tvOS%20|%20watchOS%20-lightgrey.svg?style=flat)](https://developer.apple.com/swift) [![License: MIT](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](https://github.com/orchetect/SwiftRadix/blob/main/LICENSE)
 
 A lightweight library useful for translating integers to and from radix strings (binary, hex, octal or any base) using simple, clean functional syntax.
 
