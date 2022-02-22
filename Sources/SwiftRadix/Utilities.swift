@@ -48,6 +48,7 @@ extension BinaryInteger {
     /// Returns the value rounded up to multiples of a given value.
     ///
     /// Borrowed from OTCore 1.3.0: https://github.com/orchetect/OTCore (MIT license)
+    @_disfavoredOverload
     internal func roundedUp(toMultiplesOf: Self) -> Self {
         
         if toMultiplesOf < 1 { return self }
@@ -81,6 +82,7 @@ extension StringProtocol {
     /// If `backwards` is true, right-to-left.
     ///
     /// Borrowed from OTCore 1.3.0: https://github.com/orchetect/OTCore (MIT license)
+    @_disfavoredOverload
     internal func split(every: Int,
                         backwards: Bool = false) -> [SubSequence] {
         

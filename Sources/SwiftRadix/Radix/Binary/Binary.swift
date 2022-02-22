@@ -6,7 +6,7 @@
 import Foundation
 
 /// Convenience constructor for `Radix<T>` with a radix of 2 (binary).
-@inline(__always)
+@inline(__always) @_disfavoredOverload
 public func Binary<T: BinaryInteger>(_ number: T) -> Radix<T> {
     
     Radix<T>(number, unsafeBase: 2)
@@ -14,7 +14,7 @@ public func Binary<T: BinaryInteger>(_ number: T) -> Radix<T> {
 }
 
 /// Convenience constructor for `Radix<Int>` with a radix of 2 (binary).
-@inlinable
+@inlinable @_disfavoredOverload
 public func Binary(_ string: String) -> Radix<Int>? {
     
     Radix<Int>(string, base: 2)
@@ -27,7 +27,7 @@ public func Binary(_ string: String) -> Radix<Int>? {
 ///
 ///     Binary("1010", as: Int16.self)
 ///
-@inlinable
+@inlinable @_disfavoredOverload
 public func Binary<T: BinaryInteger>(_ string: String,
                                      as type: T.Type) -> Radix<T>? {
     

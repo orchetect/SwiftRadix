@@ -6,7 +6,7 @@
 import Foundation
 
 /// Convenience constructor for `Radix<T>` with a radix of 16 (hex).
-@inline(__always)
+@inline(__always) @_disfavoredOverload
 public func Hex<T: BinaryInteger>(_ number: T) -> Radix<T> {
     
     Radix<T>(number, unsafeBase: 16)
@@ -14,7 +14,7 @@ public func Hex<T: BinaryInteger>(_ number: T) -> Radix<T> {
 }
 
 /// Convenience constructor for `Radix<Int>` with a radix of 16 (hex).
-@inlinable
+@inlinable @_disfavoredOverload
 public func Hex(_ string: String) -> Radix<Int>? {
     
     Radix<Int>(string, base: 16)
@@ -27,7 +27,7 @@ public func Hex(_ string: String) -> Radix<Int>? {
 ///
 ///     Hex("FF", as: Int16.self)
 ///
-@inlinable
+@inlinable @_disfavoredOverload
 public func Hex<T: BinaryInteger>(_ string: String,
                                   as type: T.Type) -> Radix<T>? {
     

@@ -6,7 +6,7 @@
 import Foundation
 
 /// Convenience constructor for `Radix<T>` with a radix of 8 (octal).
-@inline(__always)
+@inline(__always) @_disfavoredOverload
 public func Octal<T: BinaryInteger>(_ number: T) -> Radix<T> {
     
     Radix<T>(number, unsafeBase: 8)
@@ -14,7 +14,7 @@ public func Octal<T: BinaryInteger>(_ number: T) -> Radix<T> {
 }
 
 /// Convenience constructor for `Radix<Int>` with a radix of 8 (octal).
-@inlinable
+@inlinable @_disfavoredOverload
 public func Octal(_ string: String) -> Radix<Int>? {
     
     Radix<Int>(string, base: 8)
@@ -27,7 +27,7 @@ public func Octal(_ string: String) -> Radix<Int>? {
 ///
 ///    Octal("123", as: Int16.self)
 ///
-@inlinable
+@inlinable @_disfavoredOverload
 public func Octal<T: BinaryInteger>(_ string: String,
                                     as type: T.Type) -> Radix<T>? {
     
