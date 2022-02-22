@@ -236,6 +236,15 @@ Additional operators similarly supported, allowing mixing of types as with equat
 
 - `+=`, `-=`, `*=`, `/=`, `<<`, `>>`, `&`
 
+### Bitwise Shifting
+
+Traditional binary bit shift left/right is available directly on `Radix`.
+
+```swift
+0b0100.hex << 1        // 0b1000
+0b0100.hex >> 1        // 0b0010
+```
+
 ### Extensions on Array and Data
 
 #### [BinaryInteger]
