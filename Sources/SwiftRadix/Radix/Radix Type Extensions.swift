@@ -10,7 +10,8 @@ import Foundation
 extension BinaryInteger {
     
     /// Returns a new `Radix<T>` struct from an integer, preserving the integer type.
-    @inline(__always) public func radix(base: Int) -> Radix<Self> {
+    @inline(__always) @_disfavoredOverload
+    public func radix(base: Int) -> Radix<Self>? {
         
         Radix(self, base: base)
         
@@ -21,7 +22,8 @@ extension BinaryInteger {
 extension String {
     
     /// Returns a new `Radix<Int>?` struct from a radix string.
-    @inlinable public func radix(base: Int) -> Radix<Int>? {
+    @inlinable @_disfavoredOverload
+    public func radix(base: Int) -> Radix<Int>? {
         
         Radix(self, base: base)
         
@@ -33,7 +35,9 @@ extension String {
     ///
     ///     "123".radix(base: 4, as: Int16.self)
     ///
-    @inlinable public func radix<T: BinaryInteger>(base: Int, as type: T.Type) -> Radix<T>? {
+    @inlinable @_disfavoredOverload
+    public func radix<T: BinaryInteger>(base: Int,
+                                        as type: T.Type) -> Radix<T>? {
         
         Radix<T>(self, base: base)
         
@@ -44,9 +48,10 @@ extension String {
 extension Array where Element == String {
     
     /// Returns an array of `Radix<Int>?` structs constructed from an array of hex strings.
+    @_disfavoredOverload
     public func radix(base: Int) -> [Radix<Int>?] {
         
-        self.map { Radix<Int>($0, base: base) }
+        map { Radix<Int>($0, base: base) }
         
     }
     
@@ -56,9 +61,10 @@ extension Array where Element == String {
     ///
     ///     ["20", "123"].radix(base: 4, as: Int16.self)
     /// 
+    @_disfavoredOverload
     public func radix<T: BinaryInteger>(base: Int, as type: T.Type) -> [Radix<T>?] {
         
-        self.map { Radix<T>($0, base: base) }
+        map { Radix<T>($0, base: base) }
         
     }
     
@@ -67,9 +73,13 @@ extension Array where Element == String {
 extension Collection where Element: BinaryInteger {
     
     /// Returns an array of `Radix<T>` structs built from an integer array, preserving the integer type.
-    @inlinable public func radix(base: Int) -> [Radix<Element>] {
+    @_disfavoredOverload
+    public func radix(base: Int) -> [Radix<Element>]? {
         
-        self.map { Radix($0, base: base) }
+        // radix validity check
+        if base < 2 || base > 36 { return nil }
+        
+        return map { Radix($0, unsafeBase: base) }
         
     }
     
@@ -78,9 +88,13 @@ extension Collection where Element: BinaryInteger {
 extension Data {
     
     /// Returns an array of `Radix<UInt8>` structs built from Data bytes.
-    public func radix(base: Int) -> [Radix<UInt8>] {
+    @_disfavoredOverload
+    public func radix(base: Int) -> [Radix<UInt8>]? {
         
-        self.map { Radix($0, base: base) }
+        // radix validity check
+        if base < 2 || base > 36 { return nil }
+        
+        return map { Radix($0, unsafeBase: base) }
         
     }
     

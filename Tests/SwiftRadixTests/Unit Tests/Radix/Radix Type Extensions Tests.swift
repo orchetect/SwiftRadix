@@ -4,7 +4,7 @@
 //
 
 import XCTest
-@testable import SwiftRadix
+import SwiftRadix
 
 extension SwiftRadixTests {
     
@@ -12,16 +12,16 @@ extension SwiftRadixTests {
         
         let validString = "1100"
         
-        XCTAssertEqual(       0b1100 .radix(base: 2).stringValue, validString)
-        XCTAssertEqual(UInt  (0b1100).radix(base: 2).stringValue, validString)
-        XCTAssertEqual( Int8 (0b1100).radix(base: 2).stringValue, validString)
-        XCTAssertEqual(UInt8 (0b1100).radix(base: 2).stringValue, validString)
-        XCTAssertEqual( Int16(0b1100).radix(base: 2).stringValue, validString)
-        XCTAssertEqual(UInt16(0b1100).radix(base: 2).stringValue, validString)
-        XCTAssertEqual( Int32(0b1100).radix(base: 2).stringValue, validString)
-        XCTAssertEqual(UInt32(0b1100).radix(base: 2).stringValue, validString)
-        XCTAssertEqual( Int64(0b1100).radix(base: 2).stringValue, validString)
-        XCTAssertEqual(UInt64(0b1100).radix(base: 2).stringValue, validString)
+        XCTAssertEqual(       0b1100 .radix(base: 2)?.stringValue, validString)
+        XCTAssertEqual(UInt  (0b1100).radix(base: 2)?.stringValue, validString)
+        XCTAssertEqual( Int8 (0b1100).radix(base: 2)?.stringValue, validString)
+        XCTAssertEqual(UInt8 (0b1100).radix(base: 2)?.stringValue, validString)
+        XCTAssertEqual( Int16(0b1100).radix(base: 2)?.stringValue, validString)
+        XCTAssertEqual(UInt16(0b1100).radix(base: 2)?.stringValue, validString)
+        XCTAssertEqual( Int32(0b1100).radix(base: 2)?.stringValue, validString)
+        XCTAssertEqual(UInt32(0b1100).radix(base: 2)?.stringValue, validString)
+        XCTAssertEqual( Int64(0b1100).radix(base: 2)?.stringValue, validString)
+        XCTAssertEqual(UInt64(0b1100).radix(base: 2)?.stringValue, validString)
         
     }
     
@@ -76,10 +76,10 @@ extension SwiftRadixTests {
         
         let radixArray = source.radix(base: 2)
         
-        XCTAssertEqual(radixArray.count, 2)
+        XCTAssertEqual(radixArray?.count, 2)
         
-        XCTAssertEqual(radixArray[0].value, 0b0000)
-        XCTAssertEqual(radixArray[1].value, 0b1111)
+        XCTAssertEqual(radixArray?[0].value, 0b0000)
+        XCTAssertEqual(radixArray?[1].value, 0b1111)
         
     }
     
@@ -89,10 +89,10 @@ extension SwiftRadixTests {
         
         let radixArray = source.radix(base: 2)
         
-        XCTAssertEqual(radixArray.count, 2)
+        XCTAssertEqual(radixArray?.count, 2)
         
-        XCTAssertEqual(radixArray[0].value, 0b0000)
-        XCTAssertEqual(radixArray[1].value, 0b1111)
+        XCTAssertEqual(radixArray?[0].value, 0b0000)
+        XCTAssertEqual(radixArray?[1].value, 0b1111)
         
     }
     

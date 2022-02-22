@@ -22,7 +22,8 @@ public struct Radix<T: BinaryInteger>: RadixProtocol {
     public var base: Int
     
     /// String prefix specific to the radix
-    @inline(__always) public var stringPrefix: String {
+    @inline(__always)
+    public var stringPrefix: String {
         
         switch base {
         case 2:  return "0b"
@@ -50,12 +51,25 @@ public struct Radix<T: BinaryInteger>: RadixProtocol {
     ///     Hex(0xFF)
     ///     0xFF.hex
     ///
-    @inline(__always) public init(_ number: NumberType, base: Int) {
+    @inline(__always)
+    public init?(_ number: NumberType,
+                 base: Int) {
+        
+        // radix validity check
+        if base < 2 || base > 36 { return nil }
         
         self.base = base
         
-        // radix validity check
-        if base < 2 || base > 36 { self.base = 10 }
+        self.value = number
+        
+    }
+    
+    /// Internal initializer that bypasses base range validation.
+    @inline(__always) @usableFromInline
+    internal init(_ number: NumberType,
+                  unsafeBase: Int) {
+        
+        self.base = unsafeBase
         
         self.value = number
         
@@ -97,12 +111,14 @@ public struct Radix<T: BinaryInteger>: RadixProtocol {
     ///     Hex("FF")
     ///     "FF".hex
     ///
-    @inlinable public init?(_ string: String, base: Int) {
-        
-        self.base = base
+    @inlinable
+    public init?(_ string: String,
+                 base: Int) {
         
         // radix validity check
         if base < 2 || base > 36 { return nil }
+        
+        self.base = base
         
         guard let convertedValue = valueFrom(radixString: string)
         else { return nil }

@@ -79,16 +79,16 @@ Radix<T: BinaryInteger>
 
 // constructors
 
-Radix(0xFF, base: 16)                // Radix<Int>(255)
-Radix(UInt8(0xFF), base: 16)         // Radix<UInt8>(255)
-Radix<UInt8>(0xFF, base: 16)         // Radix<UInt8>(255)
+Radix(0xFF, base: 16)                // Radix<Int>(255)?
+Radix(UInt8(0xFF), base: 16)         // Radix<UInt8>(255)?
+Radix<UInt8>(0xFF, base: 16)         // Radix<UInt8>(255)?
 
-Radix(0b1111, base: 2)               // Radix<Int>(15)
+Radix(0b1111, base: 2)               // Radix<Int>(15)?
 
 // category method to construct
 
-0xFF.radix(base: 16)                 // Radix<Int>(255)
-0xFF.radix(base: 16, as: UInt8.self) // Radix<UInt8>(255)
+0xFF.radix(base: 16)                 // Radix<Int>(255)?
+0xFF.radix(base: 16, as: UInt8.self) // Radix<UInt8>(255)?
 ```
 
 However, for common bases (binary base-2, octal base-8, hex base-16) you may never need to construct `Radix` directly. Instead, there are convenient functional category methods on common types and collections to shortcut these.
@@ -238,25 +238,11 @@ Additional operators similarly supported, allowing mixing of types as with equat
 
 ### Bitwise Shifting
 
-#### Traditional Bit Shift
-
-Traditional binary bit shift left/right still work as usual.
+Traditional binary bit shift left/right is available directly on `Radix`.
 
 ```swift
 0b0100.hex << 1        // 0b1000
 0b0100.hex >> 1        // 0b0010
-```
-
-#### Nibble Shift
-
-Shift in multiples of 4 bits with new `<<<<` / `>>>>` operators.
-
-```swift
-0x2F.hex <<<< 1        // 0x2F0    (bitwise nibble shift left)
-0x2F.hex >>>> 1        // 0x2      (bitwise nibble shift right)
-
-0xF0.hex >>>> 1        // 0xF      (bitwise nibble shift right)
-0xF0.hex <<<< 4        // 0xF00000 (bitwise nibble shift left)
 ```
 
 ### Extensions on Array and Data
@@ -297,10 +283,10 @@ It can also be flattened into a concatenated `String` or an array of `String`s:
 It is also possible to easily generate a Swift source-compatible array literal.
 
 ```swift
-let arr = [0, 1, 255]
+let arr = [0, 2, 255]
 
-arr.hex.stringValueArrayLiteral    // "[0x0, 0x1, 0xFF]"
-arr.binary.stringValueArrayLiteral // "[0b0, 0b1, 0b11111111]"
+arr.hex.stringValueArrayLiteral    // "[0x0, 0x2, 0xFF]"
+arr.binary.stringValueArrayLiteral // "[0b0, 0b10, 0b11111111]"
 ```
 
 #### Data
@@ -320,7 +306,7 @@ A numer of additional methods for reading and manipulating the underlying intege
 #### Bit
 
 `.bit(Int)`
-`[bit: Int]`
+`[bit: Int] { get set }`
 
 - gets single bit value at specified position right-to-left
 - subscript can also be used to get or set bit values
@@ -363,7 +349,7 @@ h.value                   // == 0xF234
 
 `.bytes`
 
-- A convenience property to return the raw bytes of the value as `[Uint8]` right-to-left
+- A convenience property to return the raw bytes of the value as `[UInt8]` based on system endianness
 - radix-agnostic
 
 ```swift

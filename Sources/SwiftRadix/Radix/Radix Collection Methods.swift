@@ -13,18 +13,16 @@ extension Collection where Element : RadixProtocol {
     /// Convert an array of `Radix` to a concatenated String of radix string values.
     public var stringValue: String {
         
-        self
-            .map { $0.stringValue }
-            .joined(separator: " ")
+        map { $0.stringValue }
+        .joined(separator: " ")
         
     }
     
     /// Convert an array of `Radix` to a concatenated String of radix string values, each value padded to the number of characters specified.
     public func stringValue(prefix: Bool) -> String {
         
-        self
-            .map { $0.stringValue(prefix: prefix) }
-            .joined(separator: " ")
+        map { $0.stringValue(prefix: prefix) }
+        .joined(separator: " ")
         
     }
     
@@ -32,11 +30,10 @@ extension Collection where Element : RadixProtocol {
     public func stringValue(padTo: Int,
                             prefix: Bool = false) -> String {
         
-        self
-            .map { $0.stringValue(padTo: padTo,
-                                  splitEvery: 0,
-                                  prefix: prefix) }
-            .joined(separator: " ")
+        map { $0.stringValue(padTo: padTo,
+                             splitEvery: 0,
+                             prefix: prefix) }
+        .joined(separator: " ")
         
     }
     
@@ -44,11 +41,10 @@ extension Collection where Element : RadixProtocol {
     public func stringValue(padToEvery: Int,
                             prefix: Bool = false) -> String {
         
-        self
-            .map { $0.stringValue(padToEvery: padToEvery,
-                                  splitEvery: 0,
-                                  prefix: prefix) }
-            .joined(separator: " ")
+        map { $0.stringValue(padToEvery: padToEvery,
+                             splitEvery: 0,
+                             prefix: prefix) }
+        .joined(separator: " ")
         
     }
     
@@ -70,9 +66,9 @@ extension Collection where Element : RadixProtocol {
     public func stringValueArrayLiteral(padTo: Int) -> String {
         
         "["
-            + self.stringValues(padTo: padTo, prefixes: true)
+        + stringValues(padTo: padTo, prefixes: true)
             .joined(separator: ", " )
-            + "]"
+        + "]"
         
     }
     
@@ -80,9 +76,9 @@ extension Collection where Element : RadixProtocol {
     public func stringValueArrayLiteral(padToEvery: Int) -> String {
         
         "["
-            + self.stringValues(padToEvery: padToEvery, prefixes: true)
+        + stringValues(padToEvery: padToEvery, prefixes: true)
             .joined(separator: ", " )
-            + "]"
+        + "]"
         
     }
     
@@ -96,7 +92,7 @@ extension Collection where Element : RadixProtocol {
     /// Convert an array of `Radix` to an Array of radix string values.
     public var stringValues: [String] {
         
-        self.stringValues(padTo: 0)
+        stringValues(padTo: 0)
         
     }
     
@@ -104,9 +100,9 @@ extension Collection where Element : RadixProtocol {
     public func stringValues(padTo: Int,
                              prefixes: Bool = false) -> [String] {
         
-        self.map { $0.stringValue(padTo: padTo,
-                                  splitEvery: 0,
-                                  prefix: prefixes) }
+        map { $0.stringValue(padTo: padTo,
+                             splitEvery: 0,
+                             prefix: prefixes) }
         
     }
     
@@ -114,9 +110,9 @@ extension Collection where Element : RadixProtocol {
     public func stringValues(padToEvery: Int,
                              prefixes: Bool = false) -> [String] {
         
-        self.map { $0.stringValue(padToEvery: padToEvery,
-                                  splitEvery: 0,
-                                  prefix: prefixes) }
+        map { $0.stringValue(padToEvery: padToEvery,
+                             splitEvery: 0,
+                             prefix: prefixes) }
         
     }
     
@@ -129,21 +125,24 @@ extension Collection where Element : RadixProtocol {
 extension Collection where Element : RadixProtocol {
     
     /// Returns an array of extracted values.
-    @inlinable public var values: [Element.NumberType] {
+    @inlinable
+    public var values: [Element.NumberType] {
         
-        self.map { $0.value }
+        map { $0.value }
         
     }
     
 }
 
 /// Extension on [RadixProtocol<T>?]
-extension Collection where Element: OptionalType, Element.Wrapped : RadixProtocol {
+extension Collection where Element: SwiftRadixOptionalType,
+                           Element.Wrapped : RadixProtocol {
     
     /// Returns an array of extracted values.
-    @inlinable public var values: [Element.Wrapped.NumberType?] {
+    @inlinable
+    public var values: [Element.Wrapped.NumberType?] {
         
-        self.map { $0.optional?.value }
+        map { $0.optional?.value }
         
     }
     

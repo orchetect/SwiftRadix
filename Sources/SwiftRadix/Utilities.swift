@@ -15,12 +15,12 @@ import Foundation
 // ie:
 //
 //     extension Collection
-//       where Element: OptionalType,
+//       where Element: SwiftRadixOptionalType,
 //             Element.Wrapped: RadixProtocol
 //     { ... }
 //
 
-public protocol OptionalType {
+public protocol SwiftRadixOptionalType {
     
     associatedtype Wrapped
     
@@ -29,9 +29,10 @@ public protocol OptionalType {
     
 }
 
-extension Optional: OptionalType {
+extension Optional: SwiftRadixOptionalType {
     
-    @inline(__always) public var optional: Wrapped? {
+    @inline(__always)
+    public var optional: Wrapped? {
         
         self
         
@@ -45,6 +46,9 @@ extension Optional: OptionalType {
 extension BinaryInteger {
     
     /// Returns the value rounded up to multiples of a given value.
+    ///
+    /// Borrowed from OTCore 1.3.0: https://github.com/orchetect/OTCore (MIT license)
+    @_disfavoredOverload
     internal func roundedUp(toMultiplesOf: Self) -> Self {
         
         if toMultiplesOf < 1 { return self }
@@ -76,31 +80,34 @@ extension StringProtocol {
     
     /// Splits a string into groups of `length` characters, grouping from left-to-right.
     /// If `backwards` is true, right-to-left.
+    ///
+    /// Borrowed from OTCore 1.3.0: https://github.com/orchetect/OTCore (MIT license)
+    @_disfavoredOverload
     internal func split(every: Int,
-                        backwards: Bool = false) -> [Self.SubSequence] {
+                        backwards: Bool = false) -> [SubSequence] {
         
-        var result: [Self.SubSequence] = []
+        var result: [SubSequence] = []
         
-        for i in stride(from: 0, to: self.count, by: every) {
+        for i in stride(from: 0, to: count, by: every) {
             
             switch backwards {
             case true:
-                let endIndex = self.index(self.endIndex, offsetBy: -i)
-                let startIndex = self.index(endIndex,
-                                            offsetBy: -every,
-                                            limitedBy: self.startIndex)
-                    ?? self.startIndex
+                let offsetEndIndex = index(endIndex, offsetBy: -i)
+                let offsetStartIndex = index(offsetEndIndex,
+                                             offsetBy: -every,
+                                             limitedBy: startIndex)
+                ?? startIndex
                 
-                result.insert(self[startIndex..<endIndex], at: 0)
+                result.insert(self[offsetStartIndex..<offsetEndIndex], at: 0)
                 
             case false:
-                let startIndex = self.index(self.startIndex, offsetBy: i)
-                let endIndex = self.index(startIndex,
-                                          offsetBy: every,
-                                          limitedBy: self.endIndex)
-                    ?? self.endIndex
+                let offsetStartIndex = index(startIndex, offsetBy: i)
+                let offsetEndIndex = index(offsetStartIndex,
+                                           offsetBy: every,
+                                           limitedBy: endIndex)
+                ?? endIndex
                 
-                result.append(self[startIndex..<endIndex])
+                result.append(self[offsetStartIndex..<offsetEndIndex])
                 
             }
             

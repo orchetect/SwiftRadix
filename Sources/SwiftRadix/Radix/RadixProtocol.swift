@@ -9,6 +9,7 @@ import Foundation
 // ie:
 // extension Collection where Element : RadixProtocol { }
 
+/// Protocol used by SwiftRadix to facilitate extensions.
 public protocol RadixProtocol {
     
     associatedtype NumberType: BinaryInteger
@@ -18,7 +19,7 @@ public protocol RadixProtocol {
     var stringPrefix: String { get }
     var base: Int { get set }
     
-    init(_ number: NumberType, base: Int)
+    init?(_ number: NumberType, base: Int)
     init?(_ string: String, base: Int)
     
     var stringValue: String { get set }
