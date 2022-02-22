@@ -12,7 +12,7 @@ extension BinaryInteger {
     /// Returns a new `Radix<T>` base-8 struct from an integer, preserving the integer type.
     @inline(__always) public var octal: Radix<Self> {
         
-        Radix(self, base: 8)
+        Radix(self, unsafeBase: 8)
         
     }
     
@@ -67,9 +67,9 @@ extension Array where Element == String {
 extension Collection where Element: BinaryInteger {
     
     /// Returns an array of `Radix<T>` base-8 structs built from an integer array, preserving the integer type.
-    @inlinable public var octal: [Radix<Element>] {
+    public var octal: [Radix<Element>] {
         
-        self.map { Radix($0, base: 8) }
+        self.map { Radix($0, unsafeBase: 8) }
         
     }
     
@@ -80,7 +80,7 @@ extension Data {
     /// Returns an array of `Radix<UInt8>` base-8 structs built from Data bytes.
     public var octal: [Radix<UInt8>] {
         
-        self.map { Radix($0, base: 8) }
+        self.map { Radix($0, unsafeBase: 8) }
         
     }
     

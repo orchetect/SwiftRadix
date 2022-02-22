@@ -12,7 +12,7 @@ extension Radix {
     /// Bits can also be get or set directly via the `[bit: Int]` mutating subscript.
     @inline(__always) public func bit(_ position: Int) -> Radix<NumberType> {
         
-        Radix(self[bit: position], base: base)
+        Radix(self[bit: position], unsafeBase: base)
         
     }
     

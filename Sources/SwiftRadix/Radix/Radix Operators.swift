@@ -136,11 +136,11 @@ extension Radix: Comparable {
 // MARK: - Math operators
 
 @inlinable public func + <T>(lhs: Radix<T>, rhs: Radix<T>) -> Radix<T> {
-    Radix<T>(lhs.value + rhs.value, base: lhs.base)
+    Radix<T>(lhs.value + rhs.value, unsafeBase: lhs.base)
 }
 
 @inlinable public func + <T>(lhs: Radix<T>, rhs: T) -> Radix<T> {
-    Radix<T>(lhs.value + rhs, base: lhs.base)
+    Radix<T>(lhs.value + rhs, unsafeBase: lhs.base)
 }
 
 @inlinable public func + <T>(lhs: T, rhs: Radix<T>) -> T {
@@ -148,11 +148,11 @@ extension Radix: Comparable {
 }
 
 @inlinable public func - <T>(lhs: Radix<T>, rhs: Radix<T>) -> Radix<T> {
-    Radix<T>(lhs.value - rhs.value, base: lhs.base)
+    Radix<T>(lhs.value - rhs.value, unsafeBase: lhs.base)
 }
 
 @inlinable public func - <T>(lhs: Radix<T>, rhs: T) -> Radix<T> {
-    Radix<T>(lhs.value - rhs, base: lhs.base)
+    Radix<T>(lhs.value - rhs, unsafeBase: lhs.base)
 }
 
 @inlinable public func - <T>(lhs: T, rhs: Radix<T>) -> T {
@@ -160,11 +160,11 @@ extension Radix: Comparable {
 }
 
 @inlinable public func * <T>(lhs: Radix<T>, rhs: Radix<T>) -> Radix<T> {
-    Radix<T>(lhs.value * rhs.value, base: lhs.base)
+    Radix<T>(lhs.value * rhs.value, unsafeBase: lhs.base)
 }
 
 @inlinable public func * <T>(lhs: Radix<T>, rhs: T) -> Radix<T> {
-    Radix<T>(lhs.value * rhs, base: lhs.base)
+    Radix<T>(lhs.value * rhs, unsafeBase: lhs.base)
 }
 
 @inlinable public func * <T>(lhs: T, rhs: Radix<T>) -> T {
@@ -172,11 +172,11 @@ extension Radix: Comparable {
 }
 
 @inlinable public func / <T>(lhs: Radix<T>, rhs: Radix<T>) -> Radix<T> {
-    Radix<T>(lhs.value / rhs.value, base: lhs.base)
+    Radix<T>(lhs.value / rhs.value, unsafeBase: lhs.base)
 }
 
 @inlinable public func / <T>(lhs: Radix<T>, rhs: T) -> Radix<T> {
-    Radix<T>(lhs.value / rhs, base: lhs.base)
+    Radix<T>(lhs.value / rhs, unsafeBase: lhs.base)
 }
 
 @inlinable public func / <T>(lhs: T, rhs: Radix<T>) -> T {
@@ -240,11 +240,11 @@ extension Radix: Comparable {
 extension Radix {
     
     @inlinable static public func >> <T>(lhs: Radix<T>, rhs: Radix) -> Radix<T> {
-        Radix<T>(lhs.value >> rhs.value, base: lhs.base)
+        Radix<T>(lhs.value >> rhs.value, unsafeBase: lhs.base)
     }
     
     @inlinable static public func >> <T: BinaryInteger>(lhs: Radix, rhs: T) -> Radix {
-        Radix(lhs.value >> rhs, base: lhs.base)
+        Radix(lhs.value >> rhs, unsafeBase: lhs.base)
     }
     
     @inlinable static public func >> <T: BinaryInteger>(lhs: T, rhs: Radix) -> T {
@@ -252,11 +252,11 @@ extension Radix {
     }
     
     @inlinable static public func << <T>(lhs: Radix<T>, rhs: Radix) -> Radix<T> {
-        Radix<T>(lhs.value << rhs.value, base: lhs.base)
+        Radix<T>(lhs.value << rhs.value, unsafeBase: lhs.base)
     }
     
     @inlinable static public func << <T: BinaryInteger>(lhs: Radix, rhs: T) -> Radix {
-        Radix(lhs.value << rhs, base: lhs.base)
+        Radix(lhs.value << rhs, unsafeBase: lhs.base)
     }
     
     @inlinable static public func << <T: BinaryInteger>(lhs: T, rhs: Radix) -> T {
@@ -274,11 +274,11 @@ infix operator <<<<: BitwiseShiftPrecedence
 extension Radix {
     
     @inlinable static public func >>>> <T>(lhs: Radix<T>, rhs: Radix) -> Radix<T> {
-        Radix<T>(lhs.value >> (rhs.value * 4), base: lhs.base)
+        Radix<T>(lhs.value >> (rhs.value * 4), unsafeBase: lhs.base)
     }
     
     @inlinable static public func >>>> <T: BinaryInteger>(lhs: Radix, rhs: T) -> Radix {
-        Radix(lhs.value >> (rhs * 4), base: lhs.base)
+        Radix(lhs.value >> (rhs * 4), unsafeBase: lhs.base)
     }
     
     @inlinable static public func >>>> <T: BinaryInteger>(lhs: T, rhs: Radix) -> T {
@@ -286,11 +286,11 @@ extension Radix {
     }
     
     @inlinable static public func <<<< <T>(lhs: Radix<T>, rhs: Radix) -> Radix<T> {
-        Radix<T>(lhs.value << (rhs.value * 4), base: lhs.base)
+        Radix<T>(lhs.value << (rhs.value * 4), unsafeBase: lhs.base)
     }
     
     @inlinable static public func <<<< <T: BinaryInteger>(lhs: Radix, rhs: T) -> Radix {
-        Radix(lhs.value << (rhs * 4), base: lhs.base)
+        Radix(lhs.value << (rhs * 4), unsafeBase: lhs.base)
     }
     
     @inlinable static public func <<<< <T: BinaryInteger>(lhs: T, rhs: Radix) -> T {
@@ -305,11 +305,11 @@ extension Radix {
 extension Radix {
     
     @inlinable static public func & (lhs: Radix, rhs: Radix) -> Radix {
-        Radix(lhs.value & rhs.value, base: lhs.base)
+        Radix(lhs.value & rhs.value, unsafeBase: lhs.base)
     }
     
     @inlinable static public func & <T: BinaryInteger>(lhs: Radix, rhs: T) -> Radix<T> {
-        Radix<T>(T(lhs.value) & rhs, base: lhs.base)
+        Radix<T>(T(lhs.value) & rhs, unsafeBase: lhs.base)
     }
     
     @inlinable static public func & <T: BinaryInteger>(lhs: T, rhs: Radix) -> T {

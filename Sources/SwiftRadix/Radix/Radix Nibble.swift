@@ -15,7 +15,7 @@ extension Radix {
     /// Nibbles can also be get or set directly via the `[nibble: Int]` mutating subscript.
     @inline(__always) public func nibble(_ position: Int) -> Radix<NumberType> {
         
-        Radix(self[nibble: position], base: base)
+        Radix(self[nibble: position], unsafeBase: base)
         
     }
     

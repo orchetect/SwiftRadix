@@ -10,7 +10,7 @@ import Foundation
 extension BinaryInteger {
     
     /// Returns a new `Radix<T>` struct from an integer, preserving the integer type.
-    @inline(__always) public func radix(base: Int) -> Radix<Self> {
+    @inline(__always) public func radix(base: Int) -> Radix<Self>? {
         
         Radix(self, base: base)
         
@@ -67,9 +67,12 @@ extension Array where Element == String {
 extension Collection where Element: BinaryInteger {
     
     /// Returns an array of `Radix<T>` structs built from an integer array, preserving the integer type.
-    @inlinable public func radix(base: Int) -> [Radix<Element>] {
+    public func radix(base: Int) -> [Radix<Element>]? {
         
-        self.map { Radix($0, base: base) }
+        // radix validity check
+        if base < 2 || base > 36 { return nil }
+        
+        return self.map { Radix($0, unsafeBase: base) }
         
     }
     
@@ -78,9 +81,12 @@ extension Collection where Element: BinaryInteger {
 extension Data {
     
     /// Returns an array of `Radix<UInt8>` structs built from Data bytes.
-    public func radix(base: Int) -> [Radix<UInt8>] {
+    public func radix(base: Int) -> [Radix<UInt8>]? {
         
-        self.map { Radix($0, base: base) }
+        // radix validity check
+        if base < 2 || base > 36 { return nil }
+        
+        return self.map { Radix($0, unsafeBase: base) }
         
     }
     

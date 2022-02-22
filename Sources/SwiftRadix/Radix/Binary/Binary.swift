@@ -6,9 +6,9 @@
 import Foundation
 
 /// Convenience constructor for `Radix<T>` with a radix of 2 (binary).
-@inlinable public func Binary<T: BinaryInteger>(_ number: T) -> Radix<T> {
+@inline(__always) public func Binary<T: BinaryInteger>(_ number: T) -> Radix<T> {
     
-    Radix<T>(number, base: 2)
+    Radix<T>(number, unsafeBase: 2)
     
 }
 

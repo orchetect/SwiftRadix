@@ -94,7 +94,7 @@ extension SwiftRadixTests {
         var hexVal: Radix<Int>
         var intVal: Int
         
-        hexVal = Radix<Int>(0, base: 16)
+        hexVal = Radix<Int>(0, base: 16)!
         hexVal += 1
         XCTAssert(hexVal == 1)
         hexVal += 1.hex
@@ -110,7 +110,7 @@ extension SwiftRadixTests {
         intVal -= 1.hex
         XCTAssert(intVal == 0)
         
-        hexVal = Radix<Int>(2, base: 16)
+        hexVal = Radix<Int>(2, base: 16)!
         hexVal *= 2
         XCTAssert(hexVal == 4)
         hexVal *= 2.hex

@@ -6,9 +6,9 @@
 import Foundation
 
 /// Convenience constructor for `Radix<T>` with a radix of 8 (octal).
-@inlinable public func Octal<T: BinaryInteger>(_ number: T) -> Radix<T> {
+@inline(__always) public func Octal<T: BinaryInteger>(_ number: T) -> Radix<T> {
     
-    Radix<T>(number, base: 8)
+    Radix<T>(number, unsafeBase: 8)
     
 }
 

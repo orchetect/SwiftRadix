@@ -12,7 +12,7 @@ extension BinaryInteger {
     /// Returns a new `Radix<T>` base-2 struct from an integer, preserving the integer type.
     @inline(__always) public var binary: Radix<Self> {
         
-        Radix(self, base: 2)
+        Radix(self, unsafeBase: 2)
         
     }
     
@@ -67,9 +67,9 @@ extension Array where Element == String {
 extension Collection where Element: BinaryInteger {
     
     /// Returns an array of `Radix<T>` base-2 structs built from an integer array, preserving the integer type.
-    @inlinable public var binary: [Radix<Element>] {
+    public var binary: [Radix<Element>] {
         
-        self.map { Radix($0, base: 2) }
+        self.map { Radix($0, unsafeBase: 2) }
         
     }
     
@@ -80,7 +80,7 @@ extension Data {
     /// Returns an array of `Radix<UInt8>` base-2 structs built from `Data` bytes.
     public var binary: [Radix<UInt8>] {
         
-        self.map { Radix($0, base: 2) }
+        self.map { Radix($0, unsafeBase: 2) }
         
     }
     
