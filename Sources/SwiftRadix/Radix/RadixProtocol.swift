@@ -9,6 +9,7 @@ import Foundation
 // ie:
 // extension Collection where Element : RadixProtocol { }
 
+/// Protocol used by SwiftRadix to facilitate extensions.
 public protocol RadixProtocol {
     
     associatedtype NumberType: BinaryInteger

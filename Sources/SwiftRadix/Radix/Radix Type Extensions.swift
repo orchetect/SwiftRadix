@@ -10,7 +10,8 @@ import Foundation
 extension BinaryInteger {
     
     /// Returns a new `Radix<T>` struct from an integer, preserving the integer type.
-    @inline(__always) public func radix(base: Int) -> Radix<Self>? {
+    @inline(__always)
+    public func radix(base: Int) -> Radix<Self>? {
         
         Radix(self, base: base)
         
@@ -21,7 +22,8 @@ extension BinaryInteger {
 extension String {
     
     /// Returns a new `Radix<Int>?` struct from a radix string.
-    @inlinable public func radix(base: Int) -> Radix<Int>? {
+    @inlinable
+    public func radix(base: Int) -> Radix<Int>? {
         
         Radix(self, base: base)
         
@@ -33,7 +35,9 @@ extension String {
     ///
     ///     "123".radix(base: 4, as: Int16.self)
     ///
-    @inlinable public func radix<T: BinaryInteger>(base: Int, as type: T.Type) -> Radix<T>? {
+    @inlinable
+    public func radix<T: BinaryInteger>(base: Int,
+                                        as type: T.Type) -> Radix<T>? {
         
         Radix<T>(self, base: base)
         
@@ -46,7 +50,7 @@ extension Array where Element == String {
     /// Returns an array of `Radix<Int>?` structs constructed from an array of hex strings.
     public func radix(base: Int) -> [Radix<Int>?] {
         
-        self.map { Radix<Int>($0, base: base) }
+        map { Radix<Int>($0, base: base) }
         
     }
     
@@ -58,7 +62,7 @@ extension Array where Element == String {
     /// 
     public func radix<T: BinaryInteger>(base: Int, as type: T.Type) -> [Radix<T>?] {
         
-        self.map { Radix<T>($0, base: base) }
+        map { Radix<T>($0, base: base) }
         
     }
     
@@ -72,7 +76,7 @@ extension Collection where Element: BinaryInteger {
         // radix validity check
         if base < 2 || base > 36 { return nil }
         
-        return self.map { Radix($0, unsafeBase: base) }
+        return map { Radix($0, unsafeBase: base) }
         
     }
     
@@ -86,7 +90,7 @@ extension Data {
         // radix validity check
         if base < 2 || base > 36 { return nil }
         
-        return self.map { Radix($0, unsafeBase: base) }
+        return map { Radix($0, unsafeBase: base) }
         
     }
     
