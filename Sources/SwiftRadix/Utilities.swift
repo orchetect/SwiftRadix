@@ -92,22 +92,22 @@ extension StringProtocol {
             
             switch backwards {
             case true:
-                let endIndex = index(endIndex, offsetBy: -i)
-                let startIndex = index(endIndex,
-                                       offsetBy: -every,
-                                       limitedBy: startIndex)
+                let offsetEndIndex = index(endIndex, offsetBy: -i)
+                let offsetStartIndex = index(offsetEndIndex,
+                                             offsetBy: -every,
+                                             limitedBy: startIndex)
                 ?? startIndex
                 
-                result.insert(self[startIndex..<endIndex], at: 0)
+                result.insert(self[offsetStartIndex..<offsetEndIndex], at: 0)
                 
             case false:
-                let startIndex = index(startIndex, offsetBy: i)
-                let endIndex = index(startIndex,
-                                     offsetBy: every,
-                                     limitedBy: endIndex)
+                let offsetStartIndex = index(startIndex, offsetBy: i)
+                let offsetEndIndex = index(offsetStartIndex,
+                                           offsetBy: every,
+                                           limitedBy: endIndex)
                 ?? endIndex
                 
-                result.append(self[startIndex..<endIndex])
+                result.append(self[offsetStartIndex..<offsetEndIndex])
                 
             }
             
