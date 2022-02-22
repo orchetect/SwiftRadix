@@ -236,29 +236,6 @@ Additional operators similarly supported, allowing mixing of types as with equat
 
 - `+=`, `-=`, `*=`, `/=`, `<<`, `>>`, `&`
 
-### Bitwise Shifting
-
-#### Traditional Bit Shift
-
-Traditional binary bit shift left/right still work as usual.
-
-```swift
-0b0100.hex << 1        // 0b1000
-0b0100.hex >> 1        // 0b0010
-```
-
-#### Nibble Shift
-
-Shift in multiples of 4 bits with new `<<<<` / `>>>>` operators.
-
-```swift
-0x2F.hex <<<< 1        // 0x2F0    (bitwise nibble shift left)
-0x2F.hex >>>> 1        // 0x2      (bitwise nibble shift right)
-
-0xF0.hex >>>> 1        // 0xF      (bitwise nibble shift right)
-0xF0.hex <<<< 4        // 0xF00000 (bitwise nibble shift left)
-```
-
 ### Extensions on Array and Data
 
 #### [BinaryInteger]

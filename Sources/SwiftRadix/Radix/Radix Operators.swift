@@ -317,46 +317,6 @@ extension Radix {
 }
 
 
-// MARK: Bitwise nibble shift
-
-infix operator >>>>: BitwiseShiftPrecedence
-infix operator <<<<: BitwiseShiftPrecedence
-
-extension Radix {
-    
-    @inlinable
-    static public func >>>> <T>(lhs: Radix<T>, rhs: Radix) -> Radix<T> {
-        Radix<T>(lhs.value >> (rhs.value * 4), unsafeBase: lhs.base)
-    }
-    
-    @inlinable
-    static public func >>>> <T: BinaryInteger>(lhs: Radix, rhs: T) -> Radix {
-        Radix(lhs.value >> (rhs * 4), unsafeBase: lhs.base)
-    }
-    
-    @inlinable
-    static public func >>>> <T: BinaryInteger>(lhs: T, rhs: Radix) -> T {
-        lhs >> (rhs.value * 4)
-    }
-    
-    @inlinable
-    static public func <<<< <T>(lhs: Radix<T>, rhs: Radix) -> Radix<T> {
-        Radix<T>(lhs.value << (rhs.value * 4), unsafeBase: lhs.base)
-    }
-    
-    @inlinable
-    static public func <<<< <T: BinaryInteger>(lhs: Radix, rhs: T) -> Radix {
-        Radix(lhs.value << (rhs * 4), unsafeBase: lhs.base)
-    }
-    
-    @inlinable
-    static public func <<<< <T: BinaryInteger>(lhs: T, rhs: Radix) -> T {
-        lhs << (rhs.value * 4)
-    }
-    
-}
-
-
 // MARK: Bitwise AND
 
 extension Radix {
