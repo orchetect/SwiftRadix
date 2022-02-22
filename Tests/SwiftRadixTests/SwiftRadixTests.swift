@@ -8,7 +8,7 @@
 //
 
 import XCTest
-@testable import SwiftRadix
+import SwiftRadix
 
 final class SwiftRadixTests: XCTestCase {
     

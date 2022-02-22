@@ -1,10 +1,10 @@
 //
 //  Octal Tests.swift
-///  SwiftRadix • https://github.com/orchetect/SwiftRadix
+//  SwiftRadix • https://github.com/orchetect/SwiftRadix
 //
 
 import XCTest
-@testable import SwiftRadix
+import SwiftRadix
 
 extension SwiftRadixTests {
     

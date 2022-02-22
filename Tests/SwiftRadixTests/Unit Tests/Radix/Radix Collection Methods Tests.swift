@@ -4,7 +4,7 @@
 //
 
 import XCTest
-@testable import SwiftRadix
+import SwiftRadix
 
 extension SwiftRadixTests {
     
