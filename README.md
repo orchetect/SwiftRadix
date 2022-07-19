@@ -60,9 +60,18 @@ UInt8(123).hex == Int16(123)      // true
 
 ### Swift Package Manager (SPM)
 
-To add SwiftRadix to your Xcode project:
-1. Select File → Swift Packages → Add Package Dependency
-2. Add package using  `https://github.com/orchetect/SwiftRadix` as the URL.
+1. Add SwiftRadix as a dependency using Swift Package Manager.
+
+   - In an app project or framework, in Xcode:
+
+     - Select the menu: **File → Swift Packages → Add Package Dependency...**
+     - Enter this URL: `https://github.com/orchetect/SwiftRadix`
+
+   - In a Swift Package, add it to the Package.swift dependencies:
+
+     ```swift
+     .package(url: "https://github.com/orchetect/SwiftRadix", from: "1.1.0")
+     ```
 
 ### Cocoapods
 
