@@ -12,12 +12,12 @@ A lightweight library useful for translating integers to and from radix strings 
 
 Unified library with several constructor methods, all of which in turn provide all of the functionality of the library inline.
 
-| Option 1: Function   | Option 2: Category method | Returns                                 |
-| -------------------- | ------------------------- | --------------------------------------- |
-| `Radix(_: T, base:)` | `.radix(base:)`           | `Radix<T>(base: n)` where n is `2...36` |
-| `Binary(_: T)`       | `.binary`                 | `Radix<T>(base: 2)`                     |
-| `Octal(_: T)`        | `.octal`                  | `Radix<T>(base: 8)`                     |
-| `Hex(_: T)`          | `.hex`                    | `Radix<T>(base: 16)`                    |
+| Option 1: Function | Option 2: Category method | Returns                                 |
+| ------------------ | ------------------------- | --------------------------------------- |
+| `Radix(T, base:)`  | `.radix(base:)`           | `Radix<T>(base: n)` where n is `2...36` |
+| `Binary(T)`        | `.binary`                 | `Radix<T>(base: 2)`                     |
+| `Octal(T)`         | `.octal`                  | `Radix<T>(base: 8)`                     |
+| `Hex(T)`           | `.hex`                    | `Radix<T>(base: 16)`                    |
 
 For the sake of simplifying this documentation, `Hex()` / `.hex` will be used for most examples below.
 
