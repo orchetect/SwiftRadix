@@ -7,9 +7,7 @@ import XCTest
 import SwiftRadix
 
 extension SwiftRadixTests {
-    
     func testRadix_Init_Integer() {
-        
         // basic init test, to check if it accepts a variety of integer types and radices
         
         // Int
@@ -27,11 +25,9 @@ extension SwiftRadixTests {
         XCTAssertEqual(radix2.value.bitWidth, UInt8.bitWidth)
         XCTAssertEqual(radix2.value, 0xFF)
         XCTAssertEqual(radix2.base, 8)
-        
     }
     
     func testRadix_Init_String() {
-        
         // basic init test
         
         // Int
@@ -57,33 +53,27 @@ extension SwiftRadixTests {
         let radix3 = Radix<Int>("", base: 16)
         
         XCTAssertNil(radix3)
-        
     }
     
     func testRadix_Init_Integer_InvalidRadix() {
-        
         // invalid radix (outside 2...36)
         
         XCTAssertNil(Radix(123, base: -1))
         XCTAssertNil(Radix(123, base: 0))
         XCTAssertNil(Radix(123, base: 1))
         XCTAssertNil(Radix(123, base: 37))
-        
     }
     
     func testRadix_Init_String_InvalidRadix() {
-        
         // invalid radix (outside 2...36)
         
         XCTAssertNil(Radix<Int>("1", base: -1))
         XCTAssertNil(Radix<Int>("1", base: 0))
         XCTAssertNil(Radix<Int>("1", base: 1))
         XCTAssertNil(Radix<Int>("1", base: 37))
-        
     }
     
     func testRadix_Init_Integer_NonStandardRadix() {
-        
         // base-2 is binary; skip testing it here
         
         let radix3 = Radix(123, base: 3)!
@@ -281,11 +271,9 @@ extension SwiftRadixTests {
         XCTAssertEqual(radix36.value, 123)
         XCTAssertEqual(radix36.base, 36)
         XCTAssertEqual(radix36.stringValue, "3F")
-        
     }
     
     func testRadix_Init_String_NonStandardRadix() {
-        
         // base-2 is binary; skip testing it here
         
         let radix3 = Radix<Int>("11120", base: 3)
@@ -483,7 +471,5 @@ extension SwiftRadixTests {
         XCTAssertNotNil(radix36)
         XCTAssertEqual(radix36?.value, 123)
         XCTAssertEqual(radix36?.base, 36)
-        
     }
-    
 }

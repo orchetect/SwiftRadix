@@ -3,7 +3,6 @@
 import PackageDescription
 
 let package = Package(
-    
     name: "SwiftRadix",
     
     platforms: [.macOS(.v10_10), .iOS(.v9), .tvOS(.v9), .watchOS(.v2)],
@@ -11,7 +10,8 @@ let package = Package(
     products: [
         .library(
             name: "SwiftRadix",
-            targets: ["SwiftRadix"])
+            targets: ["SwiftRadix"]
+        )
     ],
     
     dependencies: [
@@ -21,11 +21,12 @@ let package = Package(
     targets: [
         .target(
             name: "SwiftRadix",
-            dependencies: []),
+            dependencies: []
+        ),
         
         .testTarget(
             name: "SwiftRadixTests",
-            dependencies: ["SwiftRadix"])
+            dependencies: ["SwiftRadix"]
+        )
     ]
-    
 )

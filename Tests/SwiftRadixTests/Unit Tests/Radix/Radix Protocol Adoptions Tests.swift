@@ -7,56 +7,70 @@ import XCTest
 import SwiftRadix
 
 extension SwiftRadixTests {
-    
     func testRadix_CustomStringConvertible() {
-        
         // CustomStringConvertible
         
         // binary
         
-        XCTAssertEqual(String(describing: 1.binary),
-                       "Radix<Int>(0b1)")
-        XCTAssertEqual(1.binary.description,
-                       "Radix<Int>(0b1)")
+        XCTAssertEqual(
+            String(describing: 1.binary),
+            "Radix<Int>(0b1)"
+        )
+        XCTAssertEqual(
+            1.binary.description,
+            "Radix<Int>(0b1)"
+        )
         
         // hex
         
-        XCTAssertEqual(String(describing: 1.hex),
-                       "Radix<Int>(0x1)")
-        XCTAssertEqual(1.hex.description,
-                       "Radix<Int>(0x1)")
+        XCTAssertEqual(
+            String(describing: 1.hex),
+            "Radix<Int>(0x1)"
+        )
+        XCTAssertEqual(
+            1.hex.description,
+            "Radix<Int>(0x1)"
+        )
         
         // octal
         
-        XCTAssertEqual(String(describing: 1.octal),
-                       "Radix<Int>(0o1)")
-        XCTAssertEqual(1.octal.description,
-                       "Radix<Int>(0o1)")
+        XCTAssertEqual(
+            String(describing: 1.octal),
+            "Radix<Int>(0o1)"
+        )
+        XCTAssertEqual(
+            1.octal.description,
+            "Radix<Int>(0o1)"
+        )
         
         // CustomDebugStringConvertible
         
         // binary
         
-        XCTAssertEqual(1.binary.debugDescription,
-                       "Radix<Int>(0b1)")
+        XCTAssertEqual(
+            1.binary.debugDescription,
+            "Radix<Int>(0b1)"
+        )
         
         // hex
         
-        XCTAssertEqual(1.hex.debugDescription,
-                       "Radix<Int>(0x1)")
+        XCTAssertEqual(
+            1.hex.debugDescription,
+            "Radix<Int>(0x1)"
+        )
         
         // octal
         
-        XCTAssertEqual(1.octal.debugDescription,
-                       "Radix<Int>(0o1)")
-        
+        XCTAssertEqual(
+            1.octal.debugDescription,
+            "Radix<Int>(0o1)"
+        )
     }
     
     func testRadix_Hashable() {
-        
         // Dictionary - [Key : Hashable]
         
-        var dict: [String : Radix<Int>] = [:]
+        var dict: [String: Radix<Int>] = [:]
         
         dict.updateValue(1.hex, forKey: "value1")
         
@@ -73,7 +87,5 @@ extension SwiftRadixTests {
         set.update(with: 2.hex)
         
         XCTAssertEqual(set.count, 2)
-        
     }
-    
 }

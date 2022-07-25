@@ -11,7 +11,6 @@ import Foundation
 
 /// Protocol used by SwiftRadix to facilitate extensions.
 public protocol RadixProtocol {
-    
     associatedtype NumberType: BinaryInteger
     
     var value: NumberType { get set }
@@ -26,5 +25,4 @@ public protocol RadixProtocol {
     func stringValue(prefix: Bool) -> String
     func stringValue(padTo: Int, splitEvery: Int, prefix: Bool) -> String
     func stringValue(padToEvery: Int, splitEvery: Int, prefix: Bool) -> String
-    
 }

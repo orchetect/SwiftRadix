@@ -7,28 +7,23 @@ import XCTest
 import SwiftRadix
 
 extension SwiftRadixTests {
-    
     func testOctal_TypeExtensions_BinaryInteger() {
-        
         let validString = "123"
         
-        XCTAssertEqual(       0o123 .octal.stringValue, validString)
-        XCTAssertEqual(UInt  (0o123).octal.stringValue, validString)
-        XCTAssertEqual( Int8 (0o123).octal.stringValue, validString)
-        XCTAssertEqual(UInt8 (0o123).octal.stringValue, validString)
-        XCTAssertEqual( Int16(0o123).octal.stringValue, validString)
+        XCTAssertEqual(0o123.octal.stringValue, validString)
+        XCTAssertEqual(UInt(0o123).octal.stringValue, validString)
+        XCTAssertEqual(Int8(0o123).octal.stringValue, validString)
+        XCTAssertEqual(UInt8(0o123).octal.stringValue, validString)
+        XCTAssertEqual(Int16(0o123).octal.stringValue, validString)
         XCTAssertEqual(UInt16(0o123).octal.stringValue, validString)
-        XCTAssertEqual( Int32(0o123).octal.stringValue, validString)
+        XCTAssertEqual(Int32(0o123).octal.stringValue, validString)
         XCTAssertEqual(UInt32(0o123).octal.stringValue, validString)
-        XCTAssertEqual( Int64(0o123).octal.stringValue, validString)
+        XCTAssertEqual(Int64(0o123).octal.stringValue, validString)
         XCTAssertEqual(UInt64(0o123).octal.stringValue, validString)
-        
     }
     
     func testOctal_TypeExtensions_String() {
-        
         let validValue = 0o123
-        
         
         let radix1 = "0o123".octal // Int default
         
@@ -47,11 +42,9 @@ extension SwiftRadixTests {
         XCTAssertNotNil(radix3)
         
         XCTAssertEqual(radix3?.value, Int32(validValue))
-        
     }
     
     func testOctal_TypeExtensions_StringArray() {
-        
         let source = ["000", "0o123"]
         
         let radixArray1 = source.octal // Int default
@@ -67,11 +60,9 @@ extension SwiftRadixTests {
         
         XCTAssertEqual(radixArray2[0]?.value, Int32(0x000))
         XCTAssertEqual(radixArray2[1]?.value, Int32(0o123))
-        
     }
     
     func testOctal_TypeExtensions_BinIntCollection() {
-        
         let source = [0o000, 0o123]
         
         let radixArray = source.octal
@@ -80,11 +71,9 @@ extension SwiftRadixTests {
         
         XCTAssertEqual(radixArray[0].value, 0x000)
         XCTAssertEqual(radixArray[1].value, 0o123)
-        
     }
     
     func testOctal_TypeExtensions_Data() {
-        
         let source = Data([0o000, 0o123])
         
         let radixArray = source.octal
@@ -93,7 +82,5 @@ extension SwiftRadixTests {
         
         XCTAssertEqual(radixArray[0].value, 0x000)
         XCTAssertEqual(radixArray[1].value, 0o123)
-        
     }
-    
 }

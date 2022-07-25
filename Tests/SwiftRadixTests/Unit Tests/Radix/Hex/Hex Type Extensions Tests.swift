@@ -7,28 +7,23 @@ import XCTest
 import SwiftRadix
 
 extension SwiftRadixTests {
-    
     func testHex_TypeExtensions_BinaryInteger() {
-        
         let validString = "7F"
         
-        XCTAssertEqual(       0x7F .hex.stringValue, validString)
-        XCTAssertEqual(UInt  (0x7F).hex.stringValue, validString)
-        XCTAssertEqual( Int8 (0x7F).hex.stringValue, validString)
-        XCTAssertEqual(UInt8 (0x7F).hex.stringValue, validString)
-        XCTAssertEqual( Int16(0x7F).hex.stringValue, validString)
+        XCTAssertEqual(0x7F.hex.stringValue, validString)
+        XCTAssertEqual(UInt(0x7F).hex.stringValue, validString)
+        XCTAssertEqual(Int8(0x7F).hex.stringValue, validString)
+        XCTAssertEqual(UInt8(0x7F).hex.stringValue, validString)
+        XCTAssertEqual(Int16(0x7F).hex.stringValue, validString)
         XCTAssertEqual(UInt16(0x7F).hex.stringValue, validString)
-        XCTAssertEqual( Int32(0x7F).hex.stringValue, validString)
+        XCTAssertEqual(Int32(0x7F).hex.stringValue, validString)
         XCTAssertEqual(UInt32(0x7F).hex.stringValue, validString)
-        XCTAssertEqual( Int64(0x7F).hex.stringValue, validString)
+        XCTAssertEqual(Int64(0x7F).hex.stringValue, validString)
         XCTAssertEqual(UInt64(0x7F).hex.stringValue, validString)
-        
     }
     
     func testHex_TypeExtensions_String() {
-        
         let validValue = 0xFF
-        
         
         let radix1 = "0xFF".hex // Int default
         
@@ -47,11 +42,9 @@ extension SwiftRadixTests {
         XCTAssertNotNil(radix3)
         
         XCTAssertEqual(radix3?.value, Int32(validValue))
-        
     }
     
     func testHex_TypeExtensions_StringArray() {
-        
         let source = ["00", "0xFF"]
         
         let radixArray1 = source.hex // Int default
@@ -67,11 +60,9 @@ extension SwiftRadixTests {
         
         XCTAssertEqual(radixArray2[0]?.value, Int32(0x00))
         XCTAssertEqual(radixArray2[1]?.value, Int32(0xFF))
-        
     }
     
     func testHex_TypeExtensions_BinIntCollection() {
-        
         let source = [0x00, 0xFF]
         
         let radixArray = source.hex
@@ -80,11 +71,9 @@ extension SwiftRadixTests {
         
         XCTAssertEqual(radixArray[0].value, 0x00)
         XCTAssertEqual(radixArray[1].value, 0xFF)
-        
     }
     
     func testHex_TypeExtensions_Data() {
-        
         let source = Data([0x00, 0xFF])
         
         let radixArray = source.hex
@@ -93,7 +82,5 @@ extension SwiftRadixTests {
         
         XCTAssertEqual(radixArray[0].value, 0x00)
         XCTAssertEqual(radixArray[1].value, 0xFF)
-        
     }
-    
 }

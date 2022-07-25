@@ -7,9 +7,7 @@ import XCTest
 import SwiftRadix
 
 extension SwiftRadixTests {
-    
     func testBinary() {
-        
         // init from int
         
         let binaryInt = Binary(0b1100)
@@ -36,11 +34,9 @@ extension SwiftRadixTests {
         XCTAssertEqual(binaryString2?.value.bitWidth, Int32.bitWidth)
         XCTAssertEqual(binaryString2?.value, Int32(0b1100))
         XCTAssertEqual(binaryString2?.base, 2)
-        
     }
     
     func testBinary_StringFailures() {
-        
         // wrong prefix case
         XCTAssertNil("0B10".binary)
         
@@ -53,6 +49,5 @@ extension SwiftRadixTests {
         
         // invalid string altogether
         XCTAssertNil("$y9_p".binary)
-        
     }
 }

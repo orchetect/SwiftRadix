@@ -6,7 +6,6 @@
 import Foundation
 
 extension Radix {
-    
     /// Returns a raw byte array of the value (agnostic of radix base).
     ///
     /// All bytes for the integer are returned, since they are fixed-width numbers.
@@ -18,11 +17,7 @@ extension Radix {
     ///
     @inlinable
     public var bytes: [UInt8] {
-        
         var mutableValueCopy = value
-        
         return withUnsafeBytes(of: &mutableValueCopy) { Array($0) }
-        
     }
-    
 }

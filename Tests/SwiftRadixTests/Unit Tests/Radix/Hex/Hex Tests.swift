@@ -7,9 +7,7 @@ import XCTest
 import SwiftRadix
 
 extension SwiftRadixTests {
-    
     func testHex() {
-        
         // init from int
         
         let hexInt = Hex(0xFF)
@@ -39,7 +37,6 @@ extension SwiftRadixTests {
     }
     
     func testHex_StringFailures() {
-        
         // wrong prefix case
         XCTAssertNil("0XFF".hex)
         
@@ -52,11 +49,9 @@ extension SwiftRadixTests {
         
         // invalid string altogether
         XCTAssertNil("$y9_p".hex)
-        
     }
     
     func testHex_StringCase() {
-        
         // uppercase
         
         let radix1 = Hex("0xFF")
@@ -72,7 +67,5 @@ extension SwiftRadixTests {
         XCTAssertNotNil(radix2)
         
         XCTAssertEqual(radix2?.value, 0xFF)
-        
     }
-    
 }

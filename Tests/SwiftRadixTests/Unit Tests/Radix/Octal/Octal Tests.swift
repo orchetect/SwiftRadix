@@ -7,9 +7,7 @@ import XCTest
 import SwiftRadix
 
 extension SwiftRadixTests {
-    
     func testOctal() {
-        
         // init from int
         
         let octalInt = Octal(0o123)
@@ -36,11 +34,9 @@ extension SwiftRadixTests {
         XCTAssertEqual(octalString2?.value.bitWidth, Int32.bitWidth)
         XCTAssertEqual(octalString2?.value, Int32(0o123))
         XCTAssertEqual(octalString2?.base, 8)
-        
     }
     
     func testOctal_StringFailures() {
-        
         // wrong prefix case
         XCTAssertNil("0O10".octal)
         
@@ -53,7 +49,5 @@ extension SwiftRadixTests {
         
         // invalid string altogether
         XCTAssertNil("$y9_p".octal)
-        
     }
-    
 }

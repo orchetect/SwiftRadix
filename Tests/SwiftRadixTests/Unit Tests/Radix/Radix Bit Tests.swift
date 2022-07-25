@@ -7,9 +7,7 @@ import XCTest
 import SwiftRadix
 
 extension SwiftRadixTests {
-    
     func testRadix_Bit_Get() {
-        
         let source = 0b1100_1100
         
         // binary
@@ -52,11 +50,9 @@ extension SwiftRadixTests {
         
         XCTAssertTrue(source.hex.bit(-1) == 0) // out of bounds, default 0
         XCTAssertTrue(source.hex.bit(9) == 0)  // out of bounds, default 0
-        
     }
     
     func testRadix_Bit_Subscript_Set() {
-        
         var radix: Radix<Int>
         
         // binary
@@ -108,7 +104,5 @@ extension SwiftRadixTests {
         radix[bit: -1] = 1 // invalid index, fails silently
         
         XCTAssertEqual(radix.value, 0b1100_1100)
-        
     }
-    
 }

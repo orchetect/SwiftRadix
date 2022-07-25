@@ -9,7 +9,6 @@ import Foundation
 
 /// A lightweight type useful for translating integers to radix strings and vice-versa, with a suite of convenient constructors and accessors.
 public struct Radix<T: BinaryInteger>: RadixProtocol {
-    
     // MARK: - Base Properties
     
     /// Stored value type
@@ -24,14 +23,12 @@ public struct Radix<T: BinaryInteger>: RadixProtocol {
     /// String prefix specific to the radix
     @inline(__always)
     public var stringPrefix: String {
-        
         switch base {
         case 2:  return "0b"
         case 8:  return "0o"
         case 16: return "0x"
         default: return ""
         }
-        
     }
     
     // MARK: - Constructors
@@ -52,27 +49,27 @@ public struct Radix<T: BinaryInteger>: RadixProtocol {
     ///     0xFF.hex
     ///
     @inline(__always)
-    public init?(_ number: NumberType,
-                 base: Int) {
-        
+    public init?(
+        _ number: NumberType,
+        base: Int
+    ) {
         // radix validity check
         if base < 2 || base > 36 { return nil }
         
         self.base = base
         
-        self.value = number
-        
+        value = number
     }
     
     /// Internal initializer that bypasses base range validation.
     @inline(__always) @usableFromInline
-    internal init(_ number: NumberType,
-                  unsafeBase: Int) {
+    internal init(
+        _ number: NumberType,
+        unsafeBase: Int
+    ) {
+        base = unsafeBase
         
-        self.base = unsafeBase
-        
-        self.value = number
-        
+        value = number
     }
     
     /// Construct from a radix string.
@@ -112,9 +109,10 @@ public struct Radix<T: BinaryInteger>: RadixProtocol {
     ///     "FF".hex
     ///
     @inlinable
-    public init?(_ string: String,
-                 base: Int) {
-        
+    public init?(
+        _ string: String,
+        base: Int
+    ) {
         // radix validity check
         if base < 2 || base > 36 { return nil }
         
@@ -124,7 +122,5 @@ public struct Radix<T: BinaryInteger>: RadixProtocol {
         else { return nil }
         
         value = convertedValue
-        
     }
-    
 }

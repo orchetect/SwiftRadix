@@ -7,9 +7,7 @@ import XCTest
 import SwiftRadix
 
 extension SwiftRadixTests {
-    
     func testRadix_stringValue_Get() {
-        
         // binary
         
         XCTAssertEqual(0b0.binary.stringValue, "0")
@@ -24,30 +22,32 @@ extension SwiftRadixTests {
         
         XCTAssertEqual(0x000.octal.stringValue, "0")
         XCTAssertEqual(0o123.octal.stringValue, "123")
-        
     }
     
     func testRadix_stringValue_Get_Extents() {
-        
         // binary
         
-        XCTAssertEqual(UInt.max.binary.stringValue,
-                       "1111111111111111111111111111111111111111111111111111111111111111")
+        XCTAssertEqual(
+            UInt.max.binary.stringValue,
+            "1111111111111111111111111111111111111111111111111111111111111111"
+        )
         
         // hex
         
-        XCTAssertEqual(UInt.max.hex.stringValue,
-                       "FFFFFFFFFFFFFFFF")
+        XCTAssertEqual(
+            UInt.max.hex.stringValue,
+            "FFFFFFFFFFFFFFFF"
+        )
         
         // octal
         
-        XCTAssertEqual(UInt.max.octal.stringValue,
-                       "1777777777777777777777")
-        
+        XCTAssertEqual(
+            UInt.max.octal.stringValue,
+            "1777777777777777777777"
+        )
     }
     
     func testRadix_stringValue_Set() {
-        
         // binary
         
         var source1 = 0b0.binary
@@ -77,11 +77,9 @@ extension SwiftRadixTests {
         
         source3.stringValue = "0o1234"              // with prefix
         XCTAssertEqual(source3.value, 0o1234)
-        
     }
     
     func testRadix_stringValue_Set_Extents() {
-        
         // binary
         
         var source1 = UInt(0b0).binary
@@ -105,11 +103,9 @@ extension SwiftRadixTests {
         source3.stringValue = "1777777777777777777777"
         
         XCTAssertEqual(source3.value, UInt.max)
-        
     }
     
     func testRadix_stringValue_Set_Extents_EdgeCases() {
-        
         // binary
         
         var source1 = 0b0.binary
@@ -133,11 +129,9 @@ extension SwiftRadixTests {
         source3.stringValue = "1777777777777777777777"
         
         XCTAssertEqual(source3.value, 0) // string overflowed Int, set silently fails
-        
     }
     
     func testRadix_stringValue_Prefix() {
-        
         // binary
         
         XCTAssertEqual(0b0.binary.stringValue(prefix: true), "0b0")
@@ -152,11 +146,9 @@ extension SwiftRadixTests {
         
         XCTAssertEqual(0b0.octal.stringValue(prefix: true), "0o0")
         XCTAssertEqual(0b0.octal.stringValue(prefix: false), "0")
-        
     }
     
     func testRadix_stringValue_PadTo() {
-        
         // binary
         
         let source1 = 0b0000_0111.binary
@@ -172,7 +164,6 @@ extension SwiftRadixTests {
         // edge cases
         XCTAssertEqual(source1.stringValue(padTo: -1), "111")
         
-        
         // hex
         
         let source2 = 0x0F.hex
@@ -187,7 +178,6 @@ extension SwiftRadixTests {
         // edge cases
         XCTAssertEqual(source2.stringValue(padTo: -1), "F")
         
-        
         // octal
         
         let source3 = 0o17.octal
@@ -201,11 +191,9 @@ extension SwiftRadixTests {
         
         // edge cases
         XCTAssertEqual(source3.stringValue(padTo: -1), "17")
-        
     }
     
     func testRadix_stringValue_PadTo_EdgeCases() {
-        
         // ensure padding of 0 or a negative value defaults to an internal padding of 1
         
         // binary
@@ -222,11 +210,9 @@ extension SwiftRadixTests {
         
         XCTAssertEqual(0o0.hex.stringValue(padTo: -1), "0")
         XCTAssertEqual(0o0.hex.stringValue(padTo: 0), "0")
-        
     }
     
     func testRadix_stringValue_PadTo_SplitEvery() {
-        
         // binary
         
         let source1 = 0b0000_0111.binary
@@ -243,7 +229,6 @@ extension SwiftRadixTests {
         // edge cases
         XCTAssertEqual(source1.stringValue(padTo: 2, splitEvery: -1), "111")
         
-        
         // hex
         
         let source2 = 0xF0F.hex
@@ -259,7 +244,6 @@ extension SwiftRadixTests {
         // edge cases
         XCTAssertEqual(source2.stringValue(padTo: 2, splitEvery: -1), "F0F")
         
-        
         // octal
         
         let source3 = 0o7.octal
@@ -274,11 +258,9 @@ extension SwiftRadixTests {
         
         // edge cases
         XCTAssertEqual(source3.stringValue(padTo: 2, splitEvery: -1), "07")
-        
     }
     
     func testRadix_stringValue_PadToEvery() {
-        
         // binary
         
         let source1 = 0b0001_1111.binary
@@ -292,7 +274,6 @@ extension SwiftRadixTests {
         
         // edge cases
         XCTAssertEqual(source1.stringValue(padToEvery: -1), "11111")
-        
         
         // hex
         
@@ -308,7 +289,6 @@ extension SwiftRadixTests {
         // edge cases
         XCTAssertEqual(source2.stringValue(padToEvery: -1), "FFF")
         
-        
         // octal
         
         let source3 = 0o123456.octal
@@ -322,11 +302,9 @@ extension SwiftRadixTests {
         
         // edge cases
         XCTAssertEqual(source3.stringValue(padToEvery: -1), "123456")
-        
     }
     
     func testRadix_stringValue_PadToEvery_SplitEvery() {
-        
         // binary
         
         let source1 = 0b0001_1111.binary
@@ -338,11 +316,13 @@ extension SwiftRadixTests {
         XCTAssertEqual(source1.stringValue(padToEvery: 4, splitEvery: 3), "00 011 111")
         
         // prefix treats it as a Swift Integer Literal, inserting underscores for splits
-        XCTAssertEqual(source1.stringValue(padToEvery: 2, splitEvery: 2, prefix: true), "0b01_11_11")
+        XCTAssertEqual(
+            source1.stringValue(padToEvery: 2, splitEvery: 2, prefix: true),
+            "0b01_11_11"
+        )
         
         // edge cases
         XCTAssertEqual(source1.stringValue(padToEvery: 2, splitEvery: -1), "011111")
-        
         
         // hex
         
@@ -359,7 +339,6 @@ extension SwiftRadixTests {
         // edge cases
         XCTAssertEqual(source2.stringValue(padToEvery: 2, splitEvery: -1), "0FFF")
         
-        
         // octal
         
         let source3 = 0o123456.octal
@@ -370,11 +349,12 @@ extension SwiftRadixTests {
         XCTAssertEqual(source3.stringValue(padToEvery: 4, splitEvery: 3), "00 123 456")
         
         // prefix treats it as a Swift Integer Literal, inserting underscores for splits
-        XCTAssertEqual(source3.stringValue(padToEvery: 2, splitEvery: 2, prefix: true), "0o12_34_56")
+        XCTAssertEqual(
+            source3.stringValue(padToEvery: 2, splitEvery: 2, prefix: true),
+            "0o12_34_56"
+        )
         
         // edge cases
         XCTAssertEqual(source3.stringValue(padToEvery: 2, splitEvery: -1), "123456")
-        
     }
-    
 }
