@@ -50,31 +50,43 @@ extension Radix {
 }
 
 @inlinable
-public func == <T: BinaryInteger, Other>(lhs: Radix<T>?, rhs: Other) -> Bool
-where Other: BinaryInteger {
-    if lhs == nil { return false }
-    return lhs!.value == rhs
+public func == <
+    T: BinaryInteger,
+    O: BinaryInteger
+>(lhs: Radix<T>?, rhs: O) -> Bool {
+    guard let lhs = lhs else { return false }
+    return lhs.value == rhs
 }
 
 @inlinable
-public func == <T: BinaryInteger, Other>(lhs: Other, rhs: Radix<T>?) -> Bool
-where Other: BinaryInteger {
-    if rhs == nil { return false }
-    return lhs == rhs!.value
+public func == <
+    T: BinaryInteger,
+    O: BinaryInteger
+>(lhs: O, rhs: Radix<T>?) -> Bool {
+    guard let rhs = rhs else { return false }
+    return lhs == rhs.value
 }
 
 @inlinable
-public func != <T: BinaryInteger, Other>(lhs: Radix<T>?, rhs: Other) -> Bool
-where Other: BinaryInteger {
-    if lhs == nil { return false }
-    return lhs!.value != rhs
+public func != <
+    T: BinaryInteger,
+    O: BinaryInteger
+>(
+    lhs: Radix<T>?, rhs: O
+) -> Bool {
+    guard let lhs = lhs else { return false }
+    return lhs.value != rhs
 }
 
 @inlinable
-public func != <T: BinaryInteger, Other>(lhs: Other, rhs: Radix<T>?) -> Bool
-where Other: BinaryInteger {
-    if rhs == nil { return false }
-    return lhs != rhs!.value
+public func != <
+    T: BinaryInteger,
+    O: BinaryInteger
+>(
+    lhs: O, rhs: Radix<T>?
+) -> Bool {
+    guard let rhs = rhs else { return false }
+    return lhs != rhs.value
 }
 
 // MARK: - Comparable
