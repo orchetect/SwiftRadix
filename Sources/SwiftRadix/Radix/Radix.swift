@@ -109,10 +109,10 @@ public struct Radix<T: BinaryInteger>: RadixProtocol {
     ///     "FF".hex
     ///
     @inlinable
-    public init?(
-        _ string: some StringProtocol,
+    public init?<S>(
+        _ string: S,
         base: Int
-    ) {
+    ) where S: StringProtocol {
         // radix validity check
         if base < 2 || base > 36 { return nil }
         

@@ -96,7 +96,9 @@ extension Radix {
     /// Internal function to convert a radix String to a value.
     /// Fails with nil if not successful or if the String is malformed.
     @usableFromInline
-    internal func valueFrom(radixString: some StringProtocol) -> NumberType? {
+    internal func valueFrom<S>(radixString: S) -> NumberType?
+    where S: StringProtocol
+    {
         var parseString: String
         
         // treat string prefix as case-sensitive
