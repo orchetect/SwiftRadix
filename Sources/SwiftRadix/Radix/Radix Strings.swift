@@ -96,7 +96,7 @@ extension Radix {
     /// Internal function to convert a radix String to a value.
     /// Fails with nil if not successful or if the String is malformed.
     @usableFromInline
-    internal func valueFrom(radixString: String) -> NumberType? {
+    internal func valueFrom(radixString: some StringProtocol) -> NumberType? {
         var parseString: String
         
         // treat string prefix as case-sensitive
@@ -105,7 +105,7 @@ extension Radix {
         {
             parseString = String(radixString.dropFirst(2))
         } else {
-            parseString = radixString
+            parseString = String(radixString)
         }
         
         var castValue: NumberType?

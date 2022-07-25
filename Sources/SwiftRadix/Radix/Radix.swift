@@ -110,7 +110,7 @@ public struct Radix<T: BinaryInteger>: RadixProtocol {
     ///
     @inlinable
     public init?(
-        _ string: String,
+        _ string: some StringProtocol,
         base: Int
     ) {
         // radix validity check
