@@ -13,7 +13,7 @@ public func Binary<T: BinaryInteger>(_ number: T) -> Radix<T> {
 
 /// Convenience constructor for `Radix<Int>` with a radix of 2 (binary).
 @inlinable @_disfavoredOverload
-public func Binary(_ string: String) -> Radix<Int>? {
+public func Binary<S: StringProtocol>(_ string: S) -> Radix<Int>? {
     Radix<Int>(string, base: 2)
 }
 
@@ -24,8 +24,11 @@ public func Binary(_ string: String) -> Radix<Int>? {
 ///     Binary("1010", as: Int16.self)
 ///
 @inlinable @_disfavoredOverload
-public func Binary<T: BinaryInteger>(
-    _ string: String,
+public func Binary<
+    S: StringProtocol,
+    T: BinaryInteger
+>(
+    _ string: S,
     as type: T.Type
 ) -> Radix<T>? {
     Radix<T>(string, base: 2)

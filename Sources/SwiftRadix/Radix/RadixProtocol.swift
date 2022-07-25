@@ -7,7 +7,7 @@ import Foundation
 
 // Protocol is necessary in order to create associatedtype-erased extensions
 // ie:
-// extension Collection where Element : RadixProtocol { }
+// extension Collection where Element: RadixProtocol { }
 
 /// Protocol used by SwiftRadix to facilitate extensions.
 public protocol RadixProtocol {
@@ -19,7 +19,7 @@ public protocol RadixProtocol {
     var base: Int { get set }
     
     init?(_ number: NumberType, base: Int)
-    init?(_ string: String, base: Int)
+    init?<S: StringProtocol>(_ string: S, base: Int)
     
     var stringValue: String { get set }
     func stringValue(prefix: Bool) -> String

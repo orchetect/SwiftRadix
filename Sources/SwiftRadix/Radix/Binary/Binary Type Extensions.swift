@@ -15,7 +15,7 @@ extension BinaryInteger {
     }
 }
 
-extension String {
+extension StringProtocol {
     /// Returns a new `Radix<Int>?` base-2 struct from a binary string.
     @inlinable @_disfavoredOverload
     public var binary: Radix<Int>? {
@@ -34,7 +34,7 @@ extension String {
     }
 }
 
-extension Array where Element == String {
+extension Array where Element: StringProtocol {
     /// Returns an array of `Radix<Int>?` base-2 structs constructed from an array of binary strings.
     @_disfavoredOverload
     public var binary: [Radix<Int>?] {

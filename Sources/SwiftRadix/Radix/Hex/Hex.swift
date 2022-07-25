@@ -13,7 +13,7 @@ public func Hex<T: BinaryInteger>(_ number: T) -> Radix<T> {
 
 /// Convenience constructor for `Radix<Int>` with a radix of 16 (hex).
 @inlinable @_disfavoredOverload
-public func Hex(_ string: String) -> Radix<Int>? {
+public func Hex<S: StringProtocol>(_ string: S) -> Radix<Int>? {
     Radix<Int>(string, base: 16)
 }
 
@@ -24,7 +24,12 @@ public func Hex(_ string: String) -> Radix<Int>? {
 ///     Hex("FF", as: Int16.self)
 ///
 @inlinable @_disfavoredOverload
-public func Hex<T: BinaryInteger>(_ string: String,
-                                  as type: T.Type) -> Radix<T>? {
+public func Hex<
+    S: StringProtocol,
+    T: BinaryInteger
+>(
+    _ string: S,
+    as type: T.Type
+) -> Radix<T>? {
     Radix<T>(string, base: 16)
 }

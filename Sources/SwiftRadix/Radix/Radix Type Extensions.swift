@@ -15,7 +15,7 @@ extension BinaryInteger {
     }
 }
 
-extension String {
+extension StringProtocol {
     /// Returns a new `Radix<Int>?` struct from a radix string.
     @inlinable @_disfavoredOverload
     public func radix(base: Int) -> Radix<Int>? {
@@ -37,7 +37,7 @@ extension String {
     }
 }
 
-extension Array where Element == String {
+extension Array where Element : StringProtocol {
     /// Returns an array of `Radix<Int>?` structs constructed from an array of hex strings.
     @_disfavoredOverload
     public func radix(base: Int) -> [Radix<Int>?] {

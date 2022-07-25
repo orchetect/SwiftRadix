@@ -15,7 +15,7 @@ extension BinaryInteger {
     }
 }
 
-extension String {
+extension StringProtocol {
     /// Returns a new `Radix<Int>?` base-8 struct from an octal string.
     @inlinable @_disfavoredOverload
     public var octal: Radix<Int>? {
@@ -34,7 +34,7 @@ extension String {
     }
 }
 
-extension Array where Element == String {
+extension Array where Element: StringProtocol {
     /// Returns an array of `Radix<Int>?` base-8 structs constructed from an array of octal strings.
     @_disfavoredOverload
     public var octal: [Radix<Int>?] {
