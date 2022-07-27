@@ -243,7 +243,7 @@ h1 != UInt8(20)        // true   (comparing Radix<Int> with UInt8)
 
 ### Additional Operators
 
-Additional operators similarly supported, allowing mixing of types as with equatability:
+Additional operators supported, allowing assignment and bitwise operations directly.
 
 - `+=`, `-=`, `*=`, `/=`, `<<`, `>>`, `&`
 
@@ -310,13 +310,14 @@ let d = Data([0x1, 0x2, 0x3, 0xFF])
 d.hex.stringValue(padTo: 2)                          // "01 02 03 FF"
 ```
 
-### Value Memory Access Methods
+### Bits and Bytes Accessors
 
 A numer of additional methods for reading and manipulating the underlying integer value.
 
 #### Bit
 
 `.bit(Int)`
+
 `[bit: Int] { get set }`
 
 - gets single bit value at specified position right-to-left
@@ -337,7 +338,8 @@ h.value                   // == 0b1000
 
 #### Nibble
 
-`.nibble(Int)`
+`.nibble(Int)
+
 `[nibble: Int] { get set }`
 
 - gets nibble (4-bit) value at specified position right-to-left
