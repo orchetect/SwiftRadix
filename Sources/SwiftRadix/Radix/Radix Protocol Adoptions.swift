@@ -1,13 +1,14 @@
 //
 //  Radix Protocol Adoptions.swift
 //  SwiftRadix • https://github.com/orchetect/SwiftRadix
+//  © 2022 Steffan Andrews • Licensed under MIT License
 //
 
 import Foundation
 
 // MARK: String Convertible
 
-//swiftformat:disable all
+// swiftformat:disable all
 extension Radix: CustomStringConvertible,
                  CustomDebugStringConvertible {
     public var description: String {

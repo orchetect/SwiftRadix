@@ -1,6 +1,7 @@
 //
 //  Radix Strings Tests.swift
 //  SwiftRadix • https://github.com/orchetect/SwiftRadix
+//  © 2022 Steffan Andrews • Licensed under MIT License
 //
 
 import XCTest
@@ -11,7 +12,7 @@ extension SwiftRadixTests {
         // binary
         
         XCTAssertEqual(0b0.binary.stringValue, "0")
-        XCTAssertEqual(0b1100_1100.binary.stringValue, "11001100")
+        XCTAssertEqual(0b11001100.binary.stringValue, "11001100")
         
         // hex
         
@@ -53,10 +54,10 @@ extension SwiftRadixTests {
         var source1 = 0b0.binary
         
         source1.stringValue = "11001100"            // no prefix
-        XCTAssertEqual(source1.value, 0b1100_1100)
+        XCTAssertEqual(source1.value, 0b11001100)
         
         source1.stringValue = "0b00110011"          // with prefix
-        XCTAssertEqual(source1.value, 0b0011_0011)
+        XCTAssertEqual(source1.value, 0b00110011)
         
         // hex
         
@@ -151,7 +152,7 @@ extension SwiftRadixTests {
     func testRadix_stringValue_PadTo() {
         // binary
         
-        let source1 = 0b0000_0111.binary
+        let source1 = 0b00000111.binary
         
         XCTAssertEqual(source1.stringValue(padTo: 0), "111")
         XCTAssertEqual(source1.stringValue(padTo: 1), "111")
@@ -215,7 +216,7 @@ extension SwiftRadixTests {
     func testRadix_stringValue_PadTo_SplitEvery() {
         // binary
         
-        let source1 = 0b0000_0111.binary
+        let source1 = 0b00000111.binary
         
         XCTAssertEqual(source1.stringValue(padTo: 0, splitEvery: 0), "111")
         XCTAssertEqual(source1.stringValue(padTo: 1, splitEvery: 1), "1 1 1")
@@ -263,7 +264,7 @@ extension SwiftRadixTests {
     func testRadix_stringValue_PadToEvery() {
         // binary
         
-        let source1 = 0b0001_1111.binary
+        let source1 = 0b00011111.binary
         
         XCTAssertEqual(source1.stringValue(padToEvery: 0), "11111")
         XCTAssertEqual(source1.stringValue(padToEvery: 1), "11111")
@@ -307,7 +308,7 @@ extension SwiftRadixTests {
     func testRadix_stringValue_PadToEvery_SplitEvery() {
         // binary
         
-        let source1 = 0b0001_1111.binary
+        let source1 = 0b00011111.binary
         
         XCTAssertEqual(source1.stringValue(padToEvery: 0, splitEvery: 0), "11111")
         XCTAssertEqual(source1.stringValue(padToEvery: 1, splitEvery: 1), "1 1 1 1 1")

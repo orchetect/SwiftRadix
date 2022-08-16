@@ -1,6 +1,7 @@
 //
 //  Utilities.swift
 //  SwiftRadix • https://github.com/orchetect/SwiftRadix
+//  © 2022 Steffan Andrews • Licensed under MIT License
 //
 
 import Foundation
@@ -35,7 +36,7 @@ extension Optional: SwiftRadixOptionalType {
 
 // MARK: - BinaryInteger
 
-//swiftformat:disable all
+// swiftformat:disable all
 extension BinaryInteger {
     /// Returns the value rounded up to multiples of a given value.
     ///
@@ -82,7 +83,7 @@ extension StringProtocol {
                     offsetBy: -every,
                     limitedBy: startIndex
                 )
-                ?? startIndex
+                    ?? startIndex
                 
                 result.insert(self[offsetStartIndex ..< offsetEndIndex], at: 0)
                 
@@ -93,7 +94,7 @@ extension StringProtocol {
                     offsetBy: every,
                     limitedBy: endIndex
                 )
-                ?? endIndex
+                    ?? endIndex
                 
                 result.append(self[offsetStartIndex ..< offsetEndIndex])
             }

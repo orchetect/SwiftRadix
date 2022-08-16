@@ -1,6 +1,7 @@
 //
 //  Radix Bit.swift
 //  SwiftRadix • https://github.com/orchetect/SwiftRadix
+//  © 2022 Steffan Andrews • Licensed under MIT License
 //
 
 import Foundation

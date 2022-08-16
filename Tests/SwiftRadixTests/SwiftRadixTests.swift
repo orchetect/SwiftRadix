@@ -1,10 +1,7 @@
 //
 //  SwiftRadixTests.swift
-//  SwiftRadix
-//
-//  Created by Steffan Andrews on 2017-12-29.
-//  MIT License
-//  https://github.com/orchetect/SwiftRadix
+//  SwiftRadix • https://github.com/orchetect/SwiftRadix
+//  © 2022 Steffan Andrews • Licensed under MIT License
 //
 
 import XCTest

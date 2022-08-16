@@ -1,6 +1,7 @@
 //
 //  Radix Collection Methods.swift
 //  SwiftRadix • https://github.com/orchetect/SwiftRadix
+//  © 2022 Steffan Andrews • Licensed under MIT License
 //
 
 import Foundation
@@ -26,9 +27,11 @@ extension Collection where Element: RadixProtocol {
         prefix: Bool = false
     ) -> String {
         map {
-            $0.stringValue(padTo: padTo,
-                           splitEvery: 0,
-                           prefix: prefix)
+            $0.stringValue(
+                padTo: padTo,
+                splitEvery: 0,
+                prefix: prefix
+            )
         }
         .joined(separator: " ")
     }
@@ -39,9 +42,11 @@ extension Collection where Element: RadixProtocol {
         prefix: Bool = false
     ) -> String {
         map {
-            $0.stringValue(padToEvery: padToEvery,
-                           splitEvery: 0,
-                           prefix: prefix)
+            $0.stringValue(
+                padToEvery: padToEvery,
+                splitEvery: 0,
+                prefix: prefix
+            )
         }
         .joined(separator: " ")
     }
@@ -86,9 +91,11 @@ extension Collection where Element: RadixProtocol {
         prefixes: Bool = false
     ) -> [String] {
         map {
-            $0.stringValue(padTo: padTo,
-                           splitEvery: 0,
-                           prefix: prefixes)
+            $0.stringValue(
+                padTo: padTo,
+                splitEvery: 0,
+                prefix: prefixes
+            )
         }
     }
     
@@ -98,9 +105,11 @@ extension Collection where Element: RadixProtocol {
         prefixes: Bool = false
     ) -> [String] {
         map {
-            $0.stringValue(padToEvery: padToEvery,
-                           splitEvery: 0,
-                           prefix: prefixes)
+            $0.stringValue(
+                padToEvery: padToEvery,
+                splitEvery: 0,
+                prefix: prefixes
+            )
         }
     }
 }
@@ -116,7 +125,7 @@ extension Collection where Element: RadixProtocol {
     }
 }
 
-//swiftformat:disable all
+// swiftformat:disable all
 /// Extension on `[RadixProtocol<T>?]`
 extension Collection where Element: SwiftRadixOptionalType,
                            Element.Wrapped: RadixProtocol {

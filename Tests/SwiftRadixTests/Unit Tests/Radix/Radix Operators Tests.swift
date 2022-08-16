@@ -1,6 +1,7 @@
 //
 //  Radix Operators Tests.swift
 //  SwiftRadix • https://github.com/orchetect/SwiftRadix
+//  © 2022 Steffan Andrews • Licensed under MIT License
 //
 
 import XCTest
@@ -153,13 +154,13 @@ extension SwiftRadixTests {
         // Bitwise AND
         // & operator only supports integers of the same type
         
-        XCTAssertEqual(0b1111_1111.hex & 0b1000_1000.hex, 0b1000_1000.hex)
-        XCTAssertEqual(0b1111_1111.hex & 0b1000_1000, 0b1000_1000.hex)
-        XCTAssertEqual(0b1111_1111     & 0b1000_1000.hex, 0b1000_1000)
+        XCTAssertEqual(0b11111111.hex & 0b10001000.hex, 0b10001000.hex)
+        XCTAssertEqual(0b11111111.hex & 0b10001000, 0b10001000.hex)
+        XCTAssertEqual(0b11111111     & 0b10001000.hex, 0b10001000)
         
         XCTAssertEqual(
-            UInt8(0b1111_1111).hex & UInt8(0b1000_1000).hex,
-            UInt8(0b1000_1000).hex
+            UInt8(0b11111111).hex & UInt8(0b10001000).hex,
+            UInt8(0b10001000).hex
         )
     }
 }

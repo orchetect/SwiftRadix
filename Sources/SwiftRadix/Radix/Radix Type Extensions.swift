@@ -1,6 +1,7 @@
 //
 //  Radix Type Extensions.swift
 //  SwiftRadix • https://github.com/orchetect/SwiftRadix
+//  © 2022 Steffan Andrews • Licensed under MIT License
 //
 
 import Foundation
@@ -37,7 +38,7 @@ extension StringProtocol {
     }
 }
 
-extension Array where Element : StringProtocol {
+extension Array where Element: StringProtocol {
     /// Returns an array of `Radix<Int>?` structs constructed from an array of hex strings.
     @_disfavoredOverload
     public func radix(base: Int) -> [Radix<Int>?] {
@@ -51,8 +52,10 @@ extension Array where Element : StringProtocol {
     ///     ["20", "123"].radix(base: 4, as: Int16.self)
     ///
     @_disfavoredOverload
-    public func radix<T: BinaryInteger>(base: Int,
-                                        as type: T.Type) -> [Radix<T>?] {
+    public func radix<T: BinaryInteger>(
+        base: Int,
+        as type: T.Type
+    ) -> [Radix<T>?] {
         map { Radix<T>($0, base: base) }
     }
 }

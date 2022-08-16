@@ -1,6 +1,7 @@
 //
 //  Radix Bit Tests.swift
 //  SwiftRadix • https://github.com/orchetect/SwiftRadix
+//  © 2022 Steffan Andrews • Licensed under MIT License
 //
 
 import XCTest
@@ -8,7 +9,7 @@ import SwiftRadix
 
 extension SwiftRadixTests {
     func testRadix_Bit_Get() {
-        let source = 0b1100_1100
+        let source = 0b11001100
         
         // binary
         
@@ -57,52 +58,52 @@ extension SwiftRadixTests {
         
         // binary
         
-        radix = 0b1100_1100.binary
+        radix = 0b11001100.binary
         
         radix[bit: 0] = 1
         
-        XCTAssertEqual(radix.value, 0b1100_1101)
+        XCTAssertEqual(radix.value, 0b11001101)
         
         radix[bit: 1] = 1
         
-        XCTAssertEqual(radix.value, 0b1100_1111)
+        XCTAssertEqual(radix.value, 0b11001111)
         
         // hex
         
-        radix = 0b1100_1100.hex
+        radix = 0b11001100.hex
         
         radix[bit: 0] = 1
         
-        XCTAssertEqual(radix.value, 0b1100_1101)
+        XCTAssertEqual(radix.value, 0b11001101)
         
         radix[bit: 1] = 1
         
-        XCTAssertEqual(radix.value, 0b1100_1111)
+        XCTAssertEqual(radix.value, 0b11001111)
         
         // octal
         
-        radix = 0b1100_1100.octal
+        radix = 0b11001100.octal
         
         radix[bit: 0] = 1
         
-        XCTAssertEqual(radix.value, 0b1100_1101)
+        XCTAssertEqual(radix.value, 0b11001101)
         
         radix[bit: 1] = 1
         
-        XCTAssertEqual(radix.value, 0b1100_1111)
+        XCTAssertEqual(radix.value, 0b11001111)
         
         // edge cases
         
-        radix = 0b1100_1100.hex
+        radix = 0b11001100.hex
         
         radix[bit: 0] = 3 // invalid value, fails silently
         
-        XCTAssertEqual(radix.value, 0b1100_1100)
+        XCTAssertEqual(radix.value, 0b11001100)
         
-        radix = 0b1100_1100.hex
+        radix = 0b11001100.hex
         
         radix[bit: -1] = 1 // invalid index, fails silently
         
-        XCTAssertEqual(radix.value, 0b1100_1100)
+        XCTAssertEqual(radix.value, 0b11001100)
     }
 }
