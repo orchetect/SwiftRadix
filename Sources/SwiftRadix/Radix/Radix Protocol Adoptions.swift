@@ -12,7 +12,7 @@ import Foundation
 extension Radix: CustomStringConvertible,
                  CustomDebugStringConvertible {
     public var description: String {
-        "Radix<\(String(describing: NumberType.self))>(\(stringPrefix)\(stringValue))"
+        stringValue(prefix: true)
     }
     
     public var debugDescription: String {

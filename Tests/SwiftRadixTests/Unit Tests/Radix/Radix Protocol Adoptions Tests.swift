@@ -15,33 +15,33 @@ extension SwiftRadixTests {
         
         XCTAssertEqual(
             String(describing: 1.binary),
-            "Radix<Int>(0b1)"
+            "0b1"
         )
         XCTAssertEqual(
             1.binary.description,
-            "Radix<Int>(0b1)"
+            "0b1"
         )
         
         // hex
         
         XCTAssertEqual(
             String(describing: 1.hex),
-            "Radix<Int>(0x1)"
+            "0x1"
         )
         XCTAssertEqual(
             1.hex.description,
-            "Radix<Int>(0x1)"
+            "0x1"
         )
         
         // octal
         
         XCTAssertEqual(
             String(describing: 1.octal),
-            "Radix<Int>(0o1)"
+            "0o1"
         )
         XCTAssertEqual(
             1.octal.description,
-            "Radix<Int>(0o1)"
+            "0o1"
         )
         
         // CustomDebugStringConvertible
