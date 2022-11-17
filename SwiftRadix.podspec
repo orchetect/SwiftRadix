@@ -5,7 +5,7 @@ Pod::Spec.new do |spec|
   spec.summary = "A Swift library for translating integers to/from radix strings (binary, hex, octal, etc.) using simple functional syntax."
   spec.homepage = "https://github.com/orchetect/SwiftRadix"
   spec.authors = { "Steffan Andrews" => "https://github.com/orchetect" }
-  spec.source = { :git => "https://github.com/orchetect/SwiftRadix.git" :tag => "1.3.0" }
+  spec.source = { :git => "https://github.com/orchetect/SwiftRadix.git", :tag => "1.3.0" }
   
   spec.osx.deployment_target = "10.10"
   spec.ios.deployment_target = "9.0"
