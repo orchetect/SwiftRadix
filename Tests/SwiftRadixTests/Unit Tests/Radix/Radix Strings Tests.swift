@@ -140,13 +140,18 @@ extension SwiftRadixTests {
         
         // hex
         
+        // uppercase
         XCTAssertEqual(0b0.hex.stringValue(prefix: true), "0x0")
         XCTAssertEqual(0b0.hex.stringValue(prefix: false), "0")
         
+        // lowercase
+        XCTAssertEqual(0xF.hex.stringValue(prefix: true, uppercase: false), "0xf")
+        XCTAssertEqual(0xF.hex.stringValue(prefix: false, uppercase: false), "f")
+        
         // octal
         
-        XCTAssertEqual(0b0.octal.stringValue(prefix: true), "0o0")
-        XCTAssertEqual(0b0.octal.stringValue(prefix: false), "0")
+        XCTAssertEqual(0o0.octal.stringValue(prefix: true), "0o0")
+        XCTAssertEqual(0o0.octal.stringValue(prefix: false), "0")
     }
     
     func testRadix_stringValue_PadTo() {
@@ -169,12 +174,19 @@ extension SwiftRadixTests {
         
         let source2 = 0x0F.hex
         
+        // uppercase
         XCTAssertEqual(source2.stringValue(padTo: 0), "F")
         XCTAssertEqual(source2.stringValue(padTo: 1), "F")
         XCTAssertEqual(source2.stringValue(padTo: 2), "0F")
         XCTAssertEqual(source2.stringValue(padTo: 6), "00000F")
-        
         XCTAssertEqual(source2.stringValue(padTo: 2, prefix: true), "0x0F")
+        
+        // lowercase
+        XCTAssertEqual(source2.stringValue(padTo: 0, uppercase: false), "f")
+        XCTAssertEqual(source2.stringValue(padTo: 1, uppercase: false), "f")
+        XCTAssertEqual(source2.stringValue(padTo: 2, uppercase: false), "0f")
+        XCTAssertEqual(source2.stringValue(padTo: 6, uppercase: false), "00000f")
+        XCTAssertEqual(source2.stringValue(padTo: 2, prefix: true, uppercase: false), "0x0f")
         
         // edge cases
         XCTAssertEqual(source2.stringValue(padTo: -1), "F")
@@ -234,13 +246,24 @@ extension SwiftRadixTests {
         
         let source2 = 0xF0F.hex
         
+        // uppercase
         XCTAssertEqual(source2.stringValue(padTo: 0, splitEvery: 0), "F0F")
         XCTAssertEqual(source2.stringValue(padTo: 1, splitEvery: 1), "F 0 F")
         XCTAssertEqual(source2.stringValue(padTo: 2, splitEvery: 2), "F 0F")
         XCTAssertEqual(source2.stringValue(padTo: 8, splitEvery: 3), "00 000 F0F")
-        
-        // prefix treats it as a Swift Integer Literal, inserting underscores for splits
+        // (prefix treats it as a Swift Integer Literal, inserting underscores for splits)
         XCTAssertEqual(source2.stringValue(padTo: 8, splitEvery: 2, prefix: true), "0x00_00_0F_0F")
+        
+        // lowercase
+        XCTAssertEqual(source2.stringValue(padTo: 0, splitEvery: 0, uppercase: false), "f0f")
+        XCTAssertEqual(source2.stringValue(padTo: 1, splitEvery: 1, uppercase: false), "f 0 f")
+        XCTAssertEqual(source2.stringValue(padTo: 2, splitEvery: 2, uppercase: false), "f 0f")
+        XCTAssertEqual(source2.stringValue(padTo: 8, splitEvery: 3, uppercase: false), "00 000 f0f")
+        // (prefix treats it as a Swift Integer Literal, inserting underscores for splits)
+        XCTAssertEqual(
+            source2.stringValue(padTo: 8, splitEvery: 2, prefix: true, uppercase: false),
+            "0x00_00_0f_0f"
+        )
         
         // edge cases
         XCTAssertEqual(source2.stringValue(padTo: 2, splitEvery: -1), "F0F")
@@ -280,12 +303,19 @@ extension SwiftRadixTests {
         
         let source2 = 0xFFF.hex
         
+        // uppercase
         XCTAssertEqual(source2.stringValue(padToEvery: 0), "FFF")
         XCTAssertEqual(source2.stringValue(padToEvery: 1), "FFF")
         XCTAssertEqual(source2.stringValue(padToEvery: 2), "0FFF")
         XCTAssertEqual(source2.stringValue(padToEvery: 6), "000FFF")
-        
         XCTAssertEqual(source2.stringValue(padToEvery: 2, prefix: true), "0x0FFF")
+        
+        // lowercase
+        XCTAssertEqual(source2.stringValue(padToEvery: 0, uppercase: false), "fff")
+        XCTAssertEqual(source2.stringValue(padToEvery: 1, uppercase: false), "fff")
+        XCTAssertEqual(source2.stringValue(padToEvery: 2, uppercase: false), "0fff")
+        XCTAssertEqual(source2.stringValue(padToEvery: 6, uppercase: false), "000fff")
+        XCTAssertEqual(source2.stringValue(padToEvery: 2, prefix: true, uppercase: false), "0x0fff")
         
         // edge cases
         XCTAssertEqual(source2.stringValue(padToEvery: -1), "FFF")
@@ -329,13 +359,27 @@ extension SwiftRadixTests {
         
         let source2 = 0xFFF.hex
         
+        // uppercase
         XCTAssertEqual(source2.stringValue(padToEvery: 0, splitEvery: 0), "FFF")
         XCTAssertEqual(source2.stringValue(padToEvery: 1, splitEvery: 1), "F F F")
         XCTAssertEqual(source2.stringValue(padToEvery: 2, splitEvery: 2), "0F FF")
         XCTAssertEqual(source2.stringValue(padToEvery: 8, splitEvery: 3), "00 000 FFF")
-        
-        // prefix treats it as a Swift Integer Literal, inserting underscores for splits
+        // (prefix treats it as a Swift Integer Literal, inserting underscores for splits)
         XCTAssertEqual(source2.stringValue(padToEvery: 2, splitEvery: 2, prefix: true), "0x0F_FF")
+        
+        // lowercase
+        XCTAssertEqual(source2.stringValue(padToEvery: 0, splitEvery: 0, uppercase: false), "fff")
+        XCTAssertEqual(source2.stringValue(padToEvery: 1, splitEvery: 1, uppercase: false), "f f f")
+        XCTAssertEqual(source2.stringValue(padToEvery: 2, splitEvery: 2, uppercase: false), "0f ff")
+        XCTAssertEqual(
+            source2.stringValue(padToEvery: 8, splitEvery: 3, uppercase: false),
+            "00 000 fff"
+        )
+        // (prefix treats it as a Swift Integer Literal, inserting underscores for splits)
+        XCTAssertEqual(
+            source2.stringValue(padToEvery: 2, splitEvery: 2, prefix: true, uppercase: false),
+            "0x0f_ff"
+        )
         
         // edge cases
         XCTAssertEqual(source2.stringValue(padToEvery: 2, splitEvery: -1), "0FFF")

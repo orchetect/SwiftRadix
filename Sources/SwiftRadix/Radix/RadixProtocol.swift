@@ -23,7 +23,7 @@ public protocol RadixProtocol {
     init?<S: StringProtocol>(_ string: S, base: Int)
     
     var stringValue: String { get set }
-    func stringValue(prefix: Bool) -> String
-    func stringValue(padTo: Int, splitEvery: Int, prefix: Bool) -> String
-    func stringValue(padToEvery: Int, splitEvery: Int, prefix: Bool) -> String
+    func stringValue(prefix: Bool, uppercase: Bool) -> String
+    func stringValue(padTo: Int, splitEvery: Int, prefix: Bool, uppercase: Bool) -> String
+    func stringValue(padToEvery: Int, splitEvery: Int, prefix: Bool, uppercase: Bool) -> String
 }

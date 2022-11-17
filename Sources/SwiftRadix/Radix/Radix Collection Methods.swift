@@ -19,39 +19,46 @@ extension Collection where Element: RadixProtocol {
     /// padded to the number of characters specified.
     public func stringValue(
         prefix: Bool = false,
-        separator: String = " "
+        separator: String = " ",
+        uppercase: Bool = true
     ) -> String {
-        map { $0.stringValue(prefix: prefix) }
+        map { $0.stringValue(prefix: prefix, uppercase: uppercase) }
             .joined(separator: separator)
     }
     
-    /// Convert an array of `Radix` to a concatenated `String` of radix string values, each value padded to the number of characters specified.
+    /// Convert an array of `Radix` to a concatenated `String` of radix string values, each value
+    /// padded to the number of characters specified.
     public func stringValue(
         padTo: Int,
         prefix: Bool = false,
-        separator: String = " "
+        separator: String = " ",
+        uppercase: Bool = true
     ) -> String {
         map {
             $0.stringValue(
                 padTo: padTo,
                 splitEvery: 0,
-                prefix: prefix
+                prefix: prefix,
+                uppercase: uppercase
             )
         }
         .joined(separator: separator)
     }
     
-    /// Convert an array of `Radix` to a concatenated `String` of radix string values, each value padded to multiples of the number of characters specified.
+    /// Convert an array of `Radix` to a concatenated `String` of radix string values, each value
+    /// padded to multiples of the number of characters specified.
     public func stringValue(
         padToEvery: Int,
         prefix: Bool = false,
-        separator: String = " "
+        separator: String = " ",
+        uppercase: Bool = true
     ) -> String {
         map {
             $0.stringValue(
                 padToEvery: padToEvery,
                 splitEvery: 0,
-                prefix: prefix
+                prefix: prefix,
+                uppercase: uppercase
             )
         }
         .joined(separator: separator)
@@ -61,19 +68,34 @@ extension Collection where Element: RadixProtocol {
 // MARK: - .stringValueArrayLiteral
 
 extension Collection where Element: RadixProtocol {
-    /// Format an array of `Radix` as a Swift array literal, useful for generating Swift array declarations.
+    /// Format an array of `Radix` as a Swift array literal, useful for generating Swift array
+    /// declarations.
     public var stringValueArrayLiteral: String {
         stringValueArrayLiteral(padToEvery: 0)
     }
     
-    /// Format an array of `Radix` as a Swift array literal, useful for generating Swift array declarations, each value padded to the number of characters specified.
-    public func stringValueArrayLiteral(padTo: Int) -> String {
-        "[" + stringValue(padTo: padTo, prefix: true, separator: ", ") + "]"
+    /// Format an array of `Radix` as a Swift array literal, useful for generating Swift array
+    /// declarations, each value padded to the number of characters specified.
+    public func stringValueArrayLiteral(
+        padTo: Int,
+        uppercase: Bool = true
+    ) -> String {
+        "[" + stringValue(padTo: padTo, prefix: true, separator: ", ", uppercase: uppercase) + "]"
     }
     
-    /// Format an array of `Radix` as a Swift array literal, useful for generating Swift array declarations, each value padded to multiples of the number of characters specified.
-    public func stringValueArrayLiteral(padToEvery: Int) -> String {
-        "[" + stringValue(padToEvery: padToEvery, prefix: true, separator: ", ") + "]"
+    /// Format an array of `Radix` as a Swift array literal, useful for generating Swift array
+    /// declarations, each value padded to multiples of the number of characters specified.
+    public func stringValueArrayLiteral(
+        padToEvery: Int,
+        uppercase: Bool = true
+    ) -> String {
+        "[" +
+            stringValue(
+                padToEvery: padToEvery,
+                prefix: true,
+                separator: ", ",
+                uppercase: uppercase
+            ) + "]"
     }
 }
 
@@ -85,30 +107,36 @@ extension Collection where Element: RadixProtocol {
         stringValues(padTo: 0)
     }
     
-    /// Convert an array of `Radix` to an array of radix string values, each value padded to the number of characters specified.
+    /// Convert an array of `Radix` to an array of radix string values, each value padded to the
+    /// number of characters specified.
     public func stringValues(
         padTo: Int,
-        prefixes: Bool = false
+        prefixes: Bool = false,
+        uppercase: Bool = true
     ) -> [String] {
         map {
             $0.stringValue(
                 padTo: padTo,
                 splitEvery: 0,
-                prefix: prefixes
+                prefix: prefixes,
+                uppercase: uppercase
             )
         }
     }
     
-    /// Convert an array of `Radix` to an array of radix string values, each value padded to multiples of the number of characters specified.
+    /// Convert an array of `Radix` to an array of radix string values, each value padded to
+    /// multiples of the number of characters specified.
     public func stringValues(
         padToEvery: Int,
-        prefixes: Bool = false
+        prefixes: Bool = false,
+        uppercase: Bool = true
     ) -> [String] {
         map {
             $0.stringValue(
                 padToEvery: padToEvery,
                 splitEvery: 0,
-                prefix: prefixes
+                prefix: prefixes,
+                uppercase: uppercase
             )
         }
     }

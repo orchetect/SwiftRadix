@@ -12,7 +12,7 @@ extension Radix {
     /// Setter assigns `value` to value equivalent of radix String, if it is valid.
     public var stringValue: String {
         get {
-            String(value, radix: base, uppercase: true)
+            stringValue(prefix: false, uppercase: true)
         }
         
         set {
@@ -25,10 +25,13 @@ extension Radix {
     
     /// Computed property:
     /// Returns radix String representation of `value`, optionally including `prefix`.
-    public func stringValue(prefix: Bool) -> String {
+    public func stringValue(
+        prefix: Bool,
+        uppercase: Bool = true
+    ) -> String {
         prefix
-            ? stringPrefix + stringValue
-            : stringValue
+            ? stringPrefix + String(value, radix: base, uppercase: uppercase)
+            : String(value, radix: base, uppercase: uppercase)
     }
     
     /// Computed property:
@@ -38,14 +41,17 @@ extension Radix {
     public func stringValue(
         padTo: Int,
         splitEvery: Int = 0,
-        prefix: Bool = false
+        prefix: Bool = false,
+        uppercase: Bool = true
     ) -> String {
-        var radixString = stringValue
+        var radixString = stringValue(prefix: false, uppercase: uppercase)
         
         var padCount = (padTo - radixString.count)
         if padCount < 0 { padCount = 0 }
         
-        radixString = String(repeatElement("0", count: padCount)) + radixString
+        if padCount > 0 {
+            radixString = String(repeatElement("0", count: padCount)) + radixString
+        }
         
         if splitEvery > 0 {
             let splitter = prefix ? "_" : " "
@@ -67,15 +73,18 @@ extension Radix {
     public func stringValue(
         padToEvery: Int,
         splitEvery: Int = 0,
-        prefix: Bool = false
+        prefix: Bool = false,
+        uppercase: Bool = true
     ) -> String {
-        var radixString = stringValue
+        var radixString = stringValue(prefix: false, uppercase: uppercase)
         
         var padCount = radixString.count
             .roundedUp(toMultiplesOf: padToEvery) - radixString.count
         if padCount < 0 { padCount = 0 }
         
-        radixString = String(repeatElement("0", count: padCount)) + radixString
+        if padCount > 0 {
+            radixString = String(repeatElement("0", count: padCount)) + radixString
+        }
         
         if splitEvery > 0 {
             let splitter = prefix ? "_" : " "
