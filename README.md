@@ -24,11 +24,12 @@ For the sake of simplifying this documentation, `Hex()` / `.hex` will be used fo
 ```swift
 // convert to or from hex strings
 
-255.hex.stringValue               // "FF"
-255.hex.stringValue(prefix: true) // "0xFF"
-"FF".hex?.value                   // Optional(255)
-"0xFF".hex?.value                 // Optional(255)
-"ZZ".hex?.value                   // nil (not valid hex string, so init fails)
+255.hex.stringValue                                 // "FF"
+255.hex.stringValue(prefix: true)                   // "0xFF"
+255.hex.stringValue(prefix: true, uppercase: false) // "0xff"
+"FF".hex?.value                                     // Optional(255)
+"0xFF".hex?.value                                   // Optional(255)
+"ZZ".hex?.value                                     // nil (not valid hex string, so init fails)
 
 // work with arrays of any integer type, or hex strings and convert between them
 
@@ -70,7 +71,7 @@ UInt8(123).hex == Int16(123)      // true
    - In a Swift Package, add it to the Package.swift dependencies:
 
      ```swift
-     .package(url: "https://github.com/orchetect/SwiftRadix", from: "1.1.0")
+     .package(url: "https://github.com/orchetect/SwiftRadix", from: "1.3.0")
      ```
 
 ### Cocoapods
@@ -175,42 +176,43 @@ Hex("FFFFFF", as: UInt8.self)  // nil -- 0xFFFFFF does not fit in UInt8, so init
 Various methods become available:
 
 ```swift
-let h = 255.hex                           // Radix<Int>(255)
-h.value                                   // Int(255)
-h.stringValue                             // "FF"
-h.stringValue(prefix: true)               // "0xFF"
+let h = 255.hex                               // Radix<Int>(255)
+h.value                                       // Int(255)
+h.stringValue                                 // "FF"
+h.stringValue(prefix: true)                   // "0xFF"
+h.stringValue(prefix: true, uppercase: false) // "0xff"
 
-h.stringValue = "7F"                      // can also set the hex String and get value...
-h.value                                   // 127, type Int
+h.stringValue = "7F"                          // can also set the hex String and get value...
+h.value                                       // 127, type Int
 ```
 
 Padding to *n* number of leading zeros can be specified if you need uniform string formatting:
 
 ```swift
-    0xF.hex.stringValue                   // "F"
-    0xF.hex.stringValue(padTo: 2)         // "0F"
-    0xF.hex.stringValue(padTo: 3)         // "00F"
+    0xF.hex.stringValue           // "F"
+    0xF.hex.stringValue(padTo: 2) // "0F"
+    0xF.hex.stringValue(padTo: 3) // "00F"
 
- 0xFFFF.hex.stringValue(padTo: 3)         // "FFFF" - has no effect; it's > 3 places
+ 0xFFFF.hex.stringValue(padTo: 3) // "FFFF" - has no effect; it's > 3 places
 ```
 
 It is also possible to pad leading zeros to every *n* multiple of digit places.
 
 ```swift
-    0xF.hex.stringValue(padToEvery: 2)    // "0F"
-   0xFF.hex.stringValue(padToEvery: 2)    // "FF"
-  0xFFF.hex.stringValue(padToEvery: 2)    // "0FFF"
- 0xFFFF.hex.stringValue(padToEvery: 2)    // "FFFF"
+    0xF.hex.stringValue(padToEvery: 2) // "0F"
+   0xFF.hex.stringValue(padToEvery: 2) // "FF"
+  0xFFF.hex.stringValue(padToEvery: 2) // "0FFF"
+ 0xFFFF.hex.stringValue(padToEvery: 2) // "FFFF"
 
-    0x1.hex.stringValue(padToEvery: 4)    // "0001"
-0x12345.hex.stringValue(padToEvery: 4)    // "00012345"
+    0x1.hex.stringValue(padToEvery: 4) // "0001"
+0x12345.hex.stringValue(padToEvery: 4) // "00012345"
 ```
 
 In addition to padding, strings can be split every *n* digit places, and also in combination with padding.
 
 ```swift
-    0xF.hex.stringValue(padTo: 8, splitEvery: 4)         // "0000 000F"
-0x123AB.hex.stringValue(padToEvery: 2, splitEvery: 2)    // "01 23 AB"
+    0xF.hex.stringValue(padTo: 8, splitEvery: 4)      // "0000 000F"
+0x123AB.hex.stringValue(padToEvery: 2, splitEvery: 2) // "01 23 AB"
 ```
 
 ### Equatability
@@ -316,7 +318,7 @@ A variety of additional methods for reading and manipulating the underlying inte
 
 #### Bit
 
-Category method: `.bit(Int)`
+Method: `.bit(Int)`
 
 Subscript: `[bit: Int] { get set }`
 
@@ -338,7 +340,7 @@ h.value                   // == 0b1000
 
 #### Nibble
 
-Category method: `.nibble(Int)`
+Method: `.nibble(Int)`
 
 Subscript: `[nibble: Int] { get set }`
 
@@ -377,9 +379,7 @@ Coded by a bunch of 🐹 hamsters in a trench coat that calls itself [@orchetect
 
 ## License
 
-Licensed under the MIT license. See [LICENSE](https://github.com/orchetect/SwiftRadix/blob/master/LICENSE) for details.
-
-This library was formerly known as SwiftHex.
+Licensed under the MIT license. See [LICENSE](LICENSE) for details.
 
 ## Contributions
 
