@@ -36,7 +36,8 @@ extension StringProtocol {
 }
 
 extension Array where Element: StringProtocol {
-    /// Returns an array of `Radix<Int>?` base-2 structs constructed from an array of binary strings.
+    /// Returns an array of `Radix<Int>?` base-2 structs constructed from an array of binary
+    /// strings.
     @_disfavoredOverload
     public var binary: [Radix<Int>?] {
         map { Radix<Int>($0, base: 2) }
@@ -55,7 +56,8 @@ extension Array where Element: StringProtocol {
 }
 
 extension Collection where Element: BinaryInteger {
-    /// Returns an array of `Radix<T>` base-2 structs built from an integer array, preserving the integer type.
+    /// Returns an array of `Radix<T>` base-2 structs built from an integer array, preserving the
+    /// integer type.
     @_disfavoredOverload
     public var binary: [Radix<Element>] {
         map { Radix($0, unsafeBase: 2) }

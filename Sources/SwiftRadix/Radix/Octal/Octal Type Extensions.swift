@@ -55,7 +55,8 @@ extension Array where Element: StringProtocol {
 }
 
 extension Collection where Element: BinaryInteger {
-    /// Returns an array of `Radix<T>` base-8 structs built from an integer array, preserving the integer type.
+    /// Returns an array of `Radix<T>` base-8 structs built from an integer array, preserving the
+    /// integer type.
     @_disfavoredOverload
     public var octal: [Radix<Element>] {
         map { Radix($0, unsafeBase: 8) }

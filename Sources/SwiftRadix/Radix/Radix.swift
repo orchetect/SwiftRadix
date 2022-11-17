@@ -8,7 +8,8 @@ import Foundation
 
 // MARK: - Radix<T>
 
-/// A lightweight type useful for translating integers to radix strings and vice-versa, with a suite of convenient constructors and accessors.
+/// A lightweight type useful for translating integers to radix strings and vice-versa, with a suite
+/// of convenient constructors and accessors.
 public struct Radix<T: BinaryInteger>: RadixProtocol {
     // MARK: - Base Properties
     

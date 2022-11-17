@@ -61,7 +61,8 @@ extension Array where Element: StringProtocol {
 }
 
 extension Collection where Element: BinaryInteger {
-    /// Returns an array of `Radix<T>` structs built from an integer array, preserving the integer type.
+    /// Returns an array of `Radix<T>` structs built from an integer array, preserving the integer
+    /// type.
     @_disfavoredOverload
     public func radix(base: Int) -> [Radix<Element>]? {
         // radix validity check

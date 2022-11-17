@@ -8,7 +8,8 @@ import Foundation
 
 // MARK: - OptionalType
 
-// see for more info: https://stackoverflow.com/questions/50999688/swift-extension-on-sometypet-to-produce-t-possible
+// see for more info:
+// https://stackoverflow.com/questions/50999688/swift-extension-on-sometypet-to-produce-t-possible
 //
 // Workaround useful to enable extensions on types such as `Struct<T>?` or `[Struct<T>?]`.
 //

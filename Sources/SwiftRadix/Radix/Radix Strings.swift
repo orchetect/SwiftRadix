@@ -37,7 +37,8 @@ extension Radix {
     /// Computed property:
     /// Returns radix String representation of `value`, padding zeros to number of places passed.
     ///
-    /// If `splitEvery` > 0, a spacer is inserted every nth characters in the resulting string; the spacer will be a space if `prefix` is false and an underscore if `prefix` is true.
+    /// If `splitEvery` > 0, a spacer is inserted every nth characters in the resulting string; the
+    /// spacer will be a space if `prefix` is false and an underscore if `prefix` is true.
     public func stringValue(
         padTo: Int,
         splitEvery: Int = 0,
@@ -67,9 +68,11 @@ extension Radix {
     }
     
     /// Computed property:
-    /// Returns radix String representation of `value`, padded to multiples of specified number of characters.
+    /// Returns radix String representation of `value`, padded to multiples of specified number of
+    /// characters.
     ///
-    /// If `splitEvery` > 0, a space is inserted every nth characters in the resulting string; the spacer will be a space if `prefix` is false and an underscore if `prefix` is true.
+    /// If `splitEvery` > 0, a space is inserted every nth characters in the resulting string; the
+    /// spacer will be a space if `prefix` is false and an underscore if `prefix` is true.
     public func stringValue(
         padToEvery: Int,
         splitEvery: Int = 0,
