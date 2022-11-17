@@ -312,13 +312,13 @@ d.hex.stringValue(padTo: 2)                          // "01 02 03 FF"
 
 ### Bits and Bytes Accessors
 
-A numer of additional methods for reading and manipulating the underlying integer value.
+A variety of additional methods for reading and manipulating the underlying integer value.
 
 #### Bit
 
-`.bit(Int)`
+Category method: `.bit(Int)`
 
-`[bit: Int] { get set }`
+Subscript: `[bit: Int] { get set }`
 
 - gets single bit value at specified position right-to-left
 - subscript can also be used to get or set bit values
@@ -338,9 +338,9 @@ h.value                   // == 0b1000
 
 #### Nibble
 
-`.nibble(Int)
+Category method: `.nibble(Int)`
 
-`[nibble: Int] { get set }`
+Subscript: `[nibble: Int] { get set }`
 
 - gets nibble (4-bit) value at specified position right-to-left
 - subscript can also be used to get or set nibble values

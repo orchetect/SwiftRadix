@@ -15,16 +15,21 @@ extension Collection where Element: RadixProtocol {
             .joined(separator: " ")
     }
     
-    /// Convert an array of `Radix` to a concatenated `String` of radix string values, each value padded to the number of characters specified.
-    public func stringValue(prefix: Bool) -> String {
+    /// Convert an array of `Radix` to a concatenated `String` of radix string values, each value
+    /// padded to the number of characters specified.
+    public func stringValue(
+        prefix: Bool = false,
+        separator: String = " "
+    ) -> String {
         map { $0.stringValue(prefix: prefix) }
-            .joined(separator: " ")
+            .joined(separator: separator)
     }
     
     /// Convert an array of `Radix` to a concatenated `String` of radix string values, each value padded to the number of characters specified.
     public func stringValue(
         padTo: Int,
-        prefix: Bool = false
+        prefix: Bool = false,
+        separator: String = " "
     ) -> String {
         map {
             $0.stringValue(
@@ -33,13 +38,14 @@ extension Collection where Element: RadixProtocol {
                 prefix: prefix
             )
         }
-        .joined(separator: " ")
+        .joined(separator: separator)
     }
     
     /// Convert an array of `Radix` to a concatenated `String` of radix string values, each value padded to multiples of the number of characters specified.
     public func stringValue(
         padToEvery: Int,
-        prefix: Bool = false
+        prefix: Bool = false,
+        separator: String = " "
     ) -> String {
         map {
             $0.stringValue(
@@ -48,7 +54,7 @@ extension Collection where Element: RadixProtocol {
                 prefix: prefix
             )
         }
-        .joined(separator: " ")
+        .joined(separator: separator)
     }
 }
 
@@ -62,25 +68,19 @@ extension Collection where Element: RadixProtocol {
     
     /// Format an array of `Radix` as a Swift array literal, useful for generating Swift array declarations, each value padded to the number of characters specified.
     public func stringValueArrayLiteral(padTo: Int) -> String {
-        "["
-            + stringValues(padTo: padTo, prefixes: true)
-            .joined(separator: ", ")
-            + "]"
+        "[" + stringValue(padTo: padTo, prefix: true, separator: ", ") + "]"
     }
     
     /// Format an array of `Radix` as a Swift array literal, useful for generating Swift array declarations, each value padded to multiples of the number of characters specified.
     public func stringValueArrayLiteral(padToEvery: Int) -> String {
-        "["
-            + stringValues(padToEvery: padToEvery, prefixes: true)
-            .joined(separator: ", ")
-            + "]"
+        "[" + stringValue(padToEvery: padToEvery, prefix: true, separator: ", ") + "]"
     }
 }
 
 // MARK: - .stringValues
 
 extension Collection where Element: RadixProtocol {
-    /// Convert an array of `Radix` to an array of radix string values.
+    /// Convert an array of `Radix` to an array of radix string values without padding.
     public var stringValues: [String] {
         stringValues(padTo: 0)
     }

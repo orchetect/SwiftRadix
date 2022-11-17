@@ -81,6 +81,50 @@ extension SwiftRadixTests {
         )
     }
     
+    func testRadix_CollectionExtension_stringValue_PrefixSeparator() {
+        // binary
+        
+        let source1 = [0x00.binary, 0xFF.binary]
+        
+        XCTAssertEqual(
+            source1.stringValue(prefix: true, separator: ", "),
+            "0b0, 0b11111111"
+        )
+        
+        XCTAssertEqual(
+            source1.stringValue(prefix: false, separator: ", "),
+            "0, 11111111"
+        )
+        
+        // hex
+        
+        let source2 = [0x00.hex, 0xFF.hex]
+        
+        XCTAssertEqual(
+            source2.stringValue(prefix: true, separator: ", "),
+            "0x0, 0xFF"
+        )
+        
+        XCTAssertEqual(
+            source2.stringValue(prefix: false, separator: ", "),
+            "0, FF"
+        )
+        
+        // octal
+        
+        let source3 = [0x000.octal, 0o123.octal]
+        
+        XCTAssertEqual(
+            source3.stringValue(prefix: true, separator: ", "),
+            "0o0, 0o123"
+        )
+        
+        XCTAssertEqual(
+            source3.stringValue(prefix: false, separator: ", "),
+            "0, 123"
+        )
+    }
+    
     func testRadix_CollectionExtension_stringValue_PadTo() {
         // binary
         
@@ -92,8 +136,8 @@ extension SwiftRadixTests {
         )
         
         XCTAssertEqual(
-            source1.stringValue(padTo: 2, prefix: true),
-            "0b00 0b11111111"
+            source1.stringValue(padTo: 2, prefix: true, separator: ", "),
+            "0b00, 0b11111111"
         )
         
         // hex
@@ -106,8 +150,8 @@ extension SwiftRadixTests {
         )
         
         XCTAssertEqual(
-            source2.stringValue(padTo: 2, prefix: true),
-            "0x00 0xFF"
+            source2.stringValue(padTo: 2, prefix: true, separator: ", "),
+            "0x00, 0xFF"
         )
         
         // octal
@@ -120,8 +164,8 @@ extension SwiftRadixTests {
         )
         
         XCTAssertEqual(
-            source3.stringValue(padTo: 2, prefix: true),
-            "0o00 0o123"
+            source3.stringValue(padTo: 2, prefix: true, separator: ", "),
+            "0o00, 0o123"
         )
         
         // edge cases
@@ -155,8 +199,8 @@ extension SwiftRadixTests {
         )
         
         XCTAssertEqual(
-            source1.stringValue(padToEvery: 2, prefix: true),
-            "0b00 0b11111111"
+            source1.stringValue(padToEvery: 2, prefix: true, separator: ", "),
+            "0b00, 0b11111111"
         )
         
         // hex
@@ -179,8 +223,8 @@ extension SwiftRadixTests {
         )
         
         XCTAssertEqual(
-            source2.stringValue(padToEvery: 2, prefix: true),
-            "0x00 0xFF"
+            source2.stringValue(padToEvery: 2, prefix: true, separator: ", "),
+            "0x00, 0xFF"
         )
         
         // octal
@@ -208,8 +252,8 @@ extension SwiftRadixTests {
         )
         
         XCTAssertEqual(
-            source3.stringValue(padToEvery: 2, prefix: true),
-            "0o00 0o0123"
+            source3.stringValue(padToEvery: 2, prefix: true, separator: ", "),
+            "0o00, 0o0123"
         )
         
         // edge cases
