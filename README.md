@@ -151,7 +151,7 @@ A valid hexadecimal string can be used, either containing the prefix `0x` or wit
 
 This constructor returns an `Optional`, since if the string is not valid hexadecimal, the constructor will fail and `nil` will be returned.
 
-If no integer type is specified, the type will defult to `Int`.
+If no integer type is specified, the type will default to `Int`.
 
 ```swift
 Hex("FF")                 // Radix<Int>(255)?
