@@ -2,9 +2,11 @@
 
 # SwiftRadix
 
-[![CI Build Status](https://github.com/orchetect/SwiftRadix/actions/workflows/build.yml/badge.svg)](https://github.com/orchetect/SwiftRadix/actions/workflows/build.yml) [![Platforms - macOS 10.10+ | iOS 9+ | tvOS 9+ | watchOS 2+](https://img.shields.io/badge/platforms-macOS%2010.10+%20|%20iOS%209+%20|%20tvOS%209+%20|%20watchOS%202+-lightgrey.svg?style=flat)](https://developer.apple.com/swift) [![License: MIT](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](https://github.com/orchetect/SwiftRadix/blob/main/LICENSE)
+[![CI Build Status](https://github.com/orchetect/SwiftRadix/actions/workflows/build.yml/badge.svg)](https://github.com/orchetect/SwiftRadix/actions/workflows/build.yml) [![Platforms - macOS 10.10+ | iOS 9+ | tvOS 9+ | watchOS 2+ | Linux](https://img.shields.io/badge/platforms-macOS%2010.10+%20|%20iOS%209+%20|%20tvOS%209+%20|%20watchOS%202+%20|%20Linux-lightgrey.svg?style=flat)](https://swiftpackageindex.com/orchetect/SwiftRadix/builds) [![License: MIT](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](https://github.com/orchetect/SwiftRadix/blob/main/LICENSE)
 
 A lightweight library useful for translating integers to and from radix strings (binary, hex, octal or any base) using simple, clean functional syntax.
+
+Compatible with all Apple platforms and Linux.
 
 ## Summary
 
