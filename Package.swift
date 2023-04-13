@@ -4,20 +4,16 @@ import PackageDescription
 
 let package = Package(
     name: "SwiftRadix",
-    
     platforms: platforms,
-    
     products: [
         .library(
             name: "SwiftRadix",
             targets: ["SwiftRadix"]
         )
     ],
-    
     dependencies: [
         // none
     ],
-    
     targets: [
         .target(
             name: "SwiftRadix",
@@ -30,7 +26,6 @@ let package = Package(
         )
     ]
 )
-
 
 #if swift(>=5.7) // Swift version in Xcode 14+
 let platforms: [SupportedPlatform] = [.macOS(.v10_13), .iOS(.v11), .tvOS(.v11), .watchOS(.v4)]
