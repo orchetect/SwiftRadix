@@ -11,27 +11,27 @@ import Foundation
 extension Radix: Equatable {
     // also gives != for free
     @inlinable
-    public static func == (lhs: Radix, rhs: Radix) -> Bool {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.value == rhs.value
     }
     
     @inlinable
-    public static func == <T: BinaryInteger>(lhs: Radix, rhs: T) -> Bool {
+    public static func == <O: BinaryInteger>(lhs: Self, rhs: O) -> Bool {
         lhs.value == rhs
     }
     
     @inlinable
-    public static func == <T: BinaryInteger>(lhs: T, rhs: Radix) -> Bool {
+    public static func == <O: BinaryInteger>(lhs: O, rhs: Self) -> Bool {
         lhs == rhs.value
     }
     
     @inlinable
-    public static func != <T: BinaryInteger>(lhs: Radix, rhs: T) -> Bool {
+    public static func != <O: BinaryInteger>(lhs: Self, rhs: O) -> Bool {
         lhs.value != rhs
     }
     
     @inlinable
-    public static func != <T: BinaryInteger>(lhs: T, rhs: Radix) -> Bool {
+    public static func != <O: BinaryInteger>(lhs: O, rhs: Self) -> Bool {
         lhs != rhs.value
     }
 }
@@ -40,39 +40,30 @@ extension Radix: Equatable {
 
 extension Radix {
     @inlinable
-    public static func == (lhs: Radix?, rhs: Radix) -> Bool {
+    public static func == (lhs: Self?, rhs: Self) -> Bool {
         lhs?.value == rhs.value
     }
     
     @inlinable
-    public static func == (lhs: Radix, rhs: Radix?) -> Bool {
+    public static func == (lhs: Self, rhs: Self?) -> Bool {
         lhs.value == rhs?.value
     }
 }
 
 @inlinable
-public func == <
-    T: BinaryInteger,
-    O: BinaryInteger
->(lhs: Radix<T>?, rhs: O) -> Bool {
+public func == <T: BinaryInteger, O: BinaryInteger>(lhs: Radix<T>?, rhs: O) -> Bool {
     guard let lhs = lhs else { return false }
     return lhs.value == rhs
 }
 
 @inlinable
-public func == <
-    T: BinaryInteger,
-    O: BinaryInteger
->(lhs: O, rhs: Radix<T>?) -> Bool {
+public func == <T: BinaryInteger, O: BinaryInteger>(lhs: O, rhs: Radix<T>?) -> Bool {
     guard let rhs = rhs else { return false }
     return lhs == rhs.value
 }
 
 @inlinable
-public func != <
-    T: BinaryInteger,
-    O: BinaryInteger
->(
+public func != <T: BinaryInteger, O: BinaryInteger>(
     lhs: Radix<T>?, rhs: O
 ) -> Bool {
     guard let lhs = lhs else { return false }
@@ -80,12 +71,7 @@ public func != <
 }
 
 @inlinable
-public func != <
-    T: BinaryInteger,
-    O: BinaryInteger
->(
-    lhs: O, rhs: Radix<T>?
-) -> Bool {
+public func != <T: BinaryInteger, O: BinaryInteger>(lhs: O, rhs: Radix<T>?) -> Bool {
     guard let rhs = rhs else { return false }
     return lhs != rhs.value
 }
@@ -94,62 +80,62 @@ public func != <
 
 extension Radix: Comparable {
     @inlinable
-    public static func > (lhs: Radix, rhs: Radix) -> Bool {
+    public static func > (lhs: Self, rhs: Self) -> Bool {
         lhs.value > rhs.value
     }
     
     @inlinable
-    public static func > <T: BinaryInteger>(lhs: Radix, rhs: T) -> Bool {
+    public static func > <O: BinaryInteger>(lhs: Self, rhs: O) -> Bool {
         lhs.value > rhs
     }
     
     @inlinable
-    public static func > <T: BinaryInteger>(lhs: T, rhs: Radix) -> Bool {
+    public static func > <O: BinaryInteger>(lhs: O, rhs: Self) -> Bool {
         lhs > rhs.value
     }
     
     @inlinable
-    public static func < (lhs: Radix, rhs: Radix) -> Bool {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         lhs.value < rhs.value
     }
     
     @inlinable
-    public static func < <T: BinaryInteger>(lhs: Radix, rhs: T) -> Bool {
+    public static func < <O: BinaryInteger>(lhs: Self, rhs: O) -> Bool {
         lhs.value < rhs
     }
     
     @inlinable
-    public static func < <T: BinaryInteger>(lhs: T, rhs: Radix) -> Bool {
+    public static func < <O: BinaryInteger>(lhs: O, rhs: Self) -> Bool {
         lhs < rhs.value
     }
     
     @inlinable
-    public static func >= (lhs: Radix, rhs: Radix) -> Bool {
+    public static func >= (lhs: Self, rhs: Self) -> Bool {
         lhs.value >= rhs.value
     }
     
     @inlinable
-    public static func >= <T: BinaryInteger>(lhs: Radix, rhs: T) -> Bool {
+    public static func >= <O: BinaryInteger>(lhs: Self, rhs: O) -> Bool {
         lhs.value >= rhs
     }
     
     @inlinable
-    public static func >= <T: BinaryInteger>(lhs: T, rhs: Radix) -> Bool {
+    public static func >= <O: BinaryInteger>(lhs: O, rhs: Self) -> Bool {
         lhs >= rhs.value
     }
     
     @inlinable
-    public static func <= (lhs: Radix, rhs: Radix) -> Bool {
+    public static func <= (lhs: Self, rhs: Self) -> Bool {
         lhs.value <= rhs.value
     }
     
     @inlinable
-    public static func <= <T: BinaryInteger>(lhs: Radix, rhs: T) -> Bool {
+    public static func <= <O: BinaryInteger>(lhs: Self, rhs: O) -> Bool {
         lhs.value <= rhs
     }
     
     @inlinable
-    public static func <= <T: BinaryInteger>(lhs: T, rhs: Radix) -> Bool {
+    public static func <= <O: BinaryInteger>(lhs: O, rhs: Self) -> Bool {
         lhs <= rhs.value
     }
 }
@@ -282,32 +268,32 @@ public func /= <T>(lhs: inout T, rhs: Radix<T>) {
 
 extension Radix {
     @inlinable
-    public static func >> <T>(lhs: Radix<T>, rhs: Radix) -> Radix<T> {
-        Radix<T>(lhs.value >> rhs.value, unsafeBase: lhs.base)
+    public static func >> <O: BinaryInteger>(lhs: Self, rhs: Radix<O>) -> Self {
+        Self(lhs.value >> rhs.value, unsafeBase: lhs.base)
     }
     
     @inlinable
-    public static func >> <T: BinaryInteger>(lhs: Radix, rhs: T) -> Radix {
-        Radix(lhs.value >> rhs, unsafeBase: lhs.base)
+    public static func >> <O: BinaryInteger>(lhs: Self, rhs: O) -> Self {
+        Self(lhs.value >> rhs, unsafeBase: lhs.base)
     }
     
     @inlinable
-    public static func >> <T: BinaryInteger>(lhs: T, rhs: Radix) -> T {
+    public static func >> <O: BinaryInteger>(lhs: O, rhs: Self) -> O {
         lhs >> rhs.value
     }
     
     @inlinable
-    public static func << <T>(lhs: Radix<T>, rhs: Radix) -> Radix<T> {
-        Radix<T>(lhs.value << rhs.value, unsafeBase: lhs.base)
+    public static func << <O: BinaryInteger>(lhs: Self, rhs: Radix<O>) -> Self {
+        Self(lhs.value << rhs.value, unsafeBase: lhs.base)
     }
     
     @inlinable
-    public static func << <T: BinaryInteger>(lhs: Radix, rhs: T) -> Radix {
-        Radix(lhs.value << rhs, unsafeBase: lhs.base)
+    public static func << <O: BinaryInteger>(lhs: Self, rhs: O) -> Self {
+        Self(lhs.value << rhs, unsafeBase: lhs.base)
     }
     
     @inlinable
-    public static func << <T: BinaryInteger>(lhs: T, rhs: Radix) -> T {
+    public static func << <O: BinaryInteger>(lhs: O, rhs: Self) -> O {
         lhs << rhs.value
     }
 }
@@ -316,17 +302,17 @@ extension Radix {
 
 extension Radix {
     @inlinable
-    public static func & (lhs: Radix, rhs: Radix) -> Radix {
-        Radix(lhs.value & rhs.value, unsafeBase: lhs.base)
+    public static func & (lhs: Self, rhs: Self) -> Self {
+        Self(lhs.value & rhs.value, unsafeBase: lhs.base)
     }
     
     @inlinable
-    public static func & <T: BinaryInteger>(lhs: Radix, rhs: T) -> Radix<T> {
-        Radix<T>(T(lhs.value) & rhs, unsafeBase: lhs.base)
+    public static func & (lhs: Self, rhs: T) -> Self {
+        Self(T(lhs.value) & rhs, unsafeBase: lhs.base)
     }
     
     @inlinable
-    public static func & <T: BinaryInteger>(lhs: T, rhs: Radix) -> T {
+    public static func & (lhs: T, rhs: Self) -> T {
         lhs & T(rhs.value)
     }
 }
