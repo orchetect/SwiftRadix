@@ -81,7 +81,7 @@ jobs:
     steps:
     - uses: actions/checkout@main
     - name: Apple Watch - Build
-      run: xcodebuild build -workspace ".swiftpm/xcode/package.xcworkspace" -scheme "SwiftRadix-CI" -destination "generic/platform=watchOS Simulator,name=Any watchOS Device" | xcpretty && exit ${PIPESTATUS[0]}
+      run: xcodebuild build -workspace ".swiftpm/xcode/package.xcworkspace" -scheme "SwiftRadix-CI" -destination "generic/platform=watchOS,name=Any watchOS Device" | xcpretty && exit ${PIPESTATUS[0]}
     - name: Apple Watch - Unit Tests
       run: xcodebuild test -workspace ".swiftpm/xcode/package.xcworkspace" -scheme "SwiftRadix-CI" -destination "platform=watchOS Simulator,name=Apple Watch Series 9 (45mm)" | xcpretty && exit ${PIPESTATUS[0]}
 
