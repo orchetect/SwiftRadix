@@ -7,7 +7,7 @@
 import XCTest
 import SwiftRadix
 
-extension SwiftRadixTests {
+final class RadixOperatorsTests: XCTestCase {
     func testRadix_Operators() {
         // just test hex (base-16)
         // (since all operators operate on the underlying value, agnostic of radix)

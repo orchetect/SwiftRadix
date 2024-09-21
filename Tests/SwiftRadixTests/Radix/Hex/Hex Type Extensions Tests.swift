@@ -7,7 +7,7 @@
 import XCTest
 import SwiftRadix
 
-extension SwiftRadixTests {
+final class HexTypeExtensionsTests: XCTestCase {
     func testHex_TypeExtensions_BinaryInteger() {
         let validString = "7F"
         

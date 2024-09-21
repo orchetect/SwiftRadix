@@ -7,7 +7,7 @@
 import XCTest
 import SwiftRadix
 
-extension SwiftRadixTests {
+final class RadixTests: XCTestCase {
     func testRadix_Init_Integer() {
         // basic init test, to check if it accepts a variety of integer types and radices
         

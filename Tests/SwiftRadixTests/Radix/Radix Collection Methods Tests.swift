@@ -7,7 +7,7 @@
 import XCTest
 import SwiftRadix
 
-extension SwiftRadixTests {
+final class RadixCollectionMethodsTests: XCTestCase {
     func testRadix_CollectionExtension_stringValue() {
         // binary
         

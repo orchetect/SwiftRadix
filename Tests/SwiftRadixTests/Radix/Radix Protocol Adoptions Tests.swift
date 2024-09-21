@@ -7,7 +7,7 @@
 import XCTest
 import SwiftRadix
 
-extension SwiftRadixTests {
+final class RadixProtocolAdoptionsTests: XCTestCase {
     func testRadix_CustomStringConvertible() {
         // CustomStringConvertible
         

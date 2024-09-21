@@ -7,7 +7,7 @@
 import XCTest
 import SwiftRadix
 
-extension SwiftRadixTests {
+final class BinaryTests: XCTestCase {
     func testBinary() {
         // init from int
         

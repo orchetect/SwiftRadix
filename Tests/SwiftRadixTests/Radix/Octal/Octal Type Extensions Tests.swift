@@ -7,7 +7,7 @@
 import XCTest
 import SwiftRadix
 
-extension SwiftRadixTests {
+final class OctalTypeExtensionsTests: XCTestCase {
     func testOctal_TypeExtensions_BinaryInteger() {
         let validString = "123"
         

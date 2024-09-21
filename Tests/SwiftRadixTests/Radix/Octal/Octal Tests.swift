@@ -7,7 +7,7 @@
 import XCTest
 import SwiftRadix
 
-extension SwiftRadixTests {
+final class OctalTests: XCTestCase {
     func testOctal() {
         // init from int
         

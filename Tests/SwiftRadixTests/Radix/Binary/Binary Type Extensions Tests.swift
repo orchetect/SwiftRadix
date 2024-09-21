@@ -7,7 +7,7 @@
 import XCTest
 import SwiftRadix
 
-extension SwiftRadixTests {
+final class BinaryTypeExtensionsTests: XCTestCase {
     func testBinary_TypeExtensions_BinaryInteger() {
         let validString = "1100"
         

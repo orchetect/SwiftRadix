@@ -7,7 +7,7 @@
 import XCTest
 import SwiftRadix
 
-extension SwiftRadixTests {
+final class RadixBitTests: XCTestCase {
     func testRadix_Bit_Get() {
         let source = 0b11001100
         

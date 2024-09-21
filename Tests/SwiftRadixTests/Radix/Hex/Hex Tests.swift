@@ -7,7 +7,7 @@
 import XCTest
 import SwiftRadix
 
-extension SwiftRadixTests {
+final class HexTests: XCTestCase {
     func testHex() {
         // init from int
         

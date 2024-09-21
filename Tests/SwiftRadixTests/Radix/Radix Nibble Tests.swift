@@ -7,7 +7,7 @@
 import XCTest
 import SwiftRadix
 
-extension SwiftRadixTests {
+final class RadixNibbleTests: XCTestCase {
     func testRadix_Nibble_Get() {
         let source = 0b01011100
         
