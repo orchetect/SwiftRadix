@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = 'SwiftRadix'
-  spec.version = '1.3.1'
+  spec.version = '1.3.2'
   spec.license = { :type => 'MIT', :file => 'LICENSE' }
   spec.summary = 'A Swift library for translating integers to/from radix strings (binary, hex, octal, etc.) using simple functional syntax.'
   spec.homepage = 'https://github.com/orchetect/SwiftRadix'
