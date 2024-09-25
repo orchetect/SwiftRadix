@@ -1,7 +1,7 @@
 //
 //  Utilities.swift
 //  SwiftRadix • https://github.com/orchetect/SwiftRadix
-//  © 2022-2024 Steffan Andrews • Licensed under MIT License
+//  © 2020-2024 Steffan Andrews • Licensed under MIT License
 //
 
 import Foundation
