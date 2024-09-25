@@ -23,7 +23,7 @@
 --funcattributes prev-line
 --groupedextension "MARK: %c"
 --guardelse auto
---header "\n {file}\n SwiftRadix • https://github.com/orchetect/SwiftRadix\n © {year}-2024 Steffan Andrews • Licensed under MIT License\n"
+--header "\n {file}\n SwiftRadix • https://github.com/orchetect/SwiftRadix\n © 2020-{year} Steffan Andrews • Licensed under MIT License\n"
 --hexgrouping 4,8
 --hexliteralcase uppercase
 --ifdef no-indent
