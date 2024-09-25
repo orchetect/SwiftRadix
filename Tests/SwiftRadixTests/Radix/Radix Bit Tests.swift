@@ -4,8 +4,8 @@
 //  © 2020-2024 Steffan Andrews • Licensed under MIT License
 //
 
-import XCTest
 import SwiftRadix
+import XCTest
 
 final class RadixBitTests: XCTestCase {
     func testRadix_Bit_Get() {

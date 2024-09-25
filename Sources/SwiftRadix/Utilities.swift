@@ -69,7 +69,7 @@ extension StringProtocol {
     ///
     /// Borrowed from OTCore 1.3.0: https://github.com/orchetect/OTCore (MIT license)
     @_disfavoredOverload
-    internal func split(
+    func split(
         every: Int,
         backwards: Bool = false
     ) -> [SubSequence] {

@@ -65,7 +65,7 @@ public struct Radix<T: BinaryInteger>: RadixProtocol {
     
     /// Internal initializer that bypasses base range validation.
     @inline(__always) @usableFromInline
-    internal init(
+    init(
         _ number: NumberType,
         unsafeBase: Int
     ) {
