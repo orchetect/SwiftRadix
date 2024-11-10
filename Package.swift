@@ -7,24 +7,11 @@ let package = Package(
     name: "SwiftRadix",
     platforms: platforms,
     products: [
-        .library(
-            name: "SwiftRadix",
-            targets: ["SwiftRadix"]
-        )
-    ],
-    dependencies: [
-        // none
+        .library(name: "SwiftRadix", targets: ["SwiftRadix"])
     ],
     targets: [
-        .target(
-            name: "SwiftRadix",
-            dependencies: []
-        ),
-        
-        .testTarget(
-            name: "SwiftRadixTests",
-            dependencies: ["SwiftRadix"]
-        )
+        .target(name: "SwiftRadix"),
+        .testTarget(name: "SwiftRadixTests", dependencies: ["SwiftRadix"])
     ]
 )
 
