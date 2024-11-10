@@ -5,43 +5,43 @@
 //
 
 import SwiftRadix
-import XCTest
+import Testing
 
-final class RadixNibbleTests: XCTestCase {
-    func testRadix_Nibble_Get() {
+@Suite struct RadixNibbleTests {
+    @Test func radix_Nibble_Get() {
         let source = 0b01011100
         
         // binary
         
-        XCTAssertTrue(source.binary.nibble(0) == 0b1100)
-        XCTAssertTrue(source.binary.nibble(1) == 0b0101)
+        #expect(source.binary.nibble(0) == 0b1100)
+        #expect(source.binary.nibble(1) == 0b0101)
         
-        XCTAssertTrue(source.binary[nibble: 0] == 0b1100)
-        XCTAssertTrue(source.binary[nibble: 1] == 0b0101)
+        #expect(source.binary[nibble: 0] == 0b1100)
+        #expect(source.binary[nibble: 1] == 0b0101)
         
         // hex
         
-        XCTAssertTrue(source.hex.nibble(0) == 0b1100)
-        XCTAssertTrue(source.hex.nibble(1) == 0b0101)
+        #expect(source.hex.nibble(0) == 0b1100)
+        #expect(source.hex.nibble(1) == 0b0101)
         
-        XCTAssertTrue(source.hex[nibble: 0] == 0b1100)
-        XCTAssertTrue(source.hex[nibble: 1] == 0b0101)
+        #expect(source.hex[nibble: 0] == 0b1100)
+        #expect(source.hex[nibble: 1] == 0b0101)
         
         // octal
         
-        XCTAssertTrue(source.octal.nibble(0) == 0b1100)
-        XCTAssertTrue(source.octal.nibble(1) == 0b0101)
+        #expect(source.octal.nibble(0) == 0b1100)
+        #expect(source.octal.nibble(1) == 0b0101)
         
-        XCTAssertTrue(source.octal[nibble: 0] == 0b1100)
-        XCTAssertTrue(source.octal[nibble: 1] == 0b0101)
+        #expect(source.octal[nibble: 0] == 0b1100)
+        #expect(source.octal[nibble: 1] == 0b0101)
         
         // edge cases
         
-        XCTAssertTrue(source.binary.nibble(-1) == 0) // out of bounds, default 0
-        XCTAssertTrue(source.binary.nibble(2) == 0)  // out of bounds, default 0
+        #expect(source.binary.nibble(-1) == 0) // out of bounds, default 0
+        #expect(source.binary.nibble(2) == 0)  // out of bounds, default 0
     }
     
-    func testRadix_Nibble_Subscript_Set() {
+    @Test func radix_Nibble_Subscript_Set() {
         var radix: Radix<Int>
         
         // binary
@@ -50,11 +50,11 @@ final class RadixNibbleTests: XCTestCase {
         
         radix[nibble: 0] = 0b0110
         
-        XCTAssertEqual(radix.value, 0b01010110)
+        #expect(radix.value == 0b01010110)
         
         radix[nibble: 1] = 0b0110
         
-        XCTAssertEqual(radix.value, 0b01100110)
+        #expect(radix.value == 0b01100110)
         
         // hex
         
@@ -62,11 +62,11 @@ final class RadixNibbleTests: XCTestCase {
         
         radix[nibble: 0] = 0b0110
         
-        XCTAssertEqual(radix.value, 0b01010110)
+        #expect(radix.value == 0b01010110)
         
         radix[nibble: 1] = 0b0110
         
-        XCTAssertEqual(radix.value, 0b01100110)
+        #expect(radix.value == 0b01100110)
         
         // octal
         
@@ -74,11 +74,11 @@ final class RadixNibbleTests: XCTestCase {
         
         radix[nibble: 0] = 0b0110
         
-        XCTAssertEqual(radix.value, 0b01010110)
+        #expect(radix.value == 0b01010110)
         
         radix[nibble: 1] = 0b0110
         
-        XCTAssertEqual(radix.value, 0b01100110)
+        #expect(radix.value == 0b01100110)
         
         // edge cases
         
@@ -86,10 +86,10 @@ final class RadixNibbleTests: XCTestCase {
         
         radix[nibble: 0] = 20 // invalid value, fails silently
         
-        XCTAssertEqual(radix.value, 0b01011100)
+        #expect(radix.value == 0b01011100)
         
         radix[nibble: -1] = 1 // invalid index, fails silently
         
-        XCTAssertEqual(radix.value, 0b01011100)
+        #expect(radix.value == 0b01011100)
     }
 }

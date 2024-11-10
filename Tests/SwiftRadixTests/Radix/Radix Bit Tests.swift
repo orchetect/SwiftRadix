@@ -5,55 +5,55 @@
 //
 
 import SwiftRadix
-import XCTest
+import Testing
 
-final class RadixBitTests: XCTestCase {
-    func testRadix_Bit_Get() {
+@Suite struct RadixBitTests {
+    @Test func radix_Bit_Get() {
         let source = 0b11001100
         
         // binary
         
-        XCTAssertTrue(source.binary.bit(0) == 0b0)
-        XCTAssertTrue(source.binary.bit(1) == 0b0)
-        XCTAssertTrue(source.binary.bit(2) == 0b1)
-        XCTAssertTrue(source.binary.bit(3) == 0b1)
+        #expect(source.binary.bit(0) == 0b0)
+        #expect(source.binary.bit(1) == 0b0)
+        #expect(source.binary.bit(2) == 0b1)
+        #expect(source.binary.bit(3) == 0b1)
         
-        XCTAssertEqual(source.binary[bit: 0], 0b0)
-        XCTAssertEqual(source.binary[bit: 1], 0b0)
-        XCTAssertEqual(source.binary[bit: 2], 0b1)
-        XCTAssertEqual(source.binary[bit: 3], 0b1)
+        #expect(source.binary[bit: 0] == 0b0)
+        #expect(source.binary[bit: 1] == 0b0)
+        #expect(source.binary[bit: 2] == 0b1)
+        #expect(source.binary[bit: 3] == 0b1)
         
         // hex
         
-        XCTAssertTrue(source.hex.bit(0) == 0b0)
-        XCTAssertTrue(source.hex.bit(1) == 0b0)
-        XCTAssertTrue(source.hex.bit(2) == 0b1)
-        XCTAssertTrue(source.hex.bit(3) == 0b1)
+        #expect(source.hex.bit(0) == 0b0)
+        #expect(source.hex.bit(1) == 0b0)
+        #expect(source.hex.bit(2) == 0b1)
+        #expect(source.hex.bit(3) == 0b1)
         
-        XCTAssertEqual(source.hex[bit: 0], 0b0)
-        XCTAssertEqual(source.hex[bit: 1], 0b0)
-        XCTAssertEqual(source.hex[bit: 2], 0b1)
-        XCTAssertEqual(source.hex[bit: 3], 0b1)
+        #expect(source.hex[bit: 0] == 0b0)
+        #expect(source.hex[bit: 1] == 0b0)
+        #expect(source.hex[bit: 2] == 0b1)
+        #expect(source.hex[bit: 3] == 0b1)
         
         // octal
         
-        XCTAssertTrue(source.octal.bit(0) == 0b0)
-        XCTAssertTrue(source.octal.bit(1) == 0b0)
-        XCTAssertTrue(source.octal.bit(2) == 0b1)
-        XCTAssertTrue(source.octal.bit(3) == 0b1)
+        #expect(source.octal.bit(0) == 0b0)
+        #expect(source.octal.bit(1) == 0b0)
+        #expect(source.octal.bit(2) == 0b1)
+        #expect(source.octal.bit(3) == 0b1)
         
-        XCTAssertEqual(source.octal[bit: 0], 0b0)
-        XCTAssertEqual(source.octal[bit: 1], 0b0)
-        XCTAssertEqual(source.octal[bit: 2], 0b1)
-        XCTAssertEqual(source.octal[bit: 3], 0b1)
+        #expect(source.octal[bit: 0] == 0b0)
+        #expect(source.octal[bit: 1] == 0b0)
+        #expect(source.octal[bit: 2] == 0b1)
+        #expect(source.octal[bit: 3] == 0b1)
         
         // edge cases
         
-        XCTAssertTrue(source.hex.bit(-1) == 0) // out of bounds, default 0
-        XCTAssertTrue(source.hex.bit(9) == 0)  // out of bounds, default 0
+        #expect(source.hex.bit(-1) == 0) // out of bounds, default 0
+        #expect(source.hex.bit(9) == 0)  // out of bounds, default 0
     }
     
-    func testRadix_Bit_Subscript_Set() {
+    @Test func radix_Bit_Subscript_Set() {
         var radix: Radix<Int>
         
         // binary
@@ -62,11 +62,11 @@ final class RadixBitTests: XCTestCase {
         
         radix[bit: 0] = 1
         
-        XCTAssertEqual(radix.value, 0b11001101)
+        #expect(radix.value == 0b11001101)
         
         radix[bit: 1] = 1
         
-        XCTAssertEqual(radix.value, 0b11001111)
+        #expect(radix.value == 0b11001111)
         
         // hex
         
@@ -74,11 +74,11 @@ final class RadixBitTests: XCTestCase {
         
         radix[bit: 0] = 1
         
-        XCTAssertEqual(radix.value, 0b11001101)
+        #expect(radix.value == 0b11001101)
         
         radix[bit: 1] = 1
         
-        XCTAssertEqual(radix.value, 0b11001111)
+        #expect(radix.value == 0b11001111)
         
         // octal
         
@@ -86,11 +86,11 @@ final class RadixBitTests: XCTestCase {
         
         radix[bit: 0] = 1
         
-        XCTAssertEqual(radix.value, 0b11001101)
+        #expect(radix.value == 0b11001101)
         
         radix[bit: 1] = 1
         
-        XCTAssertEqual(radix.value, 0b11001111)
+        #expect(radix.value == 0b11001111)
         
         // edge cases
         
@@ -98,12 +98,12 @@ final class RadixBitTests: XCTestCase {
         
         radix[bit: 0] = 3 // invalid value, fails silently
         
-        XCTAssertEqual(radix.value, 0b11001100)
+        #expect(radix.value == 0b11001100)
         
         radix = 0b11001100.hex
         
         radix[bit: -1] = 1 // invalid index, fails silently
         
-        XCTAssertEqual(radix.value, 0b11001100)
+        #expect(radix.value == 0b11001100)
     }
 }

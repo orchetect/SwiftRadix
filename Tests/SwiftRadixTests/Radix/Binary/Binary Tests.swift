@@ -5,50 +5,50 @@
 //
 
 import SwiftRadix
-import XCTest
+import Testing
 
-final class BinaryTests: XCTestCase {
-    func testBinary() {
+@Suite struct BinaryTests {
+    @Test func binary() {
         // init from int
         
         let binaryInt = Binary(0b1100)
         
-        XCTAssertEqual(binaryInt.value, Int(0b1100))
-        XCTAssertEqual(binaryInt.base, 2)
+        #expect(binaryInt.value == Int(0b1100))
+        #expect(binaryInt.base == 2)
         
         // init from string with prefix, default Int value
         
         let binaryString1 = Binary("0b1100") // Int default
         
-        XCTAssertNotNil(binaryString1)
+        #expect(binaryString1 != nil)
         
-        XCTAssertEqual(binaryString1?.value.bitWidth, Int.bitWidth)
-        XCTAssertEqual(binaryString1?.value, Int(0b1100))
-        XCTAssertEqual(binaryString1?.base, 2)
+        #expect(binaryString1?.value.bitWidth == Int.bitWidth)
+        #expect(binaryString1?.value == Int(0b1100))
+        #expect(binaryString1?.base == 2)
         
         // init from string without prefix, specifying Int32 value
         
         let binaryString2 = Binary("1100", as: Int32.self)
         
-        XCTAssertNotNil(binaryString2)
+        #expect(binaryString2 != nil)
         
-        XCTAssertEqual(binaryString2?.value.bitWidth, Int32.bitWidth)
-        XCTAssertEqual(binaryString2?.value, Int32(0b1100))
-        XCTAssertEqual(binaryString2?.base, 2)
+        #expect(binaryString2?.value.bitWidth == Int32.bitWidth)
+        #expect(binaryString2?.value == Int32(0b1100))
+        #expect(binaryString2?.base == 2)
     }
     
-    func testBinary_StringFailures() {
+    @Test func binary_StringFailures() {
         // wrong prefix case
-        XCTAssertNil("0B10".binary)
+        #expect("0B10".binary == nil)
         
         // wrong prefix
-        XCTAssertNil("0x1".binary)
-        XCTAssertNil("0o1".binary)
+        #expect("0x1".binary == nil)
+        #expect("0o1".binary == nil)
         
         // invalid base digits
-        XCTAssertNil("0b2".binary)
+        #expect("0b2".binary == nil)
         
         // invalid string altogether
-        XCTAssertNil("$y9_p".binary)
+        #expect(#"$y9_p"#.binary == nil)
     }
 }

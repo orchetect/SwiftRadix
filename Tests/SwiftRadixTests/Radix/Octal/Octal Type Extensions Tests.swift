@@ -4,84 +4,85 @@
 //  © 2020-2024 Steffan Andrews • Licensed under MIT License
 //
 
+import Foundation
 import SwiftRadix
-import XCTest
+import Testing
 
-final class OctalTypeExtensionsTests: XCTestCase {
-    func testOctal_TypeExtensions_BinaryInteger() {
+@Suite struct OctalTypeExtensionsTests {
+    @Test func octal_TypeExtensions_BinaryInteger() {
         let validString = "123"
         
-        XCTAssertEqual(0o123.octal.stringValue, validString)
-        XCTAssertEqual(UInt(0o123).octal.stringValue, validString)
-        XCTAssertEqual(Int8(0o123).octal.stringValue, validString)
-        XCTAssertEqual(UInt8(0o123).octal.stringValue, validString)
-        XCTAssertEqual(Int16(0o123).octal.stringValue, validString)
-        XCTAssertEqual(UInt16(0o123).octal.stringValue, validString)
-        XCTAssertEqual(Int32(0o123).octal.stringValue, validString)
-        XCTAssertEqual(UInt32(0o123).octal.stringValue, validString)
-        XCTAssertEqual(Int64(0o123).octal.stringValue, validString)
-        XCTAssertEqual(UInt64(0o123).octal.stringValue, validString)
+        #expect(0o123.octal.stringValue == validString)
+        #expect(UInt(0o123).octal.stringValue == validString)
+        #expect(Int8(0o123).octal.stringValue == validString)
+        #expect(UInt8(0o123).octal.stringValue == validString)
+        #expect(Int16(0o123).octal.stringValue == validString)
+        #expect(UInt16(0o123).octal.stringValue == validString)
+        #expect(Int32(0o123).octal.stringValue == validString)
+        #expect(UInt32(0o123).octal.stringValue == validString)
+        #expect(Int64(0o123).octal.stringValue == validString)
+        #expect(UInt64(0o123).octal.stringValue == validString)
     }
     
-    func testOctal_TypeExtensions_String() {
+    @Test func octal_TypeExtensions_String() {
         let validValue = 0o123
         
         let radix1 = "0o123".octal // Int default
         
-        XCTAssertNotNil(radix1)
+        #expect(radix1 != nil)
         
-        XCTAssertEqual(radix1?.value, Int(validValue))
+        #expect(radix1?.value == Int(validValue))
         
         let radix2 = "123".octal // Int default
         
-        XCTAssertNotNil(radix2)
+        #expect(radix2 != nil)
         
-        XCTAssertEqual(radix2?.value, Int(validValue))
+        #expect(radix2?.value == Int(validValue))
         
         let radix3 = "123".octal(as: Int32.self)
         
-        XCTAssertNotNil(radix3)
+        #expect(radix3 != nil)
         
-        XCTAssertEqual(radix3?.value, Int32(validValue))
+        #expect(radix3?.value == Int32(validValue))
     }
     
-    func testOctal_TypeExtensions_StringArray() {
+    @Test func octal_TypeExtensions_StringArray() {
         let source = ["000", "0o123"]
         
         let radixArray1 = source.octal // Int default
         
-        XCTAssertEqual(radixArray1.count, 2)
+        #expect(radixArray1.count == 2)
         
-        XCTAssertEqual(radixArray1[0]?.value, 0x000)
-        XCTAssertEqual(radixArray1[1]?.value, 0o123)
+        #expect(radixArray1[0]?.value == 0x000)
+        #expect(radixArray1[1]?.value == 0o123)
         
         let radixArray2 = source.octal(as: Int32.self)
         
-        XCTAssertEqual(radixArray2.count, 2)
+        #expect(radixArray2.count == 2)
         
-        XCTAssertEqual(radixArray2[0]?.value, Int32(0x000))
-        XCTAssertEqual(radixArray2[1]?.value, Int32(0o123))
+        #expect(radixArray2[0]?.value == Int32(0x000))
+        #expect(radixArray2[1]?.value == Int32(0o123))
     }
     
-    func testOctal_TypeExtensions_BinIntCollection() {
+    @Test func octal_TypeExtensions_BinIntCollection() {
         let source = [0o000, 0o123]
         
         let radixArray = source.octal
         
-        XCTAssertEqual(radixArray.count, 2)
+        #expect(radixArray.count == 2)
         
-        XCTAssertEqual(radixArray[0].value, 0x000)
-        XCTAssertEqual(radixArray[1].value, 0o123)
+        #expect(radixArray[0].value == 0x000)
+        #expect(radixArray[1].value == 0o123)
     }
     
-    func testOctal_TypeExtensions_Data() {
+    @Test func octal_TypeExtensions_Data() {
         let source = Data([0o000, 0o123])
         
         let radixArray = source.octal
         
-        XCTAssertEqual(radixArray.count, 2)
+        #expect(radixArray.count == 2)
         
-        XCTAssertEqual(radixArray[0].value, 0x000)
-        XCTAssertEqual(radixArray[1].value, 0o123)
+        #expect(radixArray[0].value == 0x000)
+        #expect(radixArray[1].value == 0o123)
     }
 }

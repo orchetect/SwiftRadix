@@ -5,42 +5,42 @@
 //
 
 import SwiftRadix
-import XCTest
+import Testing
 
-final class RadixProtocolAdoptionsTests: XCTestCase {
-    func testRadix_CustomStringConvertible() {
+@Suite struct RadixProtocolAdoptionsTests {
+    @Test func radix_CustomStringConvertible() {
         // CustomStringConvertible
         
         // binary
         
-        XCTAssertEqual(
-            String(describing: 1.binary),
+        #expect(
+            String(describing: 1.binary) ==
             "0b1"
         )
-        XCTAssertEqual(
-            1.binary.description,
+        #expect(
+            1.binary.description ==
             "0b1"
         )
         
         // hex
         
-        XCTAssertEqual(
-            String(describing: 1.hex),
+        #expect(
+            String(describing: 1.hex) ==
             "0x1"
         )
-        XCTAssertEqual(
-            1.hex.description,
+        #expect(
+            1.hex.description ==
             "0x1"
         )
         
         // octal
         
-        XCTAssertEqual(
-            String(describing: 1.octal),
+        #expect(
+            String(describing: 1.octal) ==
             "0o1"
         )
-        XCTAssertEqual(
-            1.octal.description,
+        #expect(
+            1.octal.description ==
             "0o1"
         )
         
@@ -48,34 +48,34 @@ final class RadixProtocolAdoptionsTests: XCTestCase {
         
         // binary
         
-        XCTAssertEqual(
-            1.binary.debugDescription,
+        #expect(
+            1.binary.debugDescription ==
             "Radix<Int>(0b1)"
         )
         
         // hex
         
-        XCTAssertEqual(
-            1.hex.debugDescription,
+        #expect(
+            1.hex.debugDescription ==
             "Radix<Int>(0x1)"
         )
         
         // octal
         
-        XCTAssertEqual(
-            1.octal.debugDescription,
+        #expect(
+            1.octal.debugDescription ==
             "Radix<Int>(0o1)"
         )
     }
     
-    func testRadix_Hashable() {
+    @Test func radix_Hashable() {
         // Dictionary - [Key : Hashable]
         
         var dict: [String: Radix<Int>] = [:]
         
         dict.updateValue(1.hex, forKey: "value1")
         
-        XCTAssertEqual(dict["value1"]!.value, 1)
+        #expect(dict["value1"]!.value == 1)
         
         // Set - Hashable
         
@@ -83,10 +83,10 @@ final class RadixProtocolAdoptionsTests: XCTestCase {
         
         set.update(with: 1.hex)
         
-        XCTAssertEqual(set.count, 1) // should recognize the dupe was not added
+        #expect(set.count == 1) // should recognize the dupe was not added
         
         set.update(with: 2.hex)
         
-        XCTAssertEqual(set.count, 2)
+        #expect(set.count == 2)
     }
 }

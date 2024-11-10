@@ -5,58 +5,58 @@
 //
 
 import SwiftRadix
-import XCTest
+import Testing
 
-final class RadixBytesTests: XCTestCase {
-    func testRadix_Bytes() {
+@Suite struct RadixBytesTests {
+    @Test func radix_Bytes() {
         // binary
         
-        XCTAssertEqual(
-            UInt8(0xFF).binary.bytes,
+        #expect(
+            UInt8(0xFF).binary.bytes ==
             [0xFF]
         )
         
-        XCTAssertEqual(
-            UInt16(0xFF).binary.bytes,
+        #expect(
+            UInt16(0xFF).binary.bytes ==
             [0xFF, 0x00]
         )
         
-        XCTAssertEqual(
-            Int(0xFF).binary.bytes,
+        #expect(
+            Int(0xFF).binary.bytes ==
             [0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
         )
         
         // hex
         
-        XCTAssertEqual(
-            UInt8(0xFF).hex.bytes,
+        #expect(
+            UInt8(0xFF).hex.bytes ==
             [0xFF]
         )
         
-        XCTAssertEqual(
-            UInt16(0xFF).hex.bytes,
+        #expect(
+            UInt16(0xFF).hex.bytes ==
             [0xFF, 0x00]
         )
         
-        XCTAssertEqual(
-            Int(0xFF).hex.bytes,
+        #expect(
+            Int(0xFF).hex.bytes ==
             [0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
         )
         
         // octal
         
-        XCTAssertEqual(
-            UInt8(0xFF).octal.bytes,
+        #expect(
+            UInt8(0xFF).octal.bytes ==
             [0xFF]
         )
         
-        XCTAssertEqual(
-            UInt16(0xFF).octal.bytes,
+        #expect(
+            UInt16(0xFF).octal.bytes ==
             [0xFF, 0x00]
         )
         
-        XCTAssertEqual(
-            Int(0xFF).octal.bytes,
+        #expect(
+            Int(0xFF).octal.bytes ==
             [0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
         )
     }

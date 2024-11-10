@@ -5,68 +5,68 @@
 //
 
 import SwiftRadix
-import XCTest
+import Testing
 
-final class HexTests: XCTestCase {
-    func testHex() {
+@Suite struct HexTests {
+    @Test func hex() {
         // init from int
         
         let hexInt = Hex(0xFF)
         
-        XCTAssertEqual(hexInt.value, Int(0xFF))
-        XCTAssertEqual(hexInt.base, 16)
+        #expect(hexInt.value == Int(0xFF))
+        #expect(hexInt.base == 16)
         
         // init from string with prefix, default Int value
         
         let hexString1 = Hex("0xFF") // Int default
         
-        XCTAssertNotNil(hexString1)
+        #expect(hexString1 != nil)
         
-        XCTAssertEqual(hexString1?.value.bitWidth, Int.bitWidth)
-        XCTAssertEqual(hexString1?.value, Int(0xFF))
-        XCTAssertEqual(hexString1?.base, 16)
+        #expect(hexString1?.value.bitWidth == Int.bitWidth)
+        #expect(hexString1?.value == Int(0xFF))
+        #expect(hexString1?.base == 16)
         
         // init from string without prefix, specifying Int32 value
         
         let hexString2 = Hex("FF", as: Int32.self)
         
-        XCTAssertNotNil(hexString2)
+        #expect(hexString2 != nil)
         
-        XCTAssertEqual(hexString2?.value.bitWidth, Int32.bitWidth)
-        XCTAssertEqual(hexString2?.value, Int32(0xFF))
-        XCTAssertEqual(hexString2?.base, 16)
+        #expect(hexString2?.value.bitWidth == Int32.bitWidth)
+        #expect(hexString2?.value == Int32(0xFF))
+        #expect(hexString2?.base == 16)
     }
     
-    func testHex_StringFailures() {
+    @Test func hex_StringFailures() {
         // wrong prefix case
-        XCTAssertNil("0XFF".hex)
+        #expect("0XFF".hex == nil)
         
         // wrong prefix
-        XCTAssertNotNil("0b1".hex) // this works because it's a valid hex string, without prefix
-        XCTAssertNil("0o1".hex)
+        #expect("0b1".hex != nil) // this works because it's a valid hex string, without prefix
+        #expect("0o1".hex == nil)
         
         // invalid base digits
-        XCTAssertNil("0xZ".hex)
+        #expect("0xZ".hex == nil)
         
         // invalid string altogether
-        XCTAssertNil("$y9_p".hex)
+        #expect("$y9_p".hex == nil)
     }
     
-    func testHex_StringCase() {
+    @Test func hex_StringCase() {
         // uppercase
         
         let radix1 = Hex("0xFF")
         
-        XCTAssertNotNil(radix1)
+        #expect(radix1 != nil)
         
-        XCTAssertEqual(radix1?.value, 0xFF)
+        #expect(radix1?.value == 0xFF)
         
         // lowercase
         
         let radix2 = Hex("0xff")
         
-        XCTAssertNotNil(radix2)
+        #expect(radix2 != nil)
         
-        XCTAssertEqual(radix2?.value, 0xFF)
+        #expect(radix2?.value == 0xFF)
     }
 }
