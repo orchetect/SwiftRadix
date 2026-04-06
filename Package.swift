@@ -1,10 +1,10 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.8
 
 import PackageDescription
 
 let package = Package(
     name: "swift-radix",
-    platforms: platforms,
+    platforms: [.macOS(.v10_13), .iOS(.v11), .tvOS(.v11), .watchOS(.v4)],
     products: [
         .library(name: "SwiftRadix", targets: ["SwiftRadix"])
     ],
@@ -13,9 +13,3 @@ let package = Package(
         .testTarget(name: "SwiftRadixTests", dependencies: ["SwiftRadix"])
     ]
 )
-
-#if swift(>=5.7) // Swift version in Xcode 14+
-let platforms: [SupportedPlatform] = [.macOS(.v10_13), .iOS(.v11), .tvOS(.v11), .watchOS(.v4)]
-#else // Swift version prior to Xcode 14
-let platforms: [SupportedPlatform] = [.macOS(.v10_10), .iOS(.v9), .tvOS(.v9), .watchOS(.v2)]
-#endif
