@@ -2,11 +2,11 @@
 
 # swift-radix
 
-[![Platforms - macOS 10.10+ | iOS 9+ | tvOS 9+ | watchOS 2+ | visionOS 1+ | Linux](https://img.shields.io/badge/platforms-macOS%2010.10+%20|%20iOS%209+%20|%20tvOS%209+%20|%20watchOS%202+%20|%20visionOS%201+%20|%20Linux-lightgrey.svg?style=flat)](https://swiftpackageindex.com/orchetect/swift-radix/builds) [![License: MIT](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](https://github.com/orchetect/swift-radix/blob/main/LICENSE)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Forchetect%2Fswift-radix%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/orchetect/swift-radix) [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Forchetect%2Fswift-radix%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/orchetect/swift-radix) [![License: MIT](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](https://github.com/orchetect/swift-radix/blob/main/LICENSE)
 
 A lightweight library useful for translating integers to and from radix strings (binary, hex, octal or any base) using simple, clean functional syntax.
 
-Compatible with all Apple platforms and Linux.
+Compatible with all Apple platforms, Linux, Android, and WASM.
 
 ## Summary
 
@@ -72,7 +72,7 @@ To add this package to a Swift package, add the dependency to your package and t
 ```swift
 let package = Package(
     dependencies: [
-        .package(url: "https://github.com/orchetect/swift-radix", from: "1.4.0")
+        .package(url: "https://github.com/orchetect/swift-radix", from: "1.4.1")
     ],
     targets: [
         .target(
