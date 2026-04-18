@@ -396,6 +396,12 @@ Please do not email maintainers for technical support. Several options are avail
 
 Contributions are welcome. Posting in [Discussions](https://github.com/orchetect/swift-radix/discussions) first prior to new submitting PRs for features or modifications is encouraged.
 
+## Code Quality & AI Contribution Policy
+
+In an effort to maintain a consistent level of code quality and safety, this repository was built by hand and is maintained without the use of AI code generation.
+
+AI-assisted contributions are welcome, but must remain modest in scope, maintain the same degree of quality and care, and be thoroughly vetted before acceptance.
+
 ## Legacy
 
 This repository was formerly known as SwiftRadix.
