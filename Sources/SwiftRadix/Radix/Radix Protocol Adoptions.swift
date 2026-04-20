@@ -1,7 +1,7 @@
 //
 //  Radix Protocol Adoptions.swift
 //  swift-radix • https://github.com/orchetect/swift-radix
-//  © 2020-2025 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 import Foundation
@@ -19,7 +19,7 @@ extension Radix: CustomStringConvertible,
         "Radix<\(String(describing: NumberType.self))>(\(stringPrefix)\(stringValue))"
     }
 }
-//swiftformat:enable all
+// swiftformat:enable all
 
 // MARK: Hashable
 

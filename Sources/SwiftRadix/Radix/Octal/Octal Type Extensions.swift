@@ -1,7 +1,7 @@
 //
 //  Octal Type Extensions.swift
 //  swift-radix • https://github.com/orchetect/swift-radix
-//  © 2020-2025 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 import Foundation
@@ -22,7 +22,7 @@ extension StringProtocol {
     public var octal: Radix<Int>? {
         Radix(self, base: 8)
     }
-    
+
     /// Returns a new `Radix<T>?` base-8 struct from a octal string.
     ///
     /// Example usage:
@@ -41,7 +41,7 @@ extension Array where Element: StringProtocol {
     public var octal: [Radix<Int>?] {
         map { Radix<Int>($0, base: 8) }
     }
-    
+
     /// Returns an array of `Radix<T>?` base-8 structs constructed from an array of octal strings.
     ///
     /// Example usage:

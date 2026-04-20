@@ -1,7 +1,7 @@
 //
 //  Octal.swift
 //  swift-radix • https://github.com/orchetect/swift-radix
-//  © 2020-2025 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 import Foundation
@@ -14,7 +14,7 @@ public func Octal<T: BinaryInteger>(_ number: T) -> Radix<T> {
 
 /// Convenience constructor for `Radix<Int>` with a radix of 8 (octal).
 @inlinable @_disfavoredOverload
-public func Octal<S: StringProtocol>(_ string: S) -> Radix<Int>? {
+public func Octal(_ string: some StringProtocol) -> Radix<Int>? {
     Radix<Int>(string, base: 8)
 }
 
@@ -25,12 +25,6 @@ public func Octal<S: StringProtocol>(_ string: S) -> Radix<Int>? {
 ///     Octal("123", as: Int16.self)
 ///
 @inlinable @_disfavoredOverload
-public func Octal<
-    S: StringProtocol,
-    T: BinaryInteger
->(
-    _ string: S,
-    as type: T.Type
-) -> Radix<T>? {
+public func Octal<T: BinaryInteger>(_ string: some StringProtocol, as type: T.Type) -> Radix<T>? {
     Radix<T>(string, base: 8)
 }

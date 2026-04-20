@@ -1,7 +1,7 @@
 //
 //  Binary.swift
 //  swift-radix • https://github.com/orchetect/swift-radix
-//  © 2020-2025 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 import Foundation
@@ -14,7 +14,7 @@ public func Binary<T: BinaryInteger>(_ number: T) -> Radix<T> {
 
 /// Convenience constructor for `Radix<Int>` with a radix of 2 (binary).
 @inlinable @_disfavoredOverload
-public func Binary<S: StringProtocol>(_ string: S) -> Radix<Int>? {
+public func Binary(_ string: some StringProtocol) -> Radix<Int>? {
     Radix<Int>(string, base: 2)
 }
 
@@ -25,12 +25,6 @@ public func Binary<S: StringProtocol>(_ string: S) -> Radix<Int>? {
 ///     Binary("1010", as: Int16.self)
 ///
 @inlinable @_disfavoredOverload
-public func Binary<
-    S: StringProtocol,
-    T: BinaryInteger
->(
-    _ string: S,
-    as type: T.Type
-) -> Radix<T>? {
+public func Binary<T: BinaryInteger>(_ string: some StringProtocol, as type: T.Type) -> Radix<T>? {
     Radix<T>(string, base: 2)
 }

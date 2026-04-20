@@ -1,7 +1,7 @@
 //
 //  Radix Strings.swift
 //  swift-radix • https://github.com/orchetect/swift-radix
-//  © 2020-2025 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 import Foundation
@@ -14,15 +14,15 @@ extension Radix {
         get {
             stringValue(prefix: false, uppercase: true)
         }
-        
+
         set {
             guard let convertedValue = valueFrom(radixString: newValue)
             else { return }
-            
+
             value = convertedValue
         }
     }
-    
+
     /// Computed property:
     /// Returns radix String representation of `value`, optionally including `prefix`.
     public func stringValue(
@@ -33,7 +33,7 @@ extension Radix {
             ? stringPrefix + String(value, radix: base, uppercase: uppercase)
             : String(value, radix: base, uppercase: uppercase)
     }
-    
+
     /// Computed property:
     /// Returns radix String representation of `value`, padding zeros to number of places passed.
     ///
@@ -46,27 +46,27 @@ extension Radix {
         uppercase: Bool = true
     ) -> String {
         var radixString = stringValue(prefix: false, uppercase: uppercase)
-        
+
         var padCount = (padTo - radixString.count)
         if padCount < 0 { padCount = 0 }
-        
+
         if padCount > 0 {
             radixString = String(repeatElement("0", count: padCount)) + radixString
         }
-        
+
         if splitEvery > 0 {
             let splitter = prefix ? "_" : " "
-            
+
             radixString = radixString
                 .split(every: splitEvery, backwards: true)
                 .joined(separator: splitter)
         }
-        
+
         return prefix
             ? stringPrefix + radixString
             : radixString
     }
-    
+
     /// Computed property:
     /// Returns radix String representation of `value`, padded to multiples of specified number of
     /// characters.
@@ -80,23 +80,23 @@ extension Radix {
         uppercase: Bool = true
     ) -> String {
         var radixString = stringValue(prefix: false, uppercase: uppercase)
-        
+
         var padCount = radixString.count
             .roundedUp(toMultiplesOf: padToEvery) - radixString.count
         if padCount < 0 { padCount = 0 }
-        
+
         if padCount > 0 {
             radixString = String(repeatElement("0", count: padCount)) + radixString
         }
-        
+
         if splitEvery > 0 {
             let splitter = prefix ? "_" : " "
-            
+
             radixString = radixString
                 .split(every: splitEvery, backwards: true)
                 .joined(separator: splitter)
         }
-        
+
         return prefix
             ? stringPrefix + radixString
             : radixString
@@ -109,9 +109,9 @@ extension Radix {
     /// Internal function to convert a radix String to a value.
     /// Fails with nil if not successful or if the String is malformed.
     @usableFromInline
-    func valueFrom<S: StringProtocol>(radixString: S) -> NumberType? {
+    func valueFrom(radixString: some StringProtocol) -> NumberType? {
         var parseString: String
-        
+
         // treat string prefix as case-sensitive
         if radixString.starts(with: stringPrefix),
            stringPrefix != ""
@@ -120,29 +120,29 @@ extension Radix {
         } else {
             parseString = String(radixString)
         }
-        
+
         var castValue: NumberType?
-        
+
         switch NumberType.self {
         case is UInt.Type:
             // Handle UInt case separately, since it can overflow into Int(_: radix:)
-            
+
             // fails if non-conformant to the radix (a malformed string)
             guard let convertedValue = UInt(parseString, radix: base)
             else { return nil }
-            
+
             // nil if the number overflows the integer type
             castValue = NumberType(exactly: convertedValue)
-            
+
         default:
             // fails if non-conformant to the radix (a malformed string)
             guard let convertedValue = Int(parseString, radix: base)
             else { return nil }
-            
+
             // nil if the number overflows the integer type
             castValue = NumberType(exactly: convertedValue)
         }
-        
+
         return castValue
     }
 }

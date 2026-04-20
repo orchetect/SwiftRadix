@@ -1,7 +1,7 @@
 //
 //  Utilities.swift
 //  swift-radix • https://github.com/orchetect/swift-radix
-//  © 2020-2025 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 import Foundation
@@ -23,7 +23,7 @@ import Foundation
 
 public protocol SwiftRadixOptionalType {
     associatedtype Wrapped
-    
+
     /// Return an object as an optional.
     var optional: Wrapped? { get }
 }
@@ -59,7 +59,7 @@ extension BinaryInteger {
         return divisions
     }
 }
-//swiftformat:enable all
+// swiftformat:enable all
 
 // MARK: - String
 
@@ -74,7 +74,7 @@ extension StringProtocol {
         backwards: Bool = false
     ) -> [SubSequence] {
         var result: [SubSequence] = []
-        
+
         for i in stride(from: 0, to: count, by: every) {
             switch backwards {
             case true:
@@ -85,9 +85,9 @@ extension StringProtocol {
                     limitedBy: startIndex
                 )
                     ?? startIndex
-                
+
                 result.insert(self[offsetStartIndex ..< offsetEndIndex], at: 0)
-                
+
             case false:
                 let offsetStartIndex = index(startIndex, offsetBy: i)
                 let offsetEndIndex = index(
@@ -96,11 +96,11 @@ extension StringProtocol {
                     limitedBy: endIndex
                 )
                     ?? endIndex
-                
+
                 result.append(self[offsetStartIndex ..< offsetEndIndex])
             }
         }
-        
+
         return result
     }
 }

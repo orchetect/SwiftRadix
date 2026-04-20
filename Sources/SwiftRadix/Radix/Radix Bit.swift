@@ -1,7 +1,7 @@
 //
 //  Radix Bit.swift
 //  swift-radix • https://github.com/orchetect/swift-radix
-//  © 2020-2025 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 import Foundation
@@ -14,24 +14,24 @@ extension Radix {
     public func bit(_ position: Int) -> Radix<NumberType> {
         Radix(self[bit: position], unsafeBase: base)
     }
-    
+
     /// Access binary bits from right-to-left. `position` is zero-based.
     @inline(__always)
     public subscript(bit position: Int) -> NumberType {
         get {
             (value & (0b1 << position)) >> position
         }
-        
+
         set {
             // ensure bit is valid
             if newValue < 0b0 || newValue > 0b1 { return }
-            
+
             // obtain old bit value
             let mask = value & (0b1 << NumberType(position))
-            
+
             // subtract old value and add new bit value
             let setValue = (value - mask) + (newValue << position)
-            
+
             value = setValue
         }
     }

@@ -1,7 +1,7 @@
 //
 //  RadixProtocol.swift
 //  swift-radix • https://github.com/orchetect/swift-radix
-//  © 2020-2025 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 import Foundation
@@ -13,15 +13,15 @@ import Foundation
 /// Protocol used by SwiftRadix to facilitate extensions.
 public protocol RadixProtocol {
     associatedtype NumberType: BinaryInteger
-    
+
     var value: NumberType { get set }
-    
+
     var stringPrefix: String { get }
     var base: Int { get set }
-    
+
     init?(_ number: NumberType, base: Int)
-    init?<S: StringProtocol>(_ string: S, base: Int)
-    
+    init?(_ string: some StringProtocol, base: Int)
+
     var stringValue: String { get set }
     func stringValue(prefix: Bool, uppercase: Bool) -> String
     func stringValue(padTo: Int, splitEvery: Int, prefix: Bool, uppercase: Bool) -> String

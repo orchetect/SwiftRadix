@@ -1,7 +1,7 @@
 //
 //  Radix Nibble.swift
 //  swift-radix • https://github.com/orchetect/swift-radix
-//  © 2020-2025 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 import Foundation
@@ -19,7 +19,7 @@ extension Radix {
             unsafeBase: base
         )
     }
-    
+
     /// Access binary nibbles from right-to-left. `position` is zero-based.
     @inline(__always)
     public subscript(nibble position: Int) -> NumberType {
@@ -27,17 +27,17 @@ extension Radix {
             (value & (0xF << (4 * NumberType(position))))
                 >> (4 * NumberType(position))
         }
-        
+
         set {
             // ensure nibble is valid
             if newValue < 0x0 || newValue > 0xF { return }
-            
+
             // obtain old nibble value
             let mask = value & (0b1111 << (4 * NumberType(position)))
-            
+
             // subtract old value and add new nibble value
             let setValue = (value - mask) + (newValue << (4 * position))
-            
+
             value = setValue
         }
     }

@@ -1,7 +1,7 @@
 //
 //  Radix.swift
 //  swift-radix • https://github.com/orchetect/swift-radix
-//  © 2020-2025 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 import Foundation
@@ -12,29 +12,29 @@ import Foundation
 /// of convenient constructors and accessors.
 public struct Radix<T: BinaryInteger>: RadixProtocol {
     // MARK: - Base Properties
-    
+
     /// Stored value type
     public typealias NumberType = T
-    
+
     /// Stored value
     public var value: NumberType = 0
-    
+
     /// Base (radix)
     public var base: Int
-    
+
     /// String prefix specific to the radix
     @inline(__always)
     public var stringPrefix: String {
         switch base {
-        case 2:  return "0b"
-        case 8:  return "0o"
+        case 2: return "0b"
+        case 8: return "0o"
         case 16: return "0x"
         default: return ""
         }
     }
-    
+
     // MARK: - Constructors
-    
+
     /// Construct from a number, preserving the number's type in `value` variable.
     ///
     /// Valid radix is between 2 and 36.
@@ -57,12 +57,12 @@ public struct Radix<T: BinaryInteger>: RadixProtocol {
     ) {
         // radix validity check
         if base < 2 || base > 36 { return nil }
-        
+
         self.base = base
-        
+
         value = number
     }
-    
+
     /// Internal initializer that bypasses base range validation.
     @inline(__always) @usableFromInline
     init(
@@ -70,10 +70,10 @@ public struct Radix<T: BinaryInteger>: RadixProtocol {
         unsafeBase: Int
     ) {
         base = unsafeBase
-        
+
         value = number
     }
-    
+
     /// Construct from a radix string.
     ///
     /// Valid radix is between 2 and 36.
@@ -111,18 +111,15 @@ public struct Radix<T: BinaryInteger>: RadixProtocol {
     ///     "FF".hex
     ///
     @inlinable
-    public init?<S: StringProtocol>(
-        _ string: S,
-        base: Int
-    ) {
+    public init?(_ string: some StringProtocol, base: Int) {
         // radix validity check
         if base < 2 || base > 36 { return nil }
-        
+
         self.base = base
-        
+
         guard let convertedValue = valueFrom(radixString: string)
         else { return nil }
-        
+
         value = convertedValue
     }
 }

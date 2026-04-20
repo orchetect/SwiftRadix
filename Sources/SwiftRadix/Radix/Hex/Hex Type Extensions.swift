@@ -1,7 +1,7 @@
 //
 //  Hex Type Extensions.swift
 //  swift-radix • https://github.com/orchetect/swift-radix
-//  © 2020-2025 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 import Foundation
@@ -22,7 +22,7 @@ extension StringProtocol {
     public var hex: Radix<Int>? {
         Radix(self, base: 16)
     }
-    
+
     /// Returns a new `Radix<T>?` base-16 struct from a hex string.
     ///
     /// Example usage:
@@ -41,7 +41,7 @@ extension Array where Element: StringProtocol {
     public var hex: [Radix<Int>?] {
         map { Radix<Int>($0, base: 16) }
     }
-    
+
     /// Returns an array of `Radix<T>` base-16 structs constructed from an array of hex strings.
     ///
     /// Example usage:
