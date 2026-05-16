@@ -1,6 +1,6 @@
 ![swift-radix](Images/swiftradix-banner.png)
 
-# swift-radix
+# SwiftRadix
 
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Forchetect%2Fswift-radix%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/orchetect/swift-radix) [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Forchetect%2Fswift-radix%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/orchetect/swift-radix) [![License: MIT](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](https://github.com/orchetect/swift-radix/blob/main/LICENSE)
 
@@ -401,7 +401,3 @@ Contributions are welcome. Posting in [Discussions](https://github.com/orchetect
 In an effort to maintain a consistent level of code quality and safety, this repository was built by hand and is maintained without the use of AI code generation.
 
 AI-assisted contributions are welcome, but must remain modest in scope, maintain the same degree of quality and care, and be thoroughly vetted before acceptance.
-
-## Legacy
-
-This repository was formerly known as SwiftRadix.
