@@ -1,4 +1,4 @@
-![swift-radix](Images/swiftradix-banner.png)
+![SwiftRadix](Images/swiftradix-banner.png)
 
 # SwiftRadix
 
