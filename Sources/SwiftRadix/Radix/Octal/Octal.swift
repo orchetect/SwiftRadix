@@ -1,6 +1,6 @@
 //
 //  Octal.swift
-//  swift-radix • https://github.com/orchetect/swift-radix
+//  SwiftRadix • https://github.com/orchetect/swift-radix
 //  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
